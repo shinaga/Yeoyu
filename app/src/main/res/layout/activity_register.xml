@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#A3DDAF"
+
+    tools:context=".MainActivity">
+
+
+        <EditText
+            android:id="@+id/editId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="114dp"
+            android:layout_marginEnd="48dp"
+            android:paddingLeft="26dp"
+            android:background="@drawable/bg_text"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            android:hint="ID(닉네임)"
+            android:textSize="14dp"
+            android:textColor="#2E4E23"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/editPasswd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="48dp"
+            android:paddingLeft="26dp"
+            android:background="@drawable/bg_text"
+            android:inputType="textPersonName"
+            android:minHeight="48dp"
+            android:hint="PASSWORD"
+            android:textSize="14dp"
+            android:textColor="#2E4E23"
+            app:layout_constraintEnd_toEndOf="@+id/editId"
+            app:layout_constraintStart_toStartOf="@+id/editId"
+            app:layout_constraintTop_toBottomOf="@+id/editId" />
+
+    <EditText
+        android:id="@+id/editPasswd2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="80dp"
+        android:layout_marginEnd="48dp"
+        android:background="@drawable/bg_text"
+        android:hint="PASSWORD 한번더"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:paddingLeft="26dp"
+        android:textColor="#2E4E23"
+        android:textSize="14dp"
+        app:layout_constraintEnd_toEndOf="@+id/editId"
+        app:layout_constraintStart_toStartOf="@+id/editId"
+        app:layout_constraintTop_toBottomOf="@+id/editId" />
+    <EditText
+        android:id="@+id/editName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="140dp"
+        android:layout_marginEnd="48dp"
+        android:background="@drawable/bg_text"
+        android:hint="이름"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:paddingLeft="26dp"
+        android:textColor="#2E4E23"
+        android:textSize="14dp"
+        app:layout_constraintEnd_toEndOf="@+id/editId"
+        app:layout_constraintStart_toStartOf="@+id/editId"
+        app:layout_constraintTop_toBottomOf="@+id/editId" />
+
+    <EditText
+        android:id="@+id/editStudentId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="204dp"
+        android:layout_marginEnd="48dp"
+        android:background="@drawable/bg_text"
+        android:hint="학번"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:paddingLeft="26dp"
+        android:textColor="#2E4E23"
+        android:textSize="14dp"
+        app:layout_constraintEnd_toEndOf="@+id/editId"
+        app:layout_constraintStart_toStartOf="@+id/editId"
+        app:layout_constraintTop_toBottomOf="@+id/editId" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="@id/editId"
+        app:layout_constraintTop_toTopOf="@id/editId"
+        app:srcCompat="@drawable/dat2" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="@id/editPasswd"
+        app:layout_constraintTop_toTopOf="@id/editPasswd"
+        app:srcCompat="@drawable/dat2" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="@id/editPasswd2"
+        app:layout_constraintTop_toTopOf="@id/editPasswd2"
+        app:srcCompat="@drawable/dat2" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="@id/editName"
+        app:layout_constraintTop_toTopOf="@id/editName"
+        app:srcCompat="@drawable/dat2" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="@id/editStudentId"
+        app:layout_constraintTop_toTopOf="@id/editStudentId"
+        app:srcCompat="@drawable/dat2" />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="@id/editId"
+        app:layout_constraintTop_toTopOf="@id/editId"
+        app:srcCompat="@drawable/dat2" />
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginEnd="48dp"
+        android:layout_marginBottom="104dp"
+        android:backgroundTint="#FFFFFF"
+        android:text="회원가입"
+        android:textColor="#2E4E23"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="44dp"
+            android:text="명지 전문 대학교"
+            android:textColor="#FFFFFF"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.489"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
