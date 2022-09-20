@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
     static EditText editId,editPasswd;
     Button btnLogin;
     TextView textRegister,textFindPw;
-
+    int tmp;//Git Test용!!!!!!!!!
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
