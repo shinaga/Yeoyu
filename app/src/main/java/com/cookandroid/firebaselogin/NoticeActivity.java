@@ -19,7 +19,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class NoticeActivity extends AppCompatActivity {
-    Button btnWrite, btnLoad;
+    Button btnWrite, btnLozad;
 
     private RecyclerView RecyclerView;
     private NoticeListAdapter RecyclerAdapter;
@@ -54,6 +54,7 @@ public class NoticeActivity extends AppCompatActivity {
                 Intent intent = new Intent(NoticeActivity.this, WriteActivity.class);//글 작성 화면
                 startActivity(intent);
         });
+
     }
     private void readNotices(){
         FirebaseDatabase database = FirebaseDatabase.getInstance();

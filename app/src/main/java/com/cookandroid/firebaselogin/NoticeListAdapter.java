@@ -4,6 +4,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -54,6 +55,13 @@ public class NoticeListAdapter extends RecyclerView.Adapter<NoticeListAdapter.Vi
             title = (TextView) itemView.findViewById(R.id.title);
             date = (TextView) itemView.findViewById(R.id.date);
             context = (TextView) itemView.findViewById(R.id.context);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(v.getContext(),"ddddddddd",Toast.LENGTH_SHORT).show();
+                }
+            });
         }
 
         void onBind(Notice item) {
