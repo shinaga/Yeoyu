@@ -567,7 +567,7 @@ public class MapActivity extends AppCompatActivity
                 .listener(MapActivity.this)
                 .key("AIzaSyDXWPIyn84mPX_63PD2oQc6PjMu3cDTn7E")
                 .latlng(location.latitude, location.longitude)//현재 위치
-                .radius(500) //500 미터 내에서 검색
+                .radius(1000) //1km 내에서 검색
                 .type(PlaceType.RESTAURANT) //음식점
                 .type(PlaceType.CAFE) //카페
                 .build()
