@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FIrebaseLogin">
         <activity
+            android:name=".NoticeviewActivity"
+            android:exported="false" />
+        <activity
             android:name=".SendEmailActivity"
             android:exported="false" />
         <activity

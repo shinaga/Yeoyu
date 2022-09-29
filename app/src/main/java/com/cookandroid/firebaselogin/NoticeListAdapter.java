@@ -59,7 +59,7 @@ public class NoticeListAdapter extends RecyclerView.Adapter<NoticeListAdapter.Vi
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(v.getContext(),"ClickEvent",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(v.getContext(),number.getText().toString(),Toast.LENGTH_SHORT).show();
                 }
             });
         }
