@@ -238,15 +238,14 @@
         app:layout_constraintEnd_toStartOf="@+id/img4"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/gb" />
-
     <ImageView
         android:id="@+id/imageView11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="58dp"
+        android:layout_height="32dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ky" />
+        app:srcCompat="@drawable/yeoyu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -98,53 +98,45 @@
         app:layout_constraintStart_toStartOf="@+id/editId"
         app:layout_constraintTop_toBottomOf="@+id/editId" />
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="@id/editId"
         app:layout_constraintTop_toTopOf="@id/editId"
-        app:srcCompat="@drawable/dat2" />
+        app:srcCompat="@drawable/dot2" />
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="@id/editPasswd"
         app:layout_constraintTop_toTopOf="@id/editPasswd"
-        app:srcCompat="@drawable/dat2" />
+        app:srcCompat="@drawable/dot2" />
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="@id/editPasswd2"
         app:layout_constraintTop_toTopOf="@id/editPasswd2"
-        app:srcCompat="@drawable/dat2" />
+        app:srcCompat="@drawable/dot2" />
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="@id/editName"
         app:layout_constraintTop_toTopOf="@id/editName"
-        app:srcCompat="@drawable/dat2" />
+        app:srcCompat="@drawable/dot2" />
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="@id/editStudentId"
         app:layout_constraintTop_toTopOf="@id/editStudentId"
-        app:srcCompat="@drawable/dat2" />
-    <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="20dp"
-        app:layout_constraintStart_toStartOf="@id/editId"
-        app:layout_constraintTop_toTopOf="@id/editId"
-        app:srcCompat="@drawable/dat2" />
+        app:srcCompat="@drawable/dot2" />
     <Button
         android:id="@+id/btnRegister"
         android:layout_width="0dp"
