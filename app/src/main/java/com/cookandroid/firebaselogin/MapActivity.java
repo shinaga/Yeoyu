@@ -57,7 +57,7 @@ public class MapActivity extends AppCompatActivity
         implements OnMapReadyCallback,
         ActivityCompat.OnRequestPermissionsResultCallback,
         PlacesListener{
-    //테스트!!!!!!!!!
+    //테스트!!!!!!!!
 
     private GoogleMap mMap;
     private Marker currentMarker = null;
