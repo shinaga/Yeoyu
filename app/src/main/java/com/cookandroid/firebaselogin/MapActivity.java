@@ -66,8 +66,6 @@ public class MapActivity extends AppCompatActivity
     private static final int GPS_ENABLE_REQUEST_CODE = 2001;
     private static final int UPDATE_INTERVAL_MS = 1000;  // 1초
     private static final int FASTEST_UPDATE_INTERVAL_MS = 500; // 0.5초
-
-
     // onRequestPermissionsResult에서 수신된 결과에서 ActivityCompat.requestPermissions를 사용한 퍼미션 요청을 구별하기 위해 사용됩니다.
     private static final int PERMISSIONS_REQUEST_CODE = 100;
     boolean needRequest = false;
@@ -119,12 +117,28 @@ public class MapActivity extends AppCompatActivity
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         previous_marker = new ArrayList<Marker>();
-
-        Button button = (Button)findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
+    //카페 찾기
+        Button button_cafe = (Button)findViewById(R.id.button_cafe);
+        button_cafe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showPlaceInformation(currentPosition);
+                showPlace_Cafe(currentPosition);
+            }
+        });
+        //식당 찾기
+        Button button_rest = (Button)findViewById(R.id.button_rest);
+        button_rest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPlace_Res(currentPosition);
+            }
+        });
+        //버스 정류장 찾기
+        Button button_bus = (Button)findViewById(R.id.button_bus);
+        button_bus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                showPlace_Bus(currentPosition);
             }
         });
     }
@@ -556,12 +570,31 @@ public class MapActivity extends AppCompatActivity
         }
     }
     List<Marker> previous_marker = null;
-    public void showPlaceInformation(LatLng location)
+
+    public void markerReset()
     {
         mMap.clear();//지도 클리어
 
         if (previous_marker != null)
             previous_marker.clear();//지역정보 마커 클리어
+    }
+
+    public void showPlace_Cafe(LatLng location)
+    {
+        markerReset();
+
+        new NRPlaces.Builder()
+                .listener(MapActivity.this)
+                .key("AIzaSyDXWPIyn84mPX_63PD2oQc6PjMu3cDTn7E")
+                .latlng(location.latitude, location.longitude)//현재 위치
+                .radius(1000) //1km 내에서 검색
+                .type(PlaceType.CAFE) //카페
+                .build()
+                .execute();
+    }
+    public void showPlace_Res(LatLng location)
+    {
+        markerReset();
 
         new NRPlaces.Builder()
                 .listener(MapActivity.this)
@@ -569,10 +602,23 @@ public class MapActivity extends AppCompatActivity
                 .latlng(location.latitude, location.longitude)//현재 위치
                 .radius(1000) //1km 내에서 검색
                 .type(PlaceType.RESTAURANT) //음식점
-                .type(PlaceType.CAFE) //카페
                 .build()
                 .execute();
     }
+    public void showPlace_Bus(LatLng location)
+    {
+        markerReset();
+
+        new NRPlaces.Builder()
+                .listener(MapActivity.this)
+                .key("AIzaSyDXWPIyn84mPX_63PD2oQc6PjMu3cDTn7E")
+                .latlng(location.latitude, location.longitude)//현재 위치
+                .radius(1000) //1km 내에서 검색
+                .type(PlaceType.BUS_STATION) //음식점
+                .build()
+                .execute();
+    }
+
 
 
 
