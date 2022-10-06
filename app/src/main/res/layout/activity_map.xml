@@ -19,17 +19,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal">
-    <Button
-        android:text="카페 검색"
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:id="@+id/button_cafe"/>
+        <Button
+            android:text="카페 검색"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:id="@+id/button_cafe"/>
         <Button
             android:text="식당 검색"
             android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
             android:id="@+id/button_rest"/>
         <Button
             android:text="버스정류장 검색"
