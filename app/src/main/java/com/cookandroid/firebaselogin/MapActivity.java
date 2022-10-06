@@ -56,7 +56,7 @@ import java.util.Locale;
 public class MapActivity extends AppCompatActivity
         implements OnMapReadyCallback,
         ActivityCompat.OnRequestPermissionsResultCallback,
-        PlacesListener{
+        PlacesListener,GoogleMap.OnMapClickListener{
 
 
     private GoogleMap mMap;
@@ -142,6 +142,7 @@ public class MapActivity extends AppCompatActivity
             }
         });
     }
+
 
     @Override
     public void onMapReady(final GoogleMap googleMap) {
@@ -669,5 +670,10 @@ public class MapActivity extends AppCompatActivity
     @Override
     public void onPlacesFinished() {
 
+    }
+
+    @Override
+    public void onMapClick(@NonNull LatLng latLng) {
+        Toast.makeText(this, currentMarker.getTitle(),Toast.LENGTH_SHORT).show();
     }
 }
