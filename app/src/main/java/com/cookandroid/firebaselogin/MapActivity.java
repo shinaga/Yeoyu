@@ -598,7 +598,7 @@ public class MapActivity extends AppCompatActivity
 
         new NRPlaces.Builder()
                 .listener(MapActivity.this)
-                .key("AIzaSyDXWPIyn84mPX_63PD2oQc6PjMu3cDTn7E")
+                .key("AIzaSyCTqlWqciTWTl6lHhxN2e_-Jx6xK11jlD0")
                 .latlng(location.latitude, location.longitude)//현재 위치
                 .radius(1000) //1km 내에서 검색
                 .type(PlaceType.RESTAURANT) //음식점
@@ -611,10 +611,10 @@ public class MapActivity extends AppCompatActivity
 
         new NRPlaces.Builder()
                 .listener(MapActivity.this)
-                .key("AIzaSyDXWPIyn84mPX_63PD2oQc6PjMu3cDTn7E")
+                .key("AIzaSyCTqlWqciTWTl6lHhxN2e_-Jx6xK11jlD0")
                 .latlng(location.latitude, location.longitude)//현재 위치
                 .radius(1000) //1km 내에서 검색
-                .type(PlaceType.BUS_STATION) //음식점
+                .type(PlaceType.BUS_STATION) //버스 정류장
                 .build()
                 .execute();
     }

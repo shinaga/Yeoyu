@@ -13,7 +13,7 @@ public class NoticeviewActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_noticeview);
 
-        numberSet();//받아온 게시글의 number를 가져옴ㅇ
+        numberSet();//받아온 게시글의 number를 가져옴
 
     }
 
