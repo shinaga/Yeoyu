@@ -1,5 +1,6 @@
 package com.cookandroid.firebaselogin;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -59,7 +60,9 @@ public class NoticeListAdapter extends RecyclerView.Adapter<NoticeListAdapter.Vi
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(v.getContext(),number.getText().toString(),Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(v.getContext(),NoticeviewActivity.class);
+                    intent.putExtra("number",number.getText().toString());
+                    v.getContext().startActivity(intent);
                 }
             });
         }
