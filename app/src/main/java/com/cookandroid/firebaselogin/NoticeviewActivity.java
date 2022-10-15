@@ -52,7 +52,7 @@ public class NoticeviewActivity extends AppCompatActivity {
                 date.setText(snapshot.child("date").getValue()+"");
                 context.setText(snapshot.child("context").getValue()+"");
             }
-////////////////////
+
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 Toast.makeText(getApplicationContext(),"네트워크를 확인해 주세요.",Toast.LENGTH_SHORT);
