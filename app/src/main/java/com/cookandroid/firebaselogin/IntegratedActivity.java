@@ -1,6 +1,7 @@
 package com.cookandroid.firebaselogin;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -92,6 +93,9 @@ public class IntegratedActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();//액션바 숨기기
+
         {//지도 관련
             getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
                     WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);

@@ -1,6 +1,7 @@
 package com.cookandroid.firebaselogin;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,6 +38,8 @@ public class NoticeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notice);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();//액션바 숨기기
 
         btnSet();//글작성 버튼을 세팅한다.
         btnClick();//글작성 버튼 클릭시 발생하는 이벤트 함수 설정한다.
