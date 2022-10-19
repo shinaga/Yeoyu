@@ -23,7 +23,7 @@ public class NoticeviewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_noticeview);//진짜 여기서 부터 다시 시작
+        setContentView(R.layout.activity_noticeview);
 
         numberSet();//받아온 게시글의 number를 가져옴
         textSet();//TextVeiw 세팅
