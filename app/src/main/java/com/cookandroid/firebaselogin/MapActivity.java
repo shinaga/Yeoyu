@@ -133,12 +133,12 @@ public class MapActivity extends AppCompatActivity
                 showPlace_Res(currentPosition);
             }
         });
-        //버스 정류장 찾기
-        Button button_bus = (Button)findViewById(R.id.button_bus);
-        button_bus.setOnClickListener(new View.OnClickListener() {
+        //편의점 찾기
+        Button button_conv = (Button)findViewById(R.id.button_conv);
+        button_conv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showPlace_Bus(currentPosition);
+                showPlace_Conv(currentPosition);
             }
         });
     }
@@ -606,7 +606,7 @@ public class MapActivity extends AppCompatActivity
                 .build()
                 .execute();
     }
-    public void showPlace_Bus(LatLng location)
+    public void showPlace_Conv(LatLng location)
     {
         markerReset();
 
@@ -615,7 +615,7 @@ public class MapActivity extends AppCompatActivity
                 .key("AIzaSyDXWPIyn84mPX_63PD2oQc6PjMu3cDTn7E")
                 .latlng(location.latitude, location.longitude)//현재 위치
                 .radius(1000) //1km 내에서 검색
-                .type(PlaceType.BUS_STATION) //음식점
+                .type(PlaceType.CONVENIENCE_STORE) //편의점
                 .build()
                 .execute();
     }
@@ -674,6 +674,6 @@ public class MapActivity extends AppCompatActivity
 
     @Override
     public void onMapClick(@NonNull LatLng latLng) {
-        Toast.makeText(this, currentMarker.getTitle(),Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "해당 위치는 " + currentMarker.getTitle() + " 입니다.",Toast.LENGTH_SHORT).show();
     }
 }
