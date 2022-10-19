@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,11 +26,33 @@ public class NoticeviewActivity extends AppCompatActivity {
     TextView id,date,context;
     ActionBar actionBar;
 
-    @Override
+    @Override//액션바 생성
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu, menu);
         return true;
+    }
+
+    @Override//액션바 클릭시
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+
+        switch(item.getItemId()) {
+
+            case R.id.delete:
+                if(id.getText().toString().equals(MainActivity.editId.getText().toString())){//삭제하려는 글의 아이디와 로그인한 유저의 아이디를 확인
+                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+                    DatabaseReference user = database.getReference("notice").child(number+"");
+
+                    user.removeValue();//글 삭제
+                    Toast.makeText(getApplicationContext(), "글이 삭제 되었습니다.", Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(getApplicationContext(),NoticeActivity.class);
+                    startActivity(intent);//삭제 후 이동
+                }
+                else Toast.makeText(getApplicationContext(), "자신의 글만 삭제 가능합니다.", Toast.LENGTH_SHORT).show();//일치하지 않을시
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
@@ -56,7 +79,7 @@ public class NoticeviewActivity extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference user = database.getReference("notice").child(number+"");
 
-        user.addValueEventListener(new ValueEventListener() {
+        user.addListenerForSingleValueEvent(new ValueEventListener() {//addValueEventListener은 항상 데이터를 대기하고 있기에 쓰면 안된다.
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 actionBar.setTitle(snapshot.child("title").getValue()+"");

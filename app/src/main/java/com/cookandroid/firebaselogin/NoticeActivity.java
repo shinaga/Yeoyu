@@ -79,14 +79,16 @@ public class NoticeActivity extends AppCompatActivity {
                     readNotice[0].addListenerForSingleValueEvent(new ValueEventListener() {//글을 읽어 오기 위함
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            number[0] = Integer.valueOf(snapshot.child("number").getValue().toString());
-                            title[0] = snapshot.child("title").getValue().toString();
-                            date[0] = snapshot.child("date").getValue().toString();
-                            context[0] = snapshot.child("context").getValue().toString();
-                            noticeList.add(new Notice(number[0], title[0],date[0], context[0]));
+                            if(snapshot.exists()){//없는 글을 불러오지 않기 위함
+                                number[0] = Integer.valueOf(snapshot.child("number").getValue().toString());
+                                title[0] = snapshot.child("title").getValue().toString();
+                                date[0] = snapshot.child("date").getValue().toString();
+                                context[0] = snapshot.child("context").getValue().toString();
+                                noticeList.add(new Notice(number[0], title[0],date[0], context[0]));
 
-                            next[0]=count[0]-10;
-                            RecyclerAdapter.setNoticeList(noticeList);//리사이클러뷰에 데이터를 넣는다.
+                                next[0]=count[0]-10;
+                                RecyclerAdapter.setNoticeList(noticeList);//리사이클러뷰에 데이터를 넣는다.
+                            }
                         }
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {

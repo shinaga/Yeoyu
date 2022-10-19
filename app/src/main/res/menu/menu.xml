@@ -10,7 +10,7 @@
         />-->
     <group>
         <item
-            android:id="@+id/menu_logout"
+            android:id="@+id/delete"
             android:title="삭제"
             app:showAsAction="never"
             />
