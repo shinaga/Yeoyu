@@ -674,6 +674,6 @@ public class MapActivity extends AppCompatActivity
 
     @Override
     public void onMapClick(@NonNull LatLng latLng) {
-        Toast.makeText(this, "해당 위치는 " + currentMarker.getTitle() + " 입니다.",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "선택한 위치는 " + currentMarker.getTitle() + " 입니다.",Toast.LENGTH_SHORT).show();
     }
 }
