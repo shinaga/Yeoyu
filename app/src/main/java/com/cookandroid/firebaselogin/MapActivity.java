@@ -23,7 +23,6 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.cookandroid.firebaselogin.R;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -55,8 +54,7 @@ import java.util.Locale;
 
 public class MapActivity extends AppCompatActivity
         implements OnMapReadyCallback,
-        ActivityCompat.OnRequestPermissionsResultCallback,
-        PlacesListener{
+        ActivityCompat.OnRequestPermissionsResultCallback,GoogleMap.OnMarkerClickListener,PlacesListener{
     //테스트!!!!!!!!
 
     private GoogleMap mMap;
@@ -134,11 +132,11 @@ public class MapActivity extends AppCompatActivity
             }
         });
         //버스 정류장 찾기
-        Button button_bus = (Button)findViewById(R.id.button_bus);
-        button_bus.setOnClickListener(new View.OnClickListener() {
+        Button button_conv = (Button)findViewById(R.id.button_conv);
+        button_conv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showPlace_Bus(currentPosition);
+                showPlace_Conv(currentPosition);
             }
         });
     }
@@ -153,6 +151,8 @@ public class MapActivity extends AppCompatActivity
         //지도의 초기위치를 서울로 이동
         setDefaultLocation();
         MarkerOptions markerOptions = new MarkerOptions();
+        mMap.setOnMarkerClickListener(this);
+
         /*
         //본관
         LatLng Main = new LatLng(37.58475463956453, 126.9250272363605 );
@@ -605,7 +605,7 @@ public class MapActivity extends AppCompatActivity
                 .build()
                 .execute();
     }
-    public void showPlace_Bus(LatLng location)
+    public void showPlace_Conv(LatLng location)
     {
         markerReset();
 
@@ -614,7 +614,7 @@ public class MapActivity extends AppCompatActivity
                 .key("AIzaSyCTqlWqciTWTl6lHhxN2e_-Jx6xK11jlD0")
                 .latlng(location.latitude, location.longitude)//현재 위치
                 .radius(1000) //1km 내에서 검색
-                .type(PlaceType.BUS_STATION) //버스 정류장
+                .type(PlaceType.CONVENIENCE_STORE) //편의점
                 .build()
                 .execute();
     }
@@ -665,9 +665,19 @@ public class MapActivity extends AppCompatActivity
         });
 
     }
+    @Override
+    public boolean onMarkerClick(Marker marker)
+    {   CameraUpdate center = CameraUpdateFactory.newLatLng(marker.getPosition());
+        mMap.animateCamera(center);
+        Toast.makeText(this, "선택한 위치는 " + getCurrentAddress(currentPosition) + " 입니다.", Toast.LENGTH_LONG).show();
+        return true;
+    }
+
 
     @Override
     public void onPlacesFinished() {
 
     }
+
+
 }
