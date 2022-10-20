@@ -22,6 +22,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -55,7 +57,7 @@ import java.util.Locale;
 
 public class MapActivity extends AppCompatActivity
         implements OnMapReadyCallback,
-        ActivityCompat.OnRequestPermissionsResultCallback,PlacesListener{
+        ActivityCompat.OnRequestPermissionsResultCallback,GoogleMap.OnMarkerClickListener,PlacesListener{
     //테스트!!!!!!!!
 
     private GoogleMap mMap;
@@ -89,8 +91,6 @@ public class MapActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();//액션바 숨기기
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
                 WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -118,7 +118,7 @@ public class MapActivity extends AppCompatActivity
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         previous_marker = new ArrayList<Marker>();
-        //카페 찾기
+    //카페 찾기
         Button button_cafe = (Button)findViewById(R.id.button_cafe);
         button_cafe.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,8 +135,8 @@ public class MapActivity extends AppCompatActivity
             }
         });
         //버스 정류장 찾기
-        Button button_conv = (Button)findViewById(R.id.button_conv);
-        button_conv.setOnClickListener(new View.OnClickListener() {
+        Button button_bus = (Button)findViewById(R.id.button_conv);
+        button_bus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showPlace_Conv(currentPosition);
@@ -154,7 +154,7 @@ public class MapActivity extends AppCompatActivity
         //지도의 초기위치를 서울로 이동
         setDefaultLocation();
         MarkerOptions markerOptions = new MarkerOptions();
-
+        mMap.setOnMarkerClickListener(this);
 
         /*
         //본관
@@ -617,7 +617,7 @@ public class MapActivity extends AppCompatActivity
                 .key("AIzaSyCTqlWqciTWTl6lHhxN2e_-Jx6xK11jlD0")
                 .latlng(location.latitude, location.longitude)//현재 위치
                 .radius(1000) //1km 내에서 검색
-                .type(PlaceType.CONVENIENCE_STORE) //편의점
+                .type(PlaceType.CONVENIENCE_STORE) //버스 정류장
                 .build()
                 .execute();
     }
@@ -668,7 +668,13 @@ public class MapActivity extends AppCompatActivity
         });
 
     }
-
+    @Override
+    public boolean onMarkerClick(Marker marker)
+    {   CameraUpdate center = CameraUpdateFactory.newLatLng(marker.getPosition());
+        mMap.animateCamera(center);
+        Toast.makeText(this, "선택한 위치는 " + getCurrentAddress(currentPosition) + " 입니다.", Toast.LENGTH_LONG).show();
+        return true;
+    }
 
 
     @Override
