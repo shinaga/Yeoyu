@@ -20,13 +20,29 @@
             android:background="@drawable/bg_text"
             android:inputType="textPersonName"
             android:minHeight="48dp"
-            android:hint="ID(닉네임)"
+            android:hint="ID"
             android:textSize="14dp"
             android:textColor="#2E4E23"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
+        <EditText
+           android:id="@+id/editNinkname"
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+            android:layout_marginStart="48dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="48dp"
+           android:paddingLeft="26dp"
+           android:background="@drawable/bg_text"
+           android:inputType="textPersonName"
+           android:minHeight="48dp"
+           android:hint="닉네임"
+           android:textSize="14dp"
+           android:textColor="#2E4E23"
+           app:layout_constraintEnd_toEndOf="@+id/editId"
+           app:layout_constraintStart_toStartOf="@+id/editId"
+           app:layout_constraintTop_toBottomOf="@+id/editId" />
         <EditText
             android:id="@+id/editPasswd"
             android:layout_width="match_parent"
@@ -41,16 +57,15 @@
             android:hint="PASSWORD"
             android:textSize="14dp"
             android:textColor="#2E4E23"
-            app:layout_constraintEnd_toEndOf="@+id/editId"
-            app:layout_constraintStart_toStartOf="@+id/editId"
-            app:layout_constraintTop_toBottomOf="@+id/editId" />
-
+            app:layout_constraintEnd_toEndOf="@+id/editNinkname"
+            app:layout_constraintStart_toStartOf="@+id/editNinkname"
+            app:layout_constraintTop_toBottomOf="@+id/editNinkname" />
     <EditText
         android:id="@+id/editPasswd2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="48dp"
         android:background="@drawable/bg_text"
         android:hint="PASSWORD 한번더"
@@ -59,15 +74,15 @@
         android:paddingLeft="26dp"
         android:textColor="#2E4E23"
         android:textSize="14dp"
-        app:layout_constraintEnd_toEndOf="@+id/editId"
-        app:layout_constraintStart_toStartOf="@+id/editId"
-        app:layout_constraintTop_toBottomOf="@+id/editId" />
+        app:layout_constraintEnd_toEndOf="@+id/editPasswd"
+        app:layout_constraintStart_toStartOf="@+id/editPasswd"
+        app:layout_constraintTop_toBottomOf="@+id/editPasswd" />
     <EditText
         android:id="@+id/editName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
-        android:layout_marginTop="140dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="48dp"
         android:background="@drawable/bg_text"
         android:hint="이름"
@@ -76,16 +91,16 @@
         android:paddingLeft="26dp"
         android:textColor="#2E4E23"
         android:textSize="14dp"
-        app:layout_constraintEnd_toEndOf="@+id/editId"
-        app:layout_constraintStart_toStartOf="@+id/editId"
-        app:layout_constraintTop_toBottomOf="@+id/editId" />
+        app:layout_constraintEnd_toEndOf="@+id/editPasswd2"
+        app:layout_constraintStart_toStartOf="@+id/editPasswd2"
+        app:layout_constraintTop_toBottomOf="@+id/editPasswd2" />
 
     <EditText
         android:id="@+id/editStudentId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
-        android:layout_marginTop="204dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="48dp"
         android:background="@drawable/bg_text"
         android:hint="학번"
@@ -94,9 +109,9 @@
         android:paddingLeft="26dp"
         android:textColor="#2E4E23"
         android:textSize="14dp"
-        app:layout_constraintEnd_toEndOf="@+id/editId"
-        app:layout_constraintStart_toStartOf="@+id/editId"
-        app:layout_constraintTop_toBottomOf="@+id/editId" />
+        app:layout_constraintEnd_toEndOf="@+id/editName"
+        app:layout_constraintStart_toStartOf="@+id/editName"
+        app:layout_constraintTop_toBottomOf="@+id/editName" />
     <ImageView
         android:layout_width="10dp"
         android:layout_height="10dp"
@@ -104,6 +119,14 @@
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="@id/editId"
         app:layout_constraintTop_toTopOf="@id/editId"
+        app:srcCompat="@drawable/dot2" />
+    <ImageView
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="@id/editNinkname"
+        app:layout_constraintTop_toTopOf="@id/editNinkname"
         app:srcCompat="@drawable/dot2" />
     <ImageView
         android:layout_width="10dp"
