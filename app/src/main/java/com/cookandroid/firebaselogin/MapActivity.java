@@ -58,7 +58,7 @@ public class MapActivity extends AppCompatActivity
         implements OnMapReadyCallback,
         ActivityCompat.OnRequestPermissionsResultCallback,
         PlacesListener{
-    //테스트!!!!!!!!
+
 
     private GoogleMap mMap;
     private Marker currentMarker = null;
@@ -91,8 +91,6 @@ public class MapActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();//액션바 숨기기
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
                 WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -416,7 +414,7 @@ public class MapActivity extends AppCompatActivity
         //디폴트 위치, Seoul
         LatLng DEFAULT_LOCATION = new LatLng(37.56, 126.97);
         String markerTitle = "위치정보 가져올 수 없음";
-        String markerSnippet = "위치 퍼미션과 GPS 활성 여부 확인하세요";
+        String markerSnippet = "위치 퍼미션과 GPS 활성 요부 확인하세요";
 
 
         if (currentMarker != null) currentMarker.remove();
@@ -588,7 +586,7 @@ public class MapActivity extends AppCompatActivity
 
         new NRPlaces.Builder()
                 .listener(MapActivity.this)
-                .key("AIzaSyCTqlWqciTWTl6lHhxN2e_-Jx6xK11jlD0")
+                .key("AIzaSyDXWPIyn84mPX_63PD2oQc6PjMu3cDTn7E")
                 .latlng(location.latitude, location.longitude)//현재 위치
                 .radius(1000) //1km 내에서 검색
                 .type(PlaceType.CAFE) //카페
@@ -601,7 +599,7 @@ public class MapActivity extends AppCompatActivity
 
         new NRPlaces.Builder()
                 .listener(MapActivity.this)
-                .key("AIzaSyCTqlWqciTWTl6lHhxN2e_-Jx6xK11jlD0")
+                .key("AIzaSyDXWPIyn84mPX_63PD2oQc6PjMu3cDTn7E")
                 .latlng(location.latitude, location.longitude)//현재 위치
                 .radius(1000) //1km 내에서 검색
                 .type(PlaceType.RESTAURANT) //음식점
@@ -614,10 +612,10 @@ public class MapActivity extends AppCompatActivity
 
         new NRPlaces.Builder()
                 .listener(MapActivity.this)
-                .key("AIzaSyCTqlWqciTWTl6lHhxN2e_-Jx6xK11jlD0")
+                .key("AIzaSyDXWPIyn84mPX_63PD2oQc6PjMu3cDTn7E")
                 .latlng(location.latitude, location.longitude)//현재 위치
                 .radius(1000) //1km 내에서 검색
-                .type(PlaceType.BUS_STATION) //버스 정류장
+                .type(PlaceType.BUS_STATION) //음식점
                 .build()
                 .execute();
     }
