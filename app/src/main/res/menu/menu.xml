@@ -2,15 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     >
-    <item
+    <!--<item
         android:id="@+id/menu_search"
         android:title="search"
         android:icon="@drawable/ic_launcher_background"
         app:showAsAction="always"
-        />
+        />-->
     <group>
         <item
-            android:id="@+id/menu_logout"
+            android:id="@+id/delete"
             android:title="삭제"
             app:showAsAction="never"
             />

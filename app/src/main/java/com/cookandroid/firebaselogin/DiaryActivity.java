@@ -2,6 +2,7 @@ package com.cookandroid.firebaselogin;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
@@ -52,6 +53,9 @@ public class DiaryActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();//액션바 숨기기
+
         setContentView(R.layout.activity_diary);
         calendarView=findViewById(R.id.calendarView);
         // 달력 위젯

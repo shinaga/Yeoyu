@@ -5,32 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".NoticeviewActivity">
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/green"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        tools:ignore="MissingConstraints" />
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="제목"
-        android:textSize="24dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginLeft="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="id"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="12dp"
         android:layout_marginLeft="12dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -40,22 +21,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="날짜"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="12dp"
         android:layout_marginRight="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#aaaaaa"
-        android:layout_marginTop="55dp"
-        app:layout_constraintTop_toTopOf="parent"
         />
     <TextView
         android:id="@+id/context"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="88dp"
+        android:layout_marginTop="48dp"
         android:layout_marginLeft="12dp"
         android:layout_marginRight="12dp"
         android:text="내용"

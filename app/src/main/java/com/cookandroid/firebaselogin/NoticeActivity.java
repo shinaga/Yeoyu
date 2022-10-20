@@ -1,6 +1,7 @@
 package com.cookandroid.firebaselogin;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -37,6 +38,8 @@ public class NoticeActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notice);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();//액션바 숨기기
 
         btnSet();//글작성 버튼을 세팅한다.
         btnClick();//글작성 버튼 클릭시 발생하는 이벤트 함수 설정한다.
@@ -76,14 +79,16 @@ public class NoticeActivity extends AppCompatActivity {
                     readNotice[0].addListenerForSingleValueEvent(new ValueEventListener() {//글을 읽어 오기 위함
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            number[0] = Integer.valueOf(snapshot.child("number").getValue().toString());
-                            title[0] = snapshot.child("title").getValue().toString();
-                            date[0] = snapshot.child("date").getValue().toString();
-                            context[0] = snapshot.child("context").getValue().toString();
-                            noticeList.add(new Notice(number[0], title[0],date[0], context[0]));
+                            if(snapshot.exists()){//없는 글을 불러오지 않기 위함
+                                number[0] = Integer.valueOf(snapshot.child("number").getValue().toString());
+                                title[0] = snapshot.child("title").getValue().toString();
+                                date[0] = snapshot.child("date").getValue().toString();
+                                context[0] = snapshot.child("context").getValue().toString();
+                                noticeList.add(new Notice(number[0], title[0],date[0], context[0]));
 
-                            next[0]=count[0]-10;
-                            RecyclerAdapter.setNoticeList(noticeList);//리사이클러뷰에 데이터를 넣는다.
+                                next[0]=count[0]-10;
+                                RecyclerAdapter.setNoticeList(noticeList);//리사이클러뷰에 데이터를 넣는다.
+                            }
                         }
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
