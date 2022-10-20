@@ -21,6 +21,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -73,17 +75,21 @@ public class MapActivity extends AppCompatActivity
     String[] REQUIRED_PERMISSIONS  = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION};  // 외부 저장소
 
 
-    Location mCurrentLocatiion;
+    Location mCurrentLocation;
     LatLng currentPosition;
 
 
     private FusedLocationProviderClient mFusedLocationClient;
     private LocationRequest locationRequest;
     private Location location;
-
+    TextView place_name;
+    TextView address;
+    LinearLayout linear;
 
     private View mLayout;  // Snackbar 사용하기 위해서는 View가 필요합니다.
     // (참고로 Toast에서는 Context가 필요했습니다.)
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,7 +102,10 @@ public class MapActivity extends AppCompatActivity
 
         mLayout = findViewById(R.id.layout_main);
 
+        place_name = (TextView)findViewById(R.id.place_name);//장소명
+        address = (TextView)findViewById(R.id.address);//상세 주소
         locationRequest = new LocationRequest()
+
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
                 .setInterval(UPDATE_INTERVAL_MS)
                 .setFastestInterval(FASTEST_UPDATE_INTERVAL_MS);
@@ -131,7 +140,7 @@ public class MapActivity extends AppCompatActivity
                 showPlace_Res(currentPosition);
             }
         });
-        //버스 정류장 찾기
+        //편의점 찾기
         Button button_bus = (Button)findViewById(R.id.button_conv);
         button_bus.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,6 +148,14 @@ public class MapActivity extends AppCompatActivity
                 showPlace_Conv(currentPosition);
             }
         });
+        LinearLayout linear = (LinearLayout)findViewById(R.id.linear);
+        linear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onMarkerClick(currentMarker);
+            }
+        });
+
     }
 
     @Override
@@ -257,7 +274,7 @@ public class MapActivity extends AppCompatActivity
                 //현재 위치에 마커 생성하고 이동
                 setCurrentLocation(location, markerTitle, markerSnippet);
 
-                mCurrentLocatiion = location;
+                mCurrentLocation = location;
             }
 
 
@@ -667,9 +684,13 @@ public class MapActivity extends AppCompatActivity
     }
     @Override
     public boolean onMarkerClick(Marker marker)
-    {   CameraUpdate center = CameraUpdateFactory.newLatLng(marker.getPosition());
+    {
+
+
+        CameraUpdate center = CameraUpdateFactory.newLatLng(marker.getPosition());
         mMap.animateCamera(center);
-        Toast.makeText(this, "선택한 위치는 " + getCurrentAddress(currentPosition) + " 입니다.", Toast.LENGTH_LONG).show();
+        place_name.setText(marker.getTitle());
+        address.setText(marker.getSnippet());
         return true;
     }
 
