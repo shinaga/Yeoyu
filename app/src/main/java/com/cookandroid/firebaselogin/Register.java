@@ -20,9 +20,14 @@ public class Register extends Activity implements View.OnClickListener {
     }
     @Override
     public void onClick(View view) {
-        String id,pw,pw2,name,studentId,email;
+        if(RegisterActivity.idCheck==false||RegisterActivity.nicknameCheck==false){
+            Toast.makeText(context, "아이디와 닉네임을 중복체크 해주세요.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        String id,nickName,pw,pw2,name,studentId,email;
 
         id = RegisterActivity.editId.getText().toString();
+        nickName = RegisterActivity.editNinkname.getText().toString();
         pw = RegisterActivity.editPasswd.getText().toString();
         pw2 = RegisterActivity.editPasswd2.getText().toString();
         name = RegisterActivity.editName.getText().toString();
@@ -38,12 +43,13 @@ public class Register extends Activity implements View.OnClickListener {
             user.addListenerForSingleValueEvent(new ValueEventListener() {//addValueEventListener로 할시에는 아이디가 생성되고 "아이디가 중복이에요가 뜸" 왜냐하면 addValueEventListener는 경로의 전체 내용에 대한 변경 사항을 읽고 "수신 대기"한다.
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
-                    if(dataSnapshot.exists()) {
+                    if(dataSnapshot.exists()) {//아이디 중복 확인(2명이 동시에 똑같은 id나 닉네임을 입력하는 것을 방지)
                         Toast.makeText(context, "아이디가 중복이에요", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    user.child("password").setValue(pw);//아이디가 중복이 아닐시 비밀번호를 붙혀 아이디를 만든다.
-                    user.child("email").setValue(email);//아이디가 중복이 아닐시 비밀번호를 붙혀 아이디를 만든다.
+                    user.child("nickname").setValue(nickName);//아이디가 중복이 아닐시 아이디를 만든다.
+                    user.child("password").setValue(pw);
+                    user.child("email").setValue(email);
                     user.child("name").setValue(name);
                     user.child("studentId").setValue(studentId);
                     Toast.makeText(context, "아이디가 생성되었어요.", Toast.LENGTH_SHORT).show();

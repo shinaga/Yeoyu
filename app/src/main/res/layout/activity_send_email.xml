@@ -71,7 +71,7 @@
             android:layout_marginEnd="48dp"
             android:background="@drawable/bg_text"
             android:ems="10"
-            android:hint="명지전문대 메일 입력(@mjc.ac.kr)"
+            android:hint="이메일 입력(@mjc.ac.kr 형식)"
             android:inputType="textPersonName"
             android:minHeight="48dp"
             android:paddingLeft="26dp"
@@ -101,8 +101,8 @@
             android:id="@+id/editWriteCode"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="240dp"
             android:layout_marginStart="48dp"
+            android:layout_marginTop="240dp"
             android:layout_marginEnd="48dp"
             android:background="@drawable/bg_text"
             android:ems="10"
@@ -150,17 +150,8 @@
             app:layout_constraintTop_toTopOf="@id/editWriteCode"
             app:srcCompat="@drawable/dot2" />
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="44dp"
-            android:text="명지 전문 대학교"
-            android:textColor="#FFFFFF"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
     <ImageView
         android:id="@+id/imageView4"
         android:layout_width="wrap_content"
