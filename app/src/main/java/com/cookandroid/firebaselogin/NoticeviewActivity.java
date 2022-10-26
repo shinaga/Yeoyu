@@ -23,7 +23,8 @@ import org.w3c.dom.Text;
 
 public class NoticeviewActivity extends AppCompatActivity {
     int number;
-    TextView id,date,context;
+    String id,nick;
+    TextView nickname,date,context;
     ActionBar actionBar;
 
     @Override//액션바 생성
@@ -39,7 +40,7 @@ public class NoticeviewActivity extends AppCompatActivity {
         switch(item.getItemId()) {
 
             case R.id.delete:
-                if(id.getText().toString().equals(MainActivity.editId.getText().toString())){//삭제하려는 글의 아이디와 로그인한 유저의 아이디를 확인
+                if(id.equals(MainActivity.editId.getText().toString())){//삭제하려는 글의 아이디와 로그인한 유저의 아이디를 확인
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                     DatabaseReference user = database.getReference("notice").child(number+"");
 
@@ -61,29 +62,60 @@ public class NoticeviewActivity extends AppCompatActivity {
         setContentView(R.layout.activity_noticeview);
         actionBar = getSupportActionBar();//액션바
 
-        numberSet();//받아온 게시글의 number를 가져옴
         textSet();//TextVeiw 세팅
-        setNotice();//제목, id, 내용, 날짜 등을 가져옴
+        numberSet();//받아온 게시글의 number를 가져옴
+        setId();//;어떤 아이디의 글인지 아이디 세팅
     }
+
+
 
     private void numberSet() {
         Intent intent = getIntent();
         number = Integer.parseInt(intent.getExtras().getString("number"));
     }
+    private void setId() {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference user = database.getReference("notice").child(number+"").child("id");
+        user.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                id = snapshot.getValue()+"";
+                setNickname();//어떤 닉네임인지 세팅, onCreate에서 호출할시 파이어베이스의 속도 때문에 오류가 나서 여기서 호출
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
+    private void setNickname() {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference user = database.getReference("user").child(id).child("nickname");
+        user.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                nick = snapshot.getValue()+"";
+                setNotice();//제목, id, 내용, 날짜 등을 가져오고 세팅, 이것도 여기서 호출
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
     private void textSet() {
-        id = findViewById(R.id.id);
+        nickname = findViewById(R.id.nickname);
         date = findViewById(R.id.date);
         context = findViewById(R.id.context);
     }
     private void setNotice() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference user = database.getReference("notice").child(number+"");
+        DatabaseReference notice = database.getReference("notice").child(number+"");
 
-        user.addListenerForSingleValueEvent(new ValueEventListener() {//addValueEventListener은 항상 데이터를 대기하고 있기에 쓰면 안된다.
+        notice.addListenerForSingleValueEvent(new ValueEventListener() {//addValueEventListener은 항상 데이터를 대기하고 있기에 쓰면 안된다.
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 actionBar.setTitle(snapshot.child("title").getValue()+"");
-                id.setText(snapshot.child("id").getValue()+"");
+                nickname.setText(nick);
                 date.setText(snapshot.child("date").getValue()+"");
                 context.setText(snapshot.child("context").getValue()+"");
             }

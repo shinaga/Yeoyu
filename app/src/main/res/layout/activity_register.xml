@@ -7,23 +7,23 @@
     android:background="#A3DDAF"
     tools:context=".RegisterActivity">
 
-   <EditText
-       android:id="@+id/editId"
-       android:layout_width="match_parent"
-       android:layout_height="wrap_content"
-       android:layout_marginStart="48dp"
-       android:layout_marginTop="114dp"
-       android:layout_marginEnd="48dp"
-       android:paddingLeft="26dp"
-       android:background="@drawable/bg_text"
-       android:inputType="textPersonName"
-       android:minHeight="48dp"
-       android:hint="ID"
-       android:textSize="14dp"
-       android:textColor="#2E4E23"
-       app:layout_constraintEnd_toEndOf="parent"
-       app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintTop_toTopOf="parent" />
+    <EditText
+        android:id="@+id/editId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="114dp"
+        android:layout_marginEnd="48dp"
+        android:paddingLeft="26dp"
+        android:background="@drawable/bg_text"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:hint="ID"
+        android:textSize="14dp"
+        android:textColor="#2E4E23"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btn_idOverlap"
@@ -38,18 +38,18 @@
         app:layout_constraintTop_toTopOf="@+id/editId">
     </Button>
 
- <TextView
-     android:id="@+id/text_idOverlap"
-     android:layout_width="wrap_content"
-     android:layout_height="wrap_content"
-     android:layout_marginStart="24dp"
-     android:layout_marginTop="16dp"
-     android:text=""
-     android:textColor="#888888"
-     app:layout_constraintStart_toStartOf="@+id/editId"
-     app:layout_constraintTop_toBottomOf="@+id/editId" />
+    <TextView
+        android:id="@+id/text_idOverlap"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:text=""
+        android:textColor="#888888"
+        app:layout_constraintStart_toStartOf="@+id/editId"
+        app:layout_constraintTop_toBottomOf="@+id/editId" />
 
- <EditText
+    <EditText
         android:id="@+id/editNinkname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -90,22 +90,22 @@
         app:layout_constraintStart_toStartOf="@+id/editNinkname"
         app:layout_constraintTop_toBottomOf="@+id/editNinkname" />
     <EditText
-            android:id="@+id/editPasswd"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="48dp"
-            android:layout_marginTop="48dp"
-            android:layout_marginEnd="48dp"
-            android:paddingLeft="26dp"
-            android:background="@drawable/bg_text"
-            android:inputType="textPassword"
-            android:minHeight="48dp"
-            android:hint="PASSWORD"
-            android:textSize="14dp"
-            android:textColor="#2E4E23"
-            app:layout_constraintEnd_toEndOf="@+id/editNinkname"
-            app:layout_constraintStart_toStartOf="@+id/editNinkname"
-            app:layout_constraintTop_toBottomOf="@+id/editNinkname" />
+        android:id="@+id/editPasswd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="48dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="48dp"
+        android:paddingLeft="26dp"
+        android:background="@drawable/bg_text"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        android:hint="PASSWORD"
+        android:textSize="14dp"
+        android:textColor="#2E4E23"
+        app:layout_constraintEnd_toEndOf="@+id/editNinkname"
+        app:layout_constraintStart_toStartOf="@+id/editNinkname"
+        app:layout_constraintTop_toBottomOf="@+id/editNinkname" />
     <EditText
         android:id="@+id/editPasswd2"
         android:layout_width="match_parent"

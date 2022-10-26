@@ -29,10 +29,10 @@ import java.security.NoSuchAlgorithmException;
 import java.text.BreakIterator;
 
 public class MainActivity extends AppCompatActivity {
-    static EditText editId,editPasswd;
+    static EditText editId,editPasswd;//여러 class에서 참조할 수 있는 전역변수
     Button btnLogin;
     TextView textRegister,textFindPw;
-    int tmp;//Git Test용
+    int tmp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

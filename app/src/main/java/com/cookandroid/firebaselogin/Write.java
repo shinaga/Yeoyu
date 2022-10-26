@@ -25,7 +25,7 @@ public class Write extends Activity implements View.OnClickListener  {
     }
     @Override
     public void onClick(View view) {
-        String id, title, content;
+        String id, nickname, title, content;
         id = MainActivity.editId.getText().toString();
         title = WriteActivity.editTitle.getText().toString();
         content = WriteActivity.editContent.getText().toString();
