@@ -632,7 +632,7 @@ public class MapActivity extends AppCompatActivity
                 .key("AIzaSyCTqlWqciTWTl6lHhxN2e_-Jx6xK11jlD0")
                 .latlng(location.latitude, location.longitude)//현재 위치
                 .radius(1000) //1km 내에서 검색
-                .type(PlaceType.CONVENIENCE_STORE) //버스 정류장
+                .type(PlaceType.CONVENIENCE_STORE) //편의점
                 .build()
                 .execute();
     }
