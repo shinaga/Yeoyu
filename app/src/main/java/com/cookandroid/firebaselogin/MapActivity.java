@@ -146,6 +146,7 @@ public class MapActivity extends AppCompatActivity
                 showPlace_Conv(currentPosition);
             }
         });
+        //마커 클릭 감지
         LinearLayout linear = (LinearLayout)findViewById(R.id.linear);
         linear.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -683,8 +684,6 @@ mMap.addMarker(markerOptions);
     @Override
     public boolean onMarkerClick(Marker marker)
     {
-
-
         CameraUpdate center = CameraUpdateFactory.newLatLng(marker.getPosition());
         mMap.animateCamera(center);
         place_name.setText(marker.getTitle());
