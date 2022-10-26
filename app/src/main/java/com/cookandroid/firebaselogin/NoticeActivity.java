@@ -20,7 +20,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 
 public class NoticeActivity extends AppCompatActivity {
-    Button btnWrite, btnLozad;
+    Button btnWrite;
 
     private RecyclerView RecyclerView;
     private NoticeListAdapter RecyclerAdapter;
@@ -84,15 +84,14 @@ public class NoticeActivity extends AppCompatActivity {
                                 title[0] = snapshot.child("title").getValue().toString();
                                 date[0] = snapshot.child("date").getValue().toString();
                                 context[0] = snapshot.child("context").getValue().toString();
-                                noticeList.add(new Notice(number[0], title[0],date[0], context[0]));
 
-                                next[0]=count[0]-10;
+                                noticeList.add(new Notice(number[0], title[0],date[0], context[0]));
                                 RecyclerAdapter.setNoticeList(noticeList);//리사이클러뷰에 데이터를 넣는다.
+                                next[0]=count[0]-10;//for문에 안넣으려 했으나 오류 때문에 반복문에 넣음
                             }
                         }
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
-
                         }
                     });
                 }
@@ -101,7 +100,6 @@ public class NoticeActivity extends AppCompatActivity {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
 
@@ -155,12 +153,13 @@ public class NoticeActivity extends AppCompatActivity {
                                         }
                                     });
                                 }
+                                next[0]-=10;//다음글 번째를 10 낮춤
                             }
                             @Override
                             public void onCancelled(@NonNull DatabaseError error) {
                             }
                         });
-                    next[0]-=10;
+
                 }
             }
         });
