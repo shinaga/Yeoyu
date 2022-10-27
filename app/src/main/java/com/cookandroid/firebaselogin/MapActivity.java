@@ -148,6 +148,7 @@ public class MapActivity extends AppCompatActivity
                 showPlace_Conv(currentPosition);
             }
         });
+        //마커 클릭 감지
         LinearLayout linear = (LinearLayout)findViewById(R.id.linear);
         linear.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -631,7 +632,7 @@ mMap.addMarker(markerOptions);
                 .key("AIzaSyCTqlWqciTWTl6lHhxN2e_-Jx6xK11jlD0")
                 .latlng(location.latitude, location.longitude)//현재 위치
                 .radius(1000) //1km 내에서 검색
-                .type(PlaceType.CONVENIENCE_STORE) //버스 정류장
+                .type(PlaceType.CONVENIENCE_STORE) //편의점
                 .build()
                 .execute();
     }
@@ -685,8 +686,6 @@ mMap.addMarker(markerOptions);
     @Override
     public boolean onMarkerClick(Marker marker)
     {
-
-
         CameraUpdate center = CameraUpdateFactory.newLatLng(marker.getPosition());
         mMap.animateCamera(center);
         place_name.setText(marker.getTitle());
