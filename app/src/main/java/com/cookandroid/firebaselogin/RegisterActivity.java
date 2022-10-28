@@ -38,6 +38,9 @@ public class RegisterActivity extends AppCompatActivity {
         btnClick();
     }
     private void editEvent(){
+
+
+
         editId.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -95,27 +98,28 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister.setOnClickListener(new Register(this));
     }
     static void checkId(Context context,boolean create){//create가 true면 통해 중복 체크후 바로 아이디를 생성한다.
-            FirebaseDatabase database = FirebaseDatabase.getInstance();
-            DatabaseReference user = database.getReference("user").child(editId.getText().toString());
-            user.addListenerForSingleValueEvent(new ValueEventListener() {//addValueEventListener로 할시에는 아이디가 생성되고 "아이디가 중복이에요가 뜸" 왜냐하면 addValueEventListener는 경로의 전체 내용에 대한 변경 사항을 읽고 "수신 대기"한다.
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {//아이디 중복 확인
-                    if(dataSnapshot.exists()) {
-                        Toast.makeText(context, "사용중인 아이디 입니다.", Toast.LENGTH_SHORT).show();
-                        idCheck = false;
-                    }
-                    else {
-                        text_idOverlap.setText("사용 가능한 아이디 입니다.");
-                        idCheck = true;
-                        if(create == true) checkNickname(context, create);
-                    }
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference user = database.getReference("user").child(editId.getText().toString());
+        user.addListenerForSingleValueEvent(new ValueEventListener() {//addValueEventListener로 할시에는 아이디가 생성되고 "아이디가 중복이에요가 뜸" 왜냐하면 addValueEventListener는 경로의 전체 내용에 대한 변경 사항을 읽고 "수신 대기"한다.
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {//아이디 중복 확인
+                if(dataSnapshot.exists()) {
+                    Toast.makeText(context, "사용중인 아이디 입니다.", Toast.LENGTH_SHORT).show();
+                    text_idOverlap.setText("");
+                    idCheck = false;
                 }
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    Toast.makeText(context, "인터넷을 확인해 주세요.", Toast.LENGTH_SHORT).show();
-                    throw databaseError.toException();// don't ignore errors
+                else {
+                    text_idOverlap.setText("사용 가능한 아이디 입니다.");
+                    idCheck = true;
+                    if(create == true) checkNickname(context, create);
                 }
-            });//이 방법은 있는지 없는지 확인하는 방법
+            }
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(context, "인터넷을 확인해 주세요.", Toast.LENGTH_SHORT).show();
+                throw databaseError.toException();// don't ignore errors
+            }
+        });//이 방법은 있는지 없는지 확인하는 방법
     }
     static void checkNickname(Context context, boolean create){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -124,6 +128,7 @@ public class RegisterActivity extends AppCompatActivity {
         user.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+                boolean overlap = false;
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
                     if(editNinkname.getText().toString().equals(snapshot.child("nickname").getValue())){//닉네임이 존재하면
                         Toast.makeText(context, "사용중인 닉네임 입니다.", Toast.LENGTH_SHORT).show();
@@ -135,8 +140,7 @@ public class RegisterActivity extends AppCompatActivity {
                         text_nicknameOverlap.setText("사용 가능한 닉네임 입니다.");
                         nicknameCheck = true;
                     }
-                    if(create == true) Register.userCreate(context);
-                }
+                }if(create == true && nicknameCheck == true) Register.userCreate(context);
             }
             @Override
             public void onCancelled(DatabaseError databaseError) {
