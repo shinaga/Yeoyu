@@ -33,12 +33,16 @@ public class Register extends Activity implements View.OnClickListener {
         studentId = RegisterActivity.editStudentId.getText().toString();
         email = SendEmailActivity.editWriteEmail.getText().toString();
 
-        if(RegisterActivity.idCheck==false||RegisterActivity.nicknameCheck==false){
+        if(RegisterActivity.idCheck==false||RegisterActivity.nicknameCheck==false){//중복 확인 후 생성할 수 있음
             Toast.makeText(context, "아이디와 닉네임을 중복체크 해주세요.", Toast.LENGTH_SHORT).show();
             return;
         }
+        if(id.equals("")||nickName.equals("")||pw.equals("")||name.equals("")||studentId.equals("")){//빈 칸이 없어야 함
+            Toast.makeText(context, "빈 칸을 채워주세요.", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
-        RegisterActivity.checkId(context,true);
+        RegisterActivity.checkId(context,true);//2명 이상이 똑같은 아이디나 닉네임으로 중복확인 하는것을 방지하기 위해 한번더 체크한다.
     }
     static void userCreate(Context context){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
