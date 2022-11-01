@@ -48,6 +48,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
+    <!--https://wingsnote.com/229-->
             <EditText
                 android:id="@+id/editComment"
                 android:layout_width="match_parent"
