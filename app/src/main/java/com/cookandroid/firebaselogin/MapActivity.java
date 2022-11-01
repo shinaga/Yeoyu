@@ -55,7 +55,7 @@ import java.util.Locale;
 public class MapActivity extends AppCompatActivity
         implements OnMapReadyCallback,
         ActivityCompat.OnRequestPermissionsResultCallback,GoogleMap.OnMarkerClickListener,PlacesListener{
-//테스트!!!!!!!!
+//https://givealecture.tistory.com/entry/day10-SlidingDrawer
 
     private GoogleMap mMap;
     private Marker currentMarker = null;
