@@ -88,67 +88,7 @@ public class IntegratedActivity extends AppCompatActivity
     private View mLayout;  // Snackbar 사용하기 위해서는 View가 필요합니다.
     // (참고로 Toast에서는 Context가 필요했습니다.)
 
-    //밑에서 부터 지도 관련 없는 내용
     ImageView img1,img2,img3,img4;
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();//액션바 숨기기
-
-        {//지도 관련
-            getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
-                    WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-
-            setContentView(R.layout.activity_integrated);
-
-            mLayout = findViewById(R.id.layout_main);
-
-            locationRequest = new LocationRequest()
-                    .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
-                    .setInterval(UPDATE_INTERVAL_MS)
-                    .setFastestInterval(FASTEST_UPDATE_INTERVAL_MS);
-
-
-            LocationSettingsRequest.Builder builder =
-                    new LocationSettingsRequest.Builder();
-
-            builder.addLocationRequest(locationRequest);
-
-
-            mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-
-
-            SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                    .findFragmentById(R.id.map);
-            mapFragment.getMapAsync(this);
-            previous_marker = new ArrayList<Marker>();
-        }//지도 관련
-        imgSet();
-        imgClick();
-    }
-
-    private void imgSet() {
-        img1=findViewById(R.id.img1);
-        img2=findViewById(R.id.img2);
-        img3=findViewById(R.id.img3);
-        img3=findViewById(R.id.img3);
-    }
-
-    private void imgClick() {
-        img1.setOnClickListener(view -> {
-            Intent intent = new Intent(this,MapActivity.class);
-            startActivity(intent);
-        });
-        img2.setOnClickListener(view -> {
-            Intent intent = new Intent(this, NoticeActivity.class);
-            startActivity(intent);
-        });
-        img3.setOnClickListener(view -> {
-            Intent intent = new Intent(this, DiaryActivity.class);
-            startActivity(intent);
-        });
-    }
 
     @Override
     public void onMapReady(final GoogleMap googleMap) {
@@ -649,4 +589,66 @@ public class IntegratedActivity extends AppCompatActivity
     public void onPlacesFinished() {
 
     }
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.hide();//액션바 숨기기
+
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
+                    WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
+            setContentView(R.layout.activity_integrated);
+
+            mLayout = findViewById(R.id.layout_main);
+
+            locationRequest = new LocationRequest()
+                    .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
+                    .setInterval(UPDATE_INTERVAL_MS)
+                    .setFastestInterval(FASTEST_UPDATE_INTERVAL_MS);
+
+
+            LocationSettingsRequest.Builder builder =
+                    new LocationSettingsRequest.Builder();
+
+            builder.addLocationRequest(locationRequest);
+
+
+            mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+
+            SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+                    .findFragmentById(R.id.map);
+            mapFragment.getMapAsync(this);
+            previous_marker = new ArrayList<Marker>();
+
+        //밑에서 부터 지도 관련 없는 내용
+        imgSet();
+        imgClick();
+    }
+
+    private void imgSet() {
+        img1=findViewById(R.id.img1);
+        img2=findViewById(R.id.img2);
+        img3=findViewById(R.id.img3);
+        img3=findViewById(R.id.img3);
+    }
+
+    private void imgClick() {
+        img1.setOnClickListener(view -> {
+            Intent intent = new Intent(this,MapActivity.class);
+            startActivity(intent);
+        });
+        img2.setOnClickListener(view -> {
+            Intent intent = new Intent(this, NoticeActivity.class);
+            startActivity(intent);
+        });
+        img3.setOnClickListener(view -> {
+            Intent intent = new Intent(this, DiaryActivity.class);
+            startActivity(intent);
+        });
+    }
+
+
 }
