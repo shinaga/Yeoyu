@@ -57,7 +57,7 @@ import java.util.Locale;
 public class MapActivity extends AppCompatActivity
         implements OnMapReadyCallback,
         ActivityCompat.OnRequestPermissionsResultCallback,GoogleMap.OnMarkerClickListener,PlacesListener{
-//테스트!!!!!!!!
+//https://givealecture.tistory.com/entry/day10-SlidingDrawer
 
     private GoogleMap mMap;
     private Marker currentMarker = null;
@@ -102,8 +102,7 @@ public class MapActivity extends AppCompatActivity
 
         mLayout = findViewById(R.id.layout_main);
 
-        place_name = (TextView)findViewById(R.id.place_name);//장소명
-        address = (TextView)findViewById(R.id.address);//상세 주소
+
         locationRequest = new LocationRequest()
 
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
