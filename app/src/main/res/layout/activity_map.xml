@@ -60,11 +60,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         android:orientation="vertical">
         <TextView
+            android:textSize="20sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id = "@+id/place_name"
             android:text="여기에 장소 이름이 와야함"/>
         <TextView
+            android:textSize="20sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id = "@+id/address"
