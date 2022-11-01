@@ -21,6 +21,8 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -55,7 +57,6 @@ import java.util.Locale;
 public class MapActivity extends AppCompatActivity
         implements OnMapReadyCallback,
         ActivityCompat.OnRequestPermissionsResultCallback,GoogleMap.OnMarkerClickListener,PlacesListener{
-//https://givealecture.tistory.com/entry/day10-SlidingDrawer
 
     private GoogleMap mMap;
     private Marker currentMarker = null;
