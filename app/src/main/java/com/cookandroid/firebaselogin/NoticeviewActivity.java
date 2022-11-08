@@ -26,7 +26,7 @@ public class NoticeviewActivity extends AppCompatActivity {
     String id,nick;
     TextView nickname,date,context;
     ActionBar actionBar;
-
+    //
     @Override//액션바 생성
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
