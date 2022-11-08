@@ -2,7 +2,7 @@
 
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- 에디트텍스트가 포커스를 받았을때의 모양 및 색상 -->
-    <item android:state_focused="true">
+    <!--<item android:state_focused="true">
         <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
             <stroke
                 android:width="1dp"
@@ -11,17 +11,15 @@
             <solid
                 android:color="#FFFFFF" />
         </shape>
-    </item>
-
-
+    </item>-->
     <item android:state_focused="false">
         <shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
-            <stroke
+            <!--<stroke
                 android:width="1dp"
-                android:color="#EEEEEE" />
-            <corners android:radius="4dp"/>
+                android:color="#EEEEEE" />-->
+            <corners android:radius="8dp"/>
             <solid
-                android:color="#FFFFFF" />
+                android:color="#EEEEEE" />
         </shape>
     </item>
 </selector>

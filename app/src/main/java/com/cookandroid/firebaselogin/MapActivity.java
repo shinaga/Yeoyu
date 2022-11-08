@@ -57,6 +57,7 @@ import java.util.Locale;
 public class MapActivity extends AppCompatActivity
         implements OnMapReadyCallback,
         ActivityCompat.OnRequestPermissionsResultCallback,GoogleMap.OnMarkerClickListener,PlacesListener{
+//https://givealecture.tistory.com/entry/day10-SlidingDrawer
 
     private GoogleMap mMap;
     private Marker currentMarker = null;
@@ -101,8 +102,7 @@ public class MapActivity extends AppCompatActivity
 
         mLayout = findViewById(R.id.layout_main);
 
-        place_name = (TextView)findViewById(R.id.place_name);//장소명
-        address = (TextView)findViewById(R.id.address);//상세 주소
+
         locationRequest = new LocationRequest()
 
                 .setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY)
@@ -164,26 +164,13 @@ public class MapActivity extends AppCompatActivity
 
         mMap = googleMap;
 
-//런타임 퍼미션 요청 대화상자나 GPS 활성 요청 대화상자 보이기전에
-//지도의 초기위치를 서울로 이동
+        //런타임 퍼미션 요청 대화상자나 GPS 활성 요청 대화상자 보이기전에
+        //지도의 초기위치를 서울로 이동
         setDefaultLocation();
         MarkerOptions markerOptions = new MarkerOptions();
         mMap.setOnMarkerClickListener(this);
 
-/*
-//본관
-LatLng Main = new LatLng(37.58475463956453, 126.9250272363605 );
-markerOptions.position(Main);
-mnarkerOptions.title("명지전문대 본관");
-markerOptios.snippet("여기에 정보 입력");
-mMap.addMarker(markerOptions);
-//공학관
-LatLng Engine = new LatLng(37.585099197178224, 126.92491367259198 );
-markerOptions.position(Engine);
-markerOptions.title("명지전문대 공학관");
-markerOptions.snippet("여기에 정보 입력");
-mMap.addMarker(markerOptions);
-*/
+
 
 
 //런타임 퍼미션 처리
@@ -482,12 +469,12 @@ mMap.addMarker(markerOptions);
         super.onRequestPermissionsResult(permsRequestCode, permissions, grandResults);
         if (permsRequestCode == PERMISSIONS_REQUEST_CODE && grandResults.length == REQUIRED_PERMISSIONS.length) {
 
-// 요청 코드가 PERMISSIONS_REQUEST_CODE 이고, 요청한 퍼미션 개수만큼 수신되었다면
+            // 요청 코드가 PERMISSIONS_REQUEST_CODE 이고, 요청한 퍼미션 개수만큼 수신되었다면
 
             boolean check_result = true;
 
 
-// 모든 퍼미션을 허용했는지 체크합니다.
+            // 모든 퍼미션을 허용했는지 체크합니다.
 
             for (int result : grandResults) {
                 if (result != PackageManager.PERMISSION_GRANTED) {
@@ -499,16 +486,16 @@ mMap.addMarker(markerOptions);
 
             if (check_result) {
 
-// 퍼미션을 허용했다면 위치 업데이트를 시작합니다.
+                // 퍼미션을 허용했다면 위치 업데이트를 시작합니다.
                 startLocationUpdates();
             } else {
-// 거부한 퍼미션이 있다면 앱을 사용할 수 없는 이유를 설명해주고 앱을 종료합니다.2 가지 경우가 있습니다.
+                // 거부한 퍼미션이 있다면 앱을 사용할 수 없는 이유를 설명해주고 앱을 종료합니다.2 가지 경우가 있습니다.
 
                 if (ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[0])
                         || ActivityCompat.shouldShowRequestPermissionRationale(this, REQUIRED_PERMISSIONS[1])) {
 
 
-// 사용자가 거부만 선택한 경우에는 앱을 다시 실행하여 허용을 선택하면 앱을 사용할 수 있습니다.
+                    // 사용자가 거부만 선택한 경우에는 앱을 다시 실행하여 허용을 선택하면 앱을 사용할 수 있습니다.
                     Snackbar.make(mLayout, "퍼미션이 거부되었습니다. 앱을 다시 실행하여 퍼미션을 허용해주세요. ",
                             Snackbar.LENGTH_INDEFINITE).setAction("확인", new View.OnClickListener() {
 
