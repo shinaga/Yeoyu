@@ -24,6 +24,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.cookandroid.firebaselogin.CheckList.CheckListActivity;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -645,7 +646,7 @@ public class IntegratedActivity extends AppCompatActivity
             startActivity(intent);
         });
         img3.setOnClickListener(view -> {
-            Intent intent = new Intent(this, DiaryActivity.class);
+            Intent intent = new Intent(this, CheckListActivity.class);
             startActivity(intent);
         });
     }
