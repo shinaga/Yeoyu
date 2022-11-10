@@ -10,6 +10,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,10 +23,13 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.w3c.dom.Text;
 
+import java.time.LocalDate;
+
 public class NoticeviewActivity extends AppCompatActivity {
     int number;
     String id,nick;
     TextView nickname,date,context;
+    EditText editComment;
     ActionBar actionBar;
     //
     @Override//액션바 생성
@@ -63,6 +68,7 @@ public class NoticeviewActivity extends AppCompatActivity {
         actionBar = getSupportActionBar();//액션바
 
         textSet();//TextVeiw 세팅
+        editSet();//EditText 세팅
         numberSet();//받아온 게시글의 number를 가져옴
         setId();//;어떤 아이디의 글인지 아이디 세팅
     }
@@ -106,6 +112,31 @@ public class NoticeviewActivity extends AppCompatActivity {
         nickname = findViewById(R.id.nickname);
         date = findViewById(R.id.date);
         context = findViewById(R.id.context);
+    }
+    private void editSet() {
+        editComment = findViewById(R.id.editComment);
+    }
+    public void send(View v){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference comment = database.getReference("notice").child(number+"").child("comment");//댓글을 작성할 곳
+
+        final int[] count = new int[1];//현재댓글 개수를 담아오는 배열 변수, 배열로 하지 않으면 저장이 안된다.
+        DatabaseReference commentCount = database.getReference("notice").child(number+"").child("commentCount");
+        commentCount.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                count[0] = Integer.valueOf(snapshot.getValue()+"");
+                commentCount.setValue(++count[0]);
+
+                comment.child(count[0]+"").child("id").setValue(id);
+                comment.child(count[0]+"").child("nickname").setValue(nickname.getText().toString());
+                comment.child(count[0]+"").child("date").setValue(LocalDate.now().toString());
+                comment.child(count[0]+"").child("comment").setValue(editComment.getText().toString());
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
     }
     private void setNotice() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();

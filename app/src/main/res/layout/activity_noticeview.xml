@@ -49,13 +49,25 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
     <!--https://wingsnote.com/229-->
-            <EditText
-                android:id="@+id/editComment"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/edit_comment"
-                android:layout_marginBottom="4dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+     <EditText
+         android:id="@+id/editComment"
+         android:layout_width="match_parent"
+         android:layout_height="32dp"
+         android:background="@drawable/edit_comment"
+         android:layout_marginLeft="4dp"
+         android:layout_marginRight="4dp"
+         android:layout_marginTop="4dp"
+         android:layout_marginBottom="8dp"
+         app:layout_constraintStart_toStartOf="parent"
+         app:layout_constraintEnd_toEndOf="parent"
+         app:layout_constraintBottom_toBottomOf="parent"/>
+
+    <ImageView
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/send"
+        android:layout_margin="4dp"
+        android:onClick="send"
+        app:layout_constraintBottom_toBottomOf="@id/editComment"
+        app:layout_constraintEnd_toEndOf="@id/editComment" />
 </androidx.constraintlayout.widget.ConstraintLayout>
