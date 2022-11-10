@@ -1,4 +1,4 @@
-package com.cookandroid.firebaselogin.CheckList.Model;
+package com.cookandroid.firebaselogin;
 
 public class ToDoModel {
 

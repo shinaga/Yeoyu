@@ -1,4 +1,4 @@
-package com.cookandroid.firebaselogin.CheckList;
+package com.cookandroid.firebaselogin;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -12,7 +12,7 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.cookandroid.firebaselogin.CheckList.Adapter.ToDoAdapter;
+import com.cookandroid.firebaselogin.ToDoAdapter;
 import com.cookandroid.firebaselogin.R;
 
 public class RecyclerItemTouchHelper extends ItemTouchHelper.SimpleCallback {

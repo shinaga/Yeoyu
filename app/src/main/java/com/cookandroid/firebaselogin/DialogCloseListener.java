@@ -1,4 +1,4 @@
-package com.cookandroid.firebaselogin.CheckList;
+package com.cookandroid.firebaselogin;
 
 import android.content.DialogInterface;
 

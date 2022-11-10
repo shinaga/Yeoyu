@@ -24,7 +24,6 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.cookandroid.firebaselogin.CheckList.CheckListActivity;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
@@ -632,7 +631,6 @@ public class IntegratedActivity extends AppCompatActivity
     private void imgSet() {
         img1=findViewById(R.id.img1);
         img2=findViewById(R.id.img2);
-        img3=findViewById(R.id.img3);
         img3=findViewById(R.id.img3);
     }
 

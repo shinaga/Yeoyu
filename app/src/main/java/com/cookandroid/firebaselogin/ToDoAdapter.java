@@ -1,4 +1,4 @@
-package com.cookandroid.firebaselogin.CheckList.Adapter;
+package com.cookandroid.firebaselogin;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -10,12 +10,6 @@ import android.widget.CompoundButton;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.cookandroid.firebaselogin.CheckList.AddNewTask;
-import com.cookandroid.firebaselogin.CheckList.CheckListActivity;
-import com.cookandroid.firebaselogin.CheckList.Model.ToDoModel;
-import com.cookandroid.firebaselogin.R;
-import com.cookandroid.firebaselogin.CheckList.Utils.DatabaseHandler;
 
 import java.util.List;
 

@@ -1,4 +1,4 @@
-package com.cookandroid.firebaselogin.CheckList;
+package com.cookandroid.firebaselogin;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -9,17 +9,13 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.cookandroid.firebaselogin.CheckList.Adapter.ToDoAdapter;
-import com.cookandroid.firebaselogin.CheckList.Model.ToDoModel;
-import com.cookandroid.firebaselogin.CheckList.Utils.DatabaseHandler;
-import com.cookandroid.firebaselogin.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-public class CheckListActivity extends AppCompatActivity implements DialogCloseListener{
+public class CheckListActivity extends AppCompatActivity implements DialogCloseListener {
 
     private DatabaseHandler db;
 

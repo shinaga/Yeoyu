@@ -1,4 +1,4 @@
-package com.cookandroid.firebaselogin.CheckList;
+package com.cookandroid.firebaselogin;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -16,9 +16,6 @@ import android.widget.EditText;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
-import com.cookandroid.firebaselogin.CheckList.Model.ToDoModel;
-import com.cookandroid.firebaselogin.CheckList.Utils.DatabaseHandler;
-import com.cookandroid.firebaselogin.R;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
 import java.util.Objects;

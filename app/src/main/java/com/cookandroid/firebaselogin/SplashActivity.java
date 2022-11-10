@@ -1,12 +1,10 @@
-package com.cookandroid.firebaselogin.CheckList;
+package com.cookandroid.firebaselogin;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import com.cookandroid.firebaselogin.R;
 
 public class SplashActivity extends AppCompatActivity {
 
