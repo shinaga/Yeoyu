@@ -46,6 +46,13 @@
                 android:textSize="18dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
     <!--https://wingsnote.com/229-->
@@ -70,4 +77,5 @@
         android:onClick="send"
         app:layout_constraintBottom_toBottomOf="@id/editComment"
         app:layout_constraintEnd_toEndOf="@id/editComment" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

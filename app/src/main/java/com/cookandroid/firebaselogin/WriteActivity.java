@@ -31,5 +31,4 @@ public class WriteActivity extends AppCompatActivity {
     }
 
     private void btnClick() {btnWrite.setOnClickListener(new Write(this));}
-
 }

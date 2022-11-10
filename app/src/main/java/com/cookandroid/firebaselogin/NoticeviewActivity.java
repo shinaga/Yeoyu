@@ -71,6 +71,7 @@ public class NoticeviewActivity extends AppCompatActivity {
         editSet();//EditText 세팅
         numberSet();//받아온 게시글의 number를 가져옴
         setId();//;어떤 아이디의 글인지 아이디 세팅
+        loadComment();
     }
 
 
@@ -137,6 +138,9 @@ public class NoticeviewActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
+    }
+    private void loadComment(){
+
     }
     private void setNotice() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
