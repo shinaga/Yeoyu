@@ -17,10 +17,10 @@
         app:layout_constraintTop_toBottomOf="@+id/context" />
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/nickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="게시글 제목"
+        android:text="닉네임"
         android:textColor="#9CB634"
         android:textSize="14dp"
         android:layout_marginStart="8dp"

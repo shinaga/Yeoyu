@@ -22,13 +22,13 @@ import java.util.ArrayList;
 public class NoticeActivity extends AppCompatActivity {
     Button btnWrite;
 
-    private RecyclerView RecyclerView;
-    private NoticeListAdapter RecyclerAdapter;
+    private RecyclerView recyclerView;
+    private NoticeListAdapter recyclerAdapter;
     private ArrayList<Notice> noticeList;//리사이클러뷰에 넣어줄 리스트
 
     final int[] count = new int[1];//현재글 개수를 담아오는 배열 변수, 마찬가지로 배열로 하지 않으면 저장이 안된다.
 
-    final int[] number = new int[1];
+    final int[] number = new int[1];//프론트에선 안보임
     final String[] title = new String[1];
     final String[] date = new String[1];
     final String[] context = new String[1];
@@ -44,10 +44,7 @@ public class NoticeActivity extends AppCompatActivity {
         btnSet();//글작성 버튼을 세팅한다.
         btnClick();//글작성 버튼 클릭시 발생하는 이벤트 함수 설정한다.
 
-        noticeList = new ArrayList<Notice>();
         recyclerViewSet();//RecyclerView 세팅한다.
-        RecyclerAdapter.setNoticeList(noticeList);//RecyclerView에 noticeList를 연결한다.
-
         readNotices();//리사이클러뷰에 담을 글 목록 가져오기
         recyclerViewScrolled();//이제부터 스크롤 끝에 다다르면 이 함수가 실행된다.
     }
@@ -86,7 +83,7 @@ public class NoticeActivity extends AppCompatActivity {
                                 context[0] = snapshot.child("context").getValue().toString();
 
                                 noticeList.add(new Notice(number[0], title[0],date[0], context[0]));
-                                RecyclerAdapter.setNoticeList(noticeList);//리사이클러뷰에 데이터를 넣는다.
+                                recyclerAdapter.setNoticeList(noticeList);//리사이클러뷰에 데이터를 넣는다.
                                 next[0]=count[0]-10;//for문에 안넣으려 했으나 오류 때문에 반복문에 넣음
                             }
                         }
@@ -105,17 +102,21 @@ public class NoticeActivity extends AppCompatActivity {
 
     }
     private void recyclerViewSet() {
-        RecyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        noticeList = new ArrayList<Notice>();
+
+        recyclerView = findViewById(R.id.recyclerView);
         /* initiate adapter */
-        RecyclerAdapter = new NoticeListAdapter();
+        recyclerAdapter = new NoticeListAdapter();
 
         /* initiate recyclerview */
-        RecyclerView.setAdapter(RecyclerAdapter);
-        RecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(recyclerAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         //mRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL,false));
+
+        recyclerAdapter.setNoticeList(noticeList);//RecyclerView에 noticeList를 연결한다.
     }
     private void recyclerViewScrolled(){
-        RecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        recyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull androidx.recyclerview.widget.RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
@@ -144,7 +145,7 @@ public class NoticeActivity extends AppCompatActivity {
 
                                                 ArrayList<Notice> n = new ArrayList<Notice>();
                                                 n.add(new Notice(number[0], title[0], date[0], context[0]));
-                                                RecyclerAdapter.addNoticeList(n);
+                                                recyclerAdapter.addNoticeList(n);
                                             }
                                         }
 

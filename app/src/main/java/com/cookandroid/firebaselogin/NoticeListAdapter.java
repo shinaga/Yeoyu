@@ -16,16 +16,16 @@ public class NoticeListAdapter extends RecyclerView.Adapter<NoticeListAdapter.Vi
 
     private ArrayList<Notice> noticeList;
 
+    @Override
+    public int getItemCount() {
+        return noticeList.size();
+    }
+
     @NonNull
     @Override
     public NoticeListAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.notice_borad_recyclerview, parent, false);
         return new NoticeListAdapter.ViewHolder(view);
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull NoticeListAdapter.ViewHolder holder, int position) {
-        holder.onBind(noticeList.get(position));
     }
 
     public void setNoticeList(ArrayList<Notice> list){
@@ -38,13 +38,12 @@ public class NoticeListAdapter extends RecyclerView.Adapter<NoticeListAdapter.Vi
         }
         notifyItemRangeInserted(getItemCount(),list.size());
     }
-    @Override
-    public int getItemCount() {
-        return noticeList.size();
-    }
+
+
+
 
     class ViewHolder extends RecyclerView.ViewHolder {
-        TextView number;
+        TextView number;//프론트에선 안보임
         TextView title;
         TextView date;
         TextView context;
@@ -73,5 +72,9 @@ public class NoticeListAdapter extends RecyclerView.Adapter<NoticeListAdapter.Vi
             date.setText(item.getDate());
             context.setText(item.getContext());
         }
+    }
+    @Override
+    public void onBindViewHolder(@NonNull NoticeListAdapter.ViewHolder holder, int position) {
+        holder.onBind(noticeList.get(position));
     }
 }

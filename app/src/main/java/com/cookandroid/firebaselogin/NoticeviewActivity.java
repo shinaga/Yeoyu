@@ -3,6 +3,8 @@ package com.cookandroid.firebaselogin;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -21,16 +23,20 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
-public class NoticeviewActivity extends AppCompatActivity {
+public class NoticeviewActivity extends AppCompatActivity{
     int number;
     String id,nick;
     TextView nickname,date,context;
     EditText editComment;
     ActionBar actionBar;
+
+    private RecyclerView recyclerView;
+    private CommentListAdapter recyclerAdapter;
+    private ArrayList<Comment> commentList;//리사이클러뷰에 넣어줄 리스트
     //
     @Override//액션바 생성
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -71,7 +77,9 @@ public class NoticeviewActivity extends AppCompatActivity {
         editSet();//EditText 세팅
         numberSet();//받아온 게시글의 number를 가져옴
         setId();//;어떤 아이디의 글인지 아이디 세팅
-        loadComment();
+
+        recyclerViewSet();//RecyclerView 세팅한다.
+        loadComment();//리사이클러뷰에 담을 댓글 목록 가져오기
     }
 
 
@@ -139,8 +147,23 @@ public class NoticeviewActivity extends AppCompatActivity {
             }
         });
     }
-    private void loadComment(){
+    private void recyclerViewSet() {
+        commentList = new ArrayList<Comment>();
 
+        recyclerView = findViewById(R.id.recyclerView);
+        /* initiate adapter */
+        recyclerAdapter = new CommentListAdapter();
+
+        /* initiate recyclerview */
+        recyclerView.setAdapter(recyclerAdapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        //mRecyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL,false));
+
+        recyclerAdapter.setCommentList(commentList);//recyclerView에 noticeList를 연결한다.
+    }
+    private void loadComment(){
+        commentList.add(new Comment(123, "닉네임","날짜", "내용"));
+        recyclerAdapter.setCommentList(commentList);//리사이클러뷰에 데이터를 넣는다.
     }
     private void setNotice() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
