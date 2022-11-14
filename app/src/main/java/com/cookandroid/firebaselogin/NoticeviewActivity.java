@@ -37,7 +37,12 @@ public class NoticeviewActivity extends AppCompatActivity{
     private RecyclerView recyclerView;
     private CommentListAdapter recyclerAdapter;
     private ArrayList<Comment> commentList;//리사이클러뷰에 넣어줄 리스트
-    //
+
+    int c_number;
+    String c_nickname;
+    String c_date;
+    String c_comment;
+
     @Override//액션바 생성
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -162,8 +167,41 @@ public class NoticeviewActivity extends AppCompatActivity{
         recyclerAdapter.setCommentList(commentList);//recyclerView에 noticeList를 연결한다.
     }
     private void loadComment(){
-        commentList.add(new Comment(123, "닉네임","날짜", "내용"));
-        recyclerAdapter.setCommentList(commentList);//리사이클러뷰에 데이터를 넣는다.
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference comment = database.getReference("notice").child(number+"").child("comment");//for문을 돌 변수
+
+        DatabaseReference count = database.getReference("notice").child(number+"").child("commentCount");
+
+        count.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int i[] = new int[1];//for문에 쓸 i도 배열로 해야함
+
+                for(i[0]=1;i[0]<=Integer.valueOf(snapshot.getValue()+"");i[0]++) {
+                    comment.child(i[0] + "").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if(snapshot.exists()) {//없는 글을 불러오지 않기 위함
+                                c_number = i[0];
+                                c_nickname = snapshot.child("nickname").getValue() + "";
+                                c_date = snapshot.child("date").getValue() + "";
+                                c_comment = snapshot.child("comment").getValue() + "";
+
+                                commentList.add(new Comment(c_number, c_nickname, c_date, c_comment));
+                                recyclerAdapter.setCommentList(commentList);//리사이클러뷰에 데이터를 넣는다.
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                        }
+                    });
+                }
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
     }
     private void setNotice() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();

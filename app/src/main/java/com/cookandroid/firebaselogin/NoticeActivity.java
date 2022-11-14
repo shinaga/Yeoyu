@@ -61,7 +61,6 @@ public class NoticeActivity extends AppCompatActivity {
         DatabaseReference noticeCount = database.getReference("noticeCount");
 
         DatabaseReference notice = database.getReference("notice");
-        final DatabaseReference[] readNotice = new DatabaseReference[1]; //for문에서 돌릴 변수, 배열로 하지 않으면 저장이 안된다.
 
         noticeCount.addListenerForSingleValueEvent(new ValueEventListener() {//노티스 넘버에 접근하기 위함
             @Override
@@ -71,16 +70,15 @@ public class NoticeActivity extends AppCompatActivity {
 
                 int i[] = new int[1];//for문에 쓸 i도 배열로 해야함
                 for(i[0]=count[0];i[0]>count[0]-10;i[0]--){//i는 noticeCount 수, 10개의 글을 보여주기 위함이다. 단 삭제된 글이 있으면 10개가 안될 수도 있다.
-                    readNotice[0] = notice.child(i[0]+"");
 
-                    readNotice[0].addListenerForSingleValueEvent(new ValueEventListener() {//글을 읽어 오기 위함
+                    notice.child(i[0]+"").addListenerForSingleValueEvent(new ValueEventListener() {//글을 읽어 오기 위함
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             if(snapshot.exists()){//없는 글을 불러오지 않기 위함
-                                number[0] = Integer.valueOf(snapshot.child("number").getValue().toString());
-                                title[0] = snapshot.child("title").getValue().toString();
-                                date[0] = snapshot.child("date").getValue().toString();
-                                context[0] = snapshot.child("context").getValue().toString();
+                                number[0] = Integer.valueOf(snapshot.child("number").getValue()+"");
+                                title[0] = snapshot.child("title").getValue()+"";
+                                date[0] = snapshot.child("date").getValue()+"";
+                                context[0] = snapshot.child("context").getValue()+"";
 
                                 noticeList.add(new Notice(number[0], title[0],date[0], context[0]));
                                 recyclerAdapter.setNoticeList(noticeList);//리사이클러뷰에 데이터를 넣는다.
@@ -126,15 +124,13 @@ public class NoticeActivity extends AppCompatActivity {
                         FirebaseDatabase database = FirebaseDatabase.getInstance();
                         DatabaseReference notice = database.getReference("notice");
 
-                        final DatabaseReference[] readNotice = new DatabaseReference[1]; //for문에서 돌릴 변수, 배열로 하지 않으면 저장이 안된다.
                         notice.addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot snapshot) {
                                 int i[] = new int[1];//for문에 쓸 i도 배열로 해야함
                                 for (i[0] = next[0]; i[0] > next[0] - 10; i[0]--) {//i는 noticeCount 수, 10개의 글을 보여주기 위함이다. 단 삭제된 글이 있으면 10개가 안될 수도 있다.
-                                    readNotice[0] = notice.child(i[0] + "");
 
-                                    readNotice[0].addListenerForSingleValueEvent(new ValueEventListener() {//글을 읽어 오기 위함
+                                    notice.child(i[0] + "").addListenerForSingleValueEvent(new ValueEventListener() {//글을 읽어 오기 위함
                                         @Override
                                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                                             if(snapshot.exists()){//없는 글을 불러오지 않기 위함
