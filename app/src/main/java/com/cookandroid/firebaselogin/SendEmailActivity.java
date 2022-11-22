@@ -32,7 +32,7 @@ public class SendEmailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send_email);
         ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();//액션바 숨기기
+        //actionBar.hide();//액션바 숨기기
 
         StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder()
                 .permitDiskReads()

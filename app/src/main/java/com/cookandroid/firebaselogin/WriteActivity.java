@@ -16,7 +16,7 @@ public class WriteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_write);
         ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();//액션바 숨기기
+        //actionBar.hide();//액션바 숨기기
 
         editSet();
         btnSet();
@@ -31,5 +31,4 @@ public class WriteActivity extends AppCompatActivity {
     }
 
     private void btnClick() {btnWrite.setOnClickListener(new Write(this));}
-
 }
