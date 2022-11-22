@@ -16,12 +16,15 @@
             android:exported="false" />
         <activity
             android:name=".SendEmailActivity"
+            android:parentActivityName=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".DiaryActivity"
+            android:parentActivityName=".IntegratedActivity"
             android:exported="false" />
         <activity
             android:name=".MapActivity"
+            android:parentActivityName=".IntegratedActivity"
             android:exported="false" />
 
         <meta-data
@@ -30,15 +33,19 @@
 
         <activity
             android:name=".IntegratedActivity"
+            android:parentActivityName=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".WriteActivity"
+            android:parentActivityName=".NoticeActivity"
             android:exported="false" />
         <activity
             android:name=".NoticeActivity"
+            android:parentActivityName=".IntegratedActivity"
             android:exported="false" />
         <activity
             android:name=".RegisterActivity"
+            android:parentActivityName=".SendEmailActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
@@ -49,6 +56,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>
