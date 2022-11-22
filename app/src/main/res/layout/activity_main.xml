@@ -4,220 +4,108 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-
+    android:background="#6667AB"
     tools:context=".MainActivity">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="175dp"
-        android:background="#FFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="25dp"
-            android:background="@drawable/bg_gradient2"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="3dp"
-                android:background="@drawable/bg_gradient3"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="200dp"
-            android:layout_marginEnd="3dp"
-            android:background="#FFFFFF"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="208dp"
-        android:layout_marginEnd="6dp"
-        android:background="@drawable/bg_gradient"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="72dp"
+        android:layout_height="72dp"
+        android:layout_marginTop="64dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0">
+        app:srcCompat="@drawable/logo" />
+    <EditText
+        android:id="@+id/editId"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="240dp"
+        android:background="@drawable/bg_text"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:minHeight="48dp"
+        android:paddingLeft="26dp"
+        android:hint="학번을 입력해주세요."
+        android:textColor="#2E4E23"
+        android:textSize="14dp"
+        android:text="test"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
+    <EditText
+        android:id="@+id/editPasswd"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="9dp"
+        android:layout_marginEnd="40dp"
+        android:background="@drawable/bg_text"
+        android:ems="10"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        android:paddingLeft="26dp"
+        android:hint="비밀번호를 입력해주세요."
+        android:textColor="#2E4E23"
+        android:textSize="14dp"
+        android:text="1234"
+        app:layout_constraintEnd_toEndOf="@+id/editId"
+        app:layout_constraintStart_toStartOf="@+id/editId"
+        app:layout_constraintTop_toBottomOf="@+id/editId" />
 
-        <EditText
-            android:id="@+id/editId"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="48dp"
-            android:layout_marginTop="156dp"
-            android:layout_marginEnd="48dp"
-            android:background="@drawable/bg_text"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:minHeight="48dp"
-            android:paddingLeft="26dp"
-            android:hint="ID"
-            android:textColor="#2E4E23"
-            android:textSize="14dp"
-            android:text="test"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="11dp"
+        android:layout_marginEnd="40dp"
+        android:backgroundTint="#FFFFFF"
+        android:text="LOGIN"
+        android:textColor="#2E4E23"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editPasswd" />
 
-        <EditText
-            android:id="@+id/editPasswd"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="48dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="48dp"
-            android:background="@drawable/bg_text"
-            android:ems="10"
-            android:inputType="textPassword"
-            android:minHeight="48dp"
-            android:paddingLeft="26dp"
-            android:hint="PASSWORD"
-            android:textColor="#2E4E23"
-            android:textSize="14dp"
-            android:text="1234"
-            app:layout_constraintEnd_toEndOf="@+id/editId"
-            app:layout_constraintStart_toStartOf="@+id/editId"
-            app:layout_constraintTop_toBottomOf="@+id/editId" />
+    <TextView
+        android:id="@+id/textRegister"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="88dp"
+        android:layout_marginBottom="120dp"
+        android:text="회원가입"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
-        <Button
-            android:id="@+id/btnLogin"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="52dp"
-            android:layout_marginTop="278dp"
-            android:layout_marginEnd="52dp"
-            android:backgroundTint="#FFFFFF"
-            android:text="LOGIN"
-            android:textColor="#2E4E23"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textRegister"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="88dp"
-            android:layout_marginBottom="164dp"
-            android:text="회원가입"
-            android:textColor="#FFFFFF"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
-
-        <TextView
-            android:id="@+id/textFindPw"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="76dp"
-            android:layout_marginBottom="164dp"
-            android:text="비밀번호 찾기"
-            android:textColor="#FFFFFF"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+    <TextView
+        android:id="@+id/textFindPw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="76dp"
+        android:layout_marginBottom="120dp"
+        android:text="비밀번호 찾기"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="10dp"
         android:layout_height="10dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="384dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/dot2" />
-
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="@id/editId"
+        app:layout_constraintTop_toTopOf="@id/editId"
+        app:srcCompat="@drawable/dot" />
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="10dp"
         android:layout_height="10dp"
-        android:layout_marginStart="56dp"
-        android:layout_marginTop="450dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/dot2" />
-
-    <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="176dp"
-        android:layout_marginEnd="5dp"
-        app:layout_constraintEnd_toStartOf="@+id/imageView5"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/b" />
-
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="175dp"
-        android:layout_marginEnd="41dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/g" />
-
-    <ImageView
-        android:id="@+id/imageView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="177dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toStartOf="@+id/imageView4"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/p" />
-
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="178dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toStartOf="@+id/imageView6"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/y" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="90dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="53dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/yeoyu" />
-
-    <ImageView
-        android:id="@+id/imageView8"
-        android:layout_width="105dp"
-        android:layout_height="32dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView"
-            app:srcCompat="@drawable/text" />
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toStartOf="@id/editPasswd"
+        app:layout_constraintTop_toTopOf="@id/editPasswd"
+        app:srcCompat="@drawable/dot" />
 </androidx.constraintlayout.widget.ConstraintLayout>

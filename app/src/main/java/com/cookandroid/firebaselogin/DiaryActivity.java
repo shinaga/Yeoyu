@@ -54,7 +54,7 @@ public class DiaryActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();//액션바 숨기기
+        //actionBar.hide();//액션바 숨기기
 
         setContentView(R.layout.activity_diary);
         calendarView=findViewById(R.id.calendarView);

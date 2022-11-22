@@ -29,7 +29,7 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
         ActionBar actionBar = getSupportActionBar();
-        actionBar.hide();//액션바 숨기기
+        //actionBar.hide();//액션바 숨기기
 
         editSet();
         textSet();
