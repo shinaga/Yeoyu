@@ -632,7 +632,6 @@ public class IntegratedActivity extends AppCompatActivity
         img1=findViewById(R.id.img1);
         img2=findViewById(R.id.img2);
         img3=findViewById(R.id.img3);
-        img3=findViewById(R.id.img3);
     }
 
     private void imgClick() {
@@ -645,7 +644,7 @@ public class IntegratedActivity extends AppCompatActivity
             startActivity(intent);
         });
         img3.setOnClickListener(view -> {
-            Intent intent = new Intent(this, DiaryActivity.class);
+            Intent intent = new Intent(this, CheckListActivity.class);
             startActivity(intent);
         });
     }

@@ -10,16 +10,17 @@
         android:layout_width="0dp"
         android:layout_height="21dp"
         android:layout_marginTop="13dp"
-        android:layout_marginRight="8dp"
+        android:layout_marginLeft="8dp"
         android:text="1"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/context" />
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/nickname"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="게시글 제목"
+        android:text="닉네임"
         android:textColor="#9CB634"
         android:textSize="14dp"
         android:layout_marginStart="8dp"
