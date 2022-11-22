@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
-
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+    ///
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
@@ -11,26 +10,22 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.AppCompat.Light"
-        tools:targetApi="31">
+        android:theme="@style/Theme.AppCompat.Light">
         <activity
             android:name=".NoticeviewActivity"
             android:exported="false" />
         <activity
             android:name=".SendEmailActivity"
-            android:exported="false" />
-        <activity
-            android:name=".CheckListActivity"
+            android:parentActivityName=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".DiaryActivity"
+            android:parentActivityName=".IntegratedActivity"
             android:exported="false" />
         <activity
             android:name=".MapActivity"
+            android:parentActivityName=".IntegratedActivity"
             android:exported="false" />
-        <activity
-            android:name=".SplashActivity"
-            android:exported="true" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -38,15 +33,19 @@
 
         <activity
             android:name=".IntegratedActivity"
+            android:parentActivityName=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".WriteActivity"
+            android:parentActivityName=".NoticeActivity"
             android:exported="false" />
         <activity
             android:name=".NoticeActivity"
+            android:parentActivityName=".IntegratedActivity"
             android:exported="false" />
         <activity
             android:name=".RegisterActivity"
+            android:parentActivityName=".SendEmailActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
@@ -57,6 +56,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>
