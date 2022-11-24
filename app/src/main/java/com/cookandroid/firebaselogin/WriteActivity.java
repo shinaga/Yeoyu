@@ -12,6 +12,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -73,11 +74,9 @@ public class WriteActivity extends AppCompatActivity {
                 Bitmap img = BitmapFactory.decodeStream(in);
                 in.close();
                 imgUpload1.setImageBitmap(img);//이미지 변경
-
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
         }
     }
 }

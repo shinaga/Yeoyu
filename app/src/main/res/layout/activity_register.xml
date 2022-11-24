@@ -4,24 +4,32 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#A3DDAF"
     tools:context=".RegisterActivity">
+    <ImageView
+        android:layout_width="172dp"
+        android:layout_height="27dp"
+        android:src="@drawable/register"
+        android:layout_marginTop="80dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/editId"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="48dp"
-        android:layout_marginTop="114dp"
+        android:layout_marginTop="116dp"
         android:layout_marginEnd="48dp"
-        android:paddingLeft="26dp"
-        android:background="@drawable/bg_text"
+        android:background="@drawable/boder_blue"
+        android:hint="ID"
         android:inputType="textPersonName"
         android:minHeight="48dp"
-        android:hint="ID"
-        android:textSize="14dp"
+        android:paddingLeft="26dp"
         android:textColor="#2E4E23"
+        android:textSize="14dp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -31,7 +39,7 @@
         android:layout_height="40dp"
         android:text="중복\n확인"
         android:textSize="10dp"
-        android:background="@drawable/button_green"
+        android:background="@drawable/boder_blue_button"
         android:layout_marginTop="4dp"
         android:layout_marginRight="5dp"
         app:layout_constraintEnd_toEndOf="@+id/editId"
@@ -56,7 +64,7 @@
         android:layout_marginStart="48dp"
         android:layout_marginTop="48dp"
         android:layout_marginEnd="48dp"
-        android:background="@drawable/bg_text"
+        android:background="@drawable/boder_blue"
         android:hint="닉네임"
         android:inputType="textPersonName"
         android:minHeight="48dp"
@@ -72,7 +80,7 @@
         android:layout_height="40dp"
         android:text="중복\n확인"
         android:textSize="10dp"
-        android:background="@drawable/button_green"
+        android:background="@drawable/boder_blue_button"
         android:layout_marginTop="4dp"
         android:layout_marginRight="5dp"
         app:layout_constraintEnd_toEndOf="@+id/editNinkname"
@@ -97,7 +105,7 @@
             android:layout_marginTop="48dp"
             android:layout_marginEnd="48dp"
             android:paddingLeft="26dp"
-            android:background="@drawable/bg_text"
+            android:background="@drawable/boder_blue"
             android:inputType="textPassword"
             android:minHeight="48dp"
             android:hint="PASSWORD"
@@ -113,7 +121,7 @@
         android:layout_marginStart="48dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="48dp"
-        android:background="@drawable/bg_text"
+        android:background="@drawable/boder_blue"
         android:hint="PASSWORD 한번더"
         android:inputType="textPassword"
         android:minHeight="48dp"
@@ -130,7 +138,7 @@
         android:layout_marginStart="48dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="48dp"
-        android:background="@drawable/bg_text"
+        android:background="@drawable/boder_blue"
         android:hint="이름"
         android:inputType="textPersonName"
         android:minHeight="48dp"
@@ -148,7 +156,7 @@
         android:layout_marginStart="48dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="48dp"
-        android:background="@drawable/bg_text"
+        android:background="@drawable/boder_blue"
         android:hint="학번"
         android:inputType="textPersonName"
         android:minHeight="48dp"
@@ -165,7 +173,7 @@
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="@id/editId"
         app:layout_constraintTop_toTopOf="@id/editId"
-        app:srcCompat="@drawable/dot2" />
+        app:srcCompat="@drawable/dot" />
     <ImageView
         android:layout_width="10dp"
         android:layout_height="10dp"
@@ -173,7 +181,7 @@
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="@id/editNinkname"
         app:layout_constraintTop_toTopOf="@id/editNinkname"
-        app:srcCompat="@drawable/dot2" />
+        app:srcCompat="@drawable/dot" />
     <ImageView
         android:layout_width="10dp"
         android:layout_height="10dp"
@@ -181,7 +189,7 @@
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="@id/editPasswd"
         app:layout_constraintTop_toTopOf="@id/editPasswd"
-        app:srcCompat="@drawable/dot2" />
+        app:srcCompat="@drawable/dot" />
     <ImageView
         android:layout_width="10dp"
         android:layout_height="10dp"
@@ -189,7 +197,7 @@
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="@id/editPasswd2"
         app:layout_constraintTop_toTopOf="@id/editPasswd2"
-        app:srcCompat="@drawable/dot2" />
+        app:srcCompat="@drawable/dot" />
     <ImageView
         android:layout_width="10dp"
         android:layout_height="10dp"
@@ -197,7 +205,7 @@
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="@id/editName"
         app:layout_constraintTop_toTopOf="@id/editName"
-        app:srcCompat="@drawable/dot2" />
+        app:srcCompat="@drawable/dot" />
     <ImageView
         android:layout_width="10dp"
         android:layout_height="10dp"
@@ -205,7 +213,7 @@
         android:layout_marginTop="20dp"
         app:layout_constraintStart_toStartOf="@id/editStudentId"
         app:layout_constraintTop_toTopOf="@id/editStudentId"
-        app:srcCompat="@drawable/dot2" />
+        app:srcCompat="@drawable/dot" />
     <Button
         android:id="@+id/btnRegister"
         android:layout_width="0dp"
@@ -213,7 +221,7 @@
         android:layout_marginStart="48dp"
         android:layout_marginEnd="48dp"
         android:layout_marginBottom="104dp"
-        android:backgroundTint="#FFFFFF"
+        android:background="@drawable/boder_blue_button"
         android:text="회원가입"
         android:textColor="#2E4E23"
         app:layout_constraintBottom_toBottomOf="parent"
