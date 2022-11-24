@@ -9,7 +9,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -34,6 +36,8 @@ public class NoticeActivity extends AppCompatActivity {
     final String[] context = new String[1];
 
     final int[] next = new int[1];//다음 차례 글 번호를 불러오는 변수(홀수번째)
+
+    boolean flag=false;//count에 값을 넣는것을 한번만 하기 위해서
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -65,7 +69,7 @@ public class NoticeActivity extends AppCompatActivity {
         noticeCount.addListenerForSingleValueEvent(new ValueEventListener() {//노티스 넘버에 접근하기 위함
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                count[0]=Integer.valueOf(snapshot.getValue().toString());//str을 int로 변환후 number[0]에 저장
+                if(flag==false)count[0]=Integer.valueOf(snapshot.getValue().toString());//str을 int로 변환후 number[0]에 저장
 
 
                 int i[] = new int[1];//for문에 쓸 i도 배열로 해야함
@@ -83,12 +87,19 @@ public class NoticeActivity extends AppCompatActivity {
                                 noticeList.add(new Notice(number[0], title[0],date[0], context[0]));
                                 recyclerAdapter.setNoticeList(noticeList);//리사이클러뷰에 데이터를 넣는다.
                                 next[0]=count[0]-10;//for문에 안넣으려 했으나 오류 때문에 반복문에 넣음
+
                             }
+
                         }
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
                         }
                     });
+                    if(i[0]==count[0]-10+1&&noticeList.size()==0&&count[0]>0){
+                        flag=true;
+                        count[0]=-10;
+                        readNotices();
+                    }
                 }
 
             }
@@ -97,7 +108,6 @@ public class NoticeActivity extends AppCompatActivity {
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
-
     }
     private void recyclerViewSet() {
         noticeList = new ArrayList<Notice>();
@@ -120,44 +130,45 @@ public class NoticeActivity extends AppCompatActivity {
                 super.onScrolled(recyclerView, dx, dy);
 
                 if (!recyclerView.canScrollVertically(1)) {//스크롤 끝 감지, 근데 이상하게 맨처음에 한번 실행됨
-
-                        FirebaseDatabase database = FirebaseDatabase.getInstance();
-                        DatabaseReference notice = database.getReference("notice");
-
-                        notice.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                int i[] = new int[1];//for문에 쓸 i도 배열로 해야함
-                                for (i[0] = next[0]; i[0] > next[0] - 10; i[0]--) {//i는 noticeCount 수, 10개의 글을 보여주기 위함이다. 단 삭제된 글이 있으면 10개가 안될 수도 있다.
-
-                                    notice.child(i[0] + "").addListenerForSingleValueEvent(new ValueEventListener() {//글을 읽어 오기 위함
-                                        @Override
-                                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                            if(snapshot.exists()){//없는 글을 불러오지 않기 위함
-                                                number[0] = Integer.valueOf(snapshot.child("number").getValue().toString());
-                                                title[0] = snapshot.child("title").getValue().toString();
-                                                date[0] = snapshot.child("date").getValue().toString();
-                                                context[0] = snapshot.child("context").getValue().toString();
-
-                                                ArrayList<Notice> n = new ArrayList<Notice>();
-                                                n.add(new Notice(number[0], title[0], date[0], context[0]));
-                                                recyclerAdapter.addNoticeList(n);
-                                            }
-                                        }
-
-                                        @Override
-                                        public void onCancelled(@NonNull DatabaseError error) {
-                                        }
-                                    });
-                                }
-                                next[0]-=10;//다음글 번째를 10 낮춤
-                            }
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError error) {
-                            }
-                        });
-
+                        loadNotice();
                 }
+            }
+        });
+    }
+    private void loadNotice(){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference notice = database.getReference("notice");
+
+        notice.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                int i[] = new int[1];//for문에 쓸 i도 배열로 해야함
+                for (i[0] = next[0]; i[0] > next[0] - 10; i[0]--) {//i는 noticeCount 수, 10개의 글을 보여주기 위함이다. 단 삭제된 글이 있으면 10개가 안될 수도 있다.
+
+                    notice.child(i[0] + "").addListenerForSingleValueEvent(new ValueEventListener() {//글을 읽어 오기 위함
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if(snapshot.exists()){//없는 글을 불러오지 않기 위함
+                                number[0] = Integer.valueOf(snapshot.child("number").getValue().toString());
+                                title[0] = snapshot.child("title").getValue().toString();
+                                date[0] = snapshot.child("date").getValue().toString();
+                                context[0] = snapshot.child("context").getValue().toString();
+
+                                ArrayList<Notice> n = new ArrayList<Notice>();
+                                n.add(new Notice(number[0], title[0], date[0], context[0]));
+                                recyclerAdapter.addNoticeList(n);
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                        }
+                    });
+                }
+                next[0]-=10;//다음글 번째를 10 낮춤
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
             }
         });
     }

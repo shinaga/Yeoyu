@@ -181,7 +181,7 @@ public class NoticeviewActivity extends AppCompatActivity{
                     comment.child(i[0] + "").addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            if(snapshot.exists()) {//없는 글을 불러오지 않기 위함
+                            if(snapshot.exists()) {//없는 댓글을 불러오지 않기 위함
                                 c_number = i[0];
                                 c_nickname = snapshot.child("nickname").getValue() + "";
                                 c_date = snapshot.child("date").getValue() + "";

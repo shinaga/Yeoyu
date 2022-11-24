@@ -37,7 +37,7 @@ public class Login extends Activity implements View.OnClickListener{
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             if(dataSnapshot.getValue().equals(pw)){
-                                Intent intent = new Intent(context, IntegratedActivity.class);
+                                Intent intent = new Intent(context, NoticeActivity.class);
                                 context.startActivity(intent);
                             }
                             else Toast.makeText(context, "아이디와 비밀번호를 확인해주세요.", Toast.LENGTH_SHORT).show();

@@ -29,6 +29,7 @@ public class CheckListActivity extends AppCompatActivity implements DialogCloseL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.checklist_activity);
+        //Objects.requireNonNull(getSupportActionBar()).hide();
 
         db = new DatabaseHandler(this);
         db.openDatabase();

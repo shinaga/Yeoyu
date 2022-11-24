@@ -3,6 +3,7 @@ package com.cookandroid.firebaselogin;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
 import android.view.View;
@@ -16,10 +17,14 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.time.LocalDate;
 public class Write extends Activity implements View.OnClickListener  {
     private Context context;
+
     public Write(Context context) {//Context 말고 Activity로 해도 됨
         this.context = context;
     }
