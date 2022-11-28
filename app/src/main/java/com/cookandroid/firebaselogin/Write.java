@@ -12,6 +12,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -24,13 +26,16 @@ import com.google.firebase.storage.UploadTask;
 import java.time.LocalDate;
 public class Write extends Activity implements View.OnClickListener  {
     private Context context;
+    private FirebaseStorage storage;
 
     public Write(Context context) {//Context 말고 Activity로 해도 됨
         this.context = context;
     }
     @Override
     public void onClick(View view) {
-        String id, nickname, title, content;
+        Toast.makeText(context, "글 등록중입니다.", Toast.LENGTH_SHORT).show();
+
+        String id, title, content;
         id = MainActivity.editId.getText().toString();
         title = WriteActivity.editTitle.getText().toString();
         content = WriteActivity.editContent.getText().toString();
@@ -42,9 +47,9 @@ public class Write extends Activity implements View.OnClickListener  {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                number[0]=Integer.valueOf(dataSnapshot.getValue().toString());//str을 int로 변환후 number[0]에 저장
+                number[0] = Integer.valueOf(dataSnapshot.getValue().toString());//str을 int로 변환후 number[0]에 저장
                 noticeCount.setValue(++number[0]);
-                DatabaseReference newNotice=database.getReference("notice").child(number[0]+"");//newNotice는 가장 끝번호를 가진 DatabaseReference가 된다.
+                DatabaseReference newNotice = database.getReference("notice").child(number[0] + "");//newNotice는 가장 끝번호를 가진 DatabaseReference가 된다.
                 newNotice.child("number").setValue(number[0]);
                 newNotice.child("id").setValue(id);
                 newNotice.child("title").setValue(title);
@@ -52,8 +57,29 @@ public class Write extends Activity implements View.OnClickListener  {
                 newNotice.child("date").setValue(LocalDate.now().toString());
                 newNotice.child("commentCount").setValue(0);
 
-                Intent intent = new Intent(context, NoticeActivity.class);// 다시 돌아간다. NoticeActivity로
-                context.startActivity(intent);
+                //이지미 등록을 위한 코드
+                for (int i = 0; i < 3; i++) {
+                    FirebaseStorage storage = FirebaseStorage.getInstance();
+                    StorageReference storageRef = storage.getReference();
+                    if(WriteActivity.file[i]!=null){
+                        StorageReference riversRef = storageRef.child("notice/" + number[0] + "/" + i+".png");
+                        UploadTask uploadTask = riversRef.putFile(WriteActivity.file[i]);
+
+                        uploadTask.addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception exception) {
+                                Toast.makeText(context, "글이 정상적으로 업로드 되지 않았습니다.", Toast.LENGTH_SHORT).show();
+                            }
+                        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                            @Override
+                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                Toast.makeText(context, "글이 정상적으로 업로드 되었습니다.", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(context, NoticeActivity.class);// 다시 돌아간다. NoticeActivity로
+                                context.startActivity(intent);
+                            }
+                        });
+                    }
+                }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

@@ -30,9 +30,8 @@ import java.io.InputStream;
 public class WriteActivity extends AppCompatActivity {
     static EditText editTitle,editContent;
     Button btnWrite;
-    private  final int GALLERY_CODE = 10;
-    static ImageView imgUpload1;
-    private FirebaseStorage storage;
+    ImageView imgUpload[] = new ImageView[3];
+    static Uri file[] = new Uri[3];//Write클래스에서 사용할 변수
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,29 +53,34 @@ public class WriteActivity extends AppCompatActivity {
     private void btnSet() {
         btnWrite = findViewById(R.id.btnWrite);
     }
-
     private void btnClick() {btnWrite.setOnClickListener(new Write(this));}
+
     private void imgSet() {
-        imgUpload1 = findViewById(R.id.imgUpload1);
+        imgUpload[0] = findViewById(R.id.imgUpload1);
+        imgUpload[1] = findViewById(R.id.imgUpload2);
+        imgUpload[2] = findViewById(R.id.imgUpload3);
     }
     private void imgClick() {
-        imgUpload1.setOnClickListener(v -> {
-            Intent intent = new Intent(Intent.ACTION_PICK);
-            intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
-            startActivityForResult(intent, GALLERY_CODE);
-        });
+        for(int i=0;i<3;i++) {
+            int finalI = i;//i를 인자값으로 주는 것이 불가능 해, 새로운 변수에 대입 함
+            imgUpload[i].setOnClickListener(v -> {
+                Intent intent = new Intent(Intent.ACTION_PICK);
+                intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
+                startActivityForResult(intent,finalI);
+            });
+        }
     }
     protected void onActivityResult(int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == GALLERY_CODE) {
             try {
+                file[requestCode] = data.getData();//Write클래스에서 사용할 변수
                 InputStream in = getContentResolver().openInputStream(data.getData());
                 Bitmap img = BitmapFactory.decodeStream(in);
+                imgUpload[requestCode].setImageBitmap(img);//이미지 변경
                 in.close();
-                imgUpload1.setImageBitmap(img);//이미지 변경
             } catch (Exception e) {
+                Toast.makeText(WriteActivity.this,"에러가 발생했습니다.",Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             }
-        }
     }
 }
