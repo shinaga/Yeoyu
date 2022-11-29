@@ -68,18 +68,23 @@ public class Write extends Activity implements View.OnClickListener  {
                         uploadTask.addOnFailureListener(new OnFailureListener() {
                             @Override
                             public void onFailure(@NonNull Exception exception) {
-                                Toast.makeText(context, "글이 정상적으로 업로드 되지 않았습니다.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(context, "사진이 정상적으로 업로드 되지 않았습니다.", Toast.LENGTH_SHORT).show();
                             }
                         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                             @Override
                             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                Toast.makeText(context, "글이 정상적으로 업로드 되었습니다.", Toast.LENGTH_SHORT).show();
-                                Intent intent = new Intent(context, NoticeActivity.class);// 다시 돌아간다. NoticeActivity로
-                                context.startActivity(intent);
+
                             }
                         });
                     }
+                    if(i == 2){
+                        Toast.makeText(context, "글이 정상적으로 업로드 되었습니다.", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(context, NoticeActivity.class);// 다시 돌아간다. NoticeActivity로
+                        context.startActivity(intent);
+                    }
+
                 }
+
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

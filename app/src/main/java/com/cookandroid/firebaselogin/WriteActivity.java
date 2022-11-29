@@ -72,15 +72,15 @@ public class WriteActivity extends AppCompatActivity {
     }
     protected void onActivityResult(int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-            try {
-                file[requestCode] = data.getData();//Write클래스에서 사용할 변수
-                InputStream in = getContentResolver().openInputStream(data.getData());
-                Bitmap img = BitmapFactory.decodeStream(in);
-                imgUpload[requestCode].setImageBitmap(img);//이미지 변경
-                in.close();
-            } catch (Exception e) {
-                Toast.makeText(WriteActivity.this,"에러가 발생했습니다.",Toast.LENGTH_SHORT).show();
-                e.printStackTrace();
-            }
+        try {
+            file[requestCode] = data.getData();//Write클래스에서 사용할 변수
+            InputStream in = getContentResolver().openInputStream(data.getData());
+            Bitmap img = BitmapFactory.decodeStream(in);
+            imgUpload[requestCode].setImageBitmap(img);//이미지 변경
+            in.close();
+        } catch (Exception e) {
+            Toast.makeText(WriteActivity.this,"에러가 발생했습니다.",Toast.LENGTH_SHORT).show();
+            e.printStackTrace();
+        }
     }
 }

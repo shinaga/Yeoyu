@@ -16,38 +16,38 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:orientation="vertical">
-    <fragment
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="0.8"
-        android:id="@+id/map"
-        tools:context=".MapsActivity"
-        android:name="com.google.android.gms.maps.SupportMapFragment"
-        tools:layout="@layout/activity_map"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-    <Button
-        android:text="카페 검색"
-        android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:id="@+id/button_cafe"/>
-        <Button
-            android:text="식당 검색"
-            android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-            android:id="@+id/button_rest"/>
-        <Button
-            android:text="편의점 검색"
-            android:layout_weight="1"
+        <fragment
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:id="@+id/button_conv"/>
-    </LinearLayout>
+            android:layout_height="match_parent"
+            android:layout_weight="0.8"
+            android:id="@+id/map"
+            tools:context=".MapsActivity"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
+            tools:layout="@layout/activity_map"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <Button
+                android:text="카페 검색"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:id="@+id/button_cafe"/>
+            <Button
+                android:text="식당 검색"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:id="@+id/button_rest"/>
+            <Button
+                android:text="편의점 검색"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:id="@+id/button_conv"/>
+        </LinearLayout>
     </LinearLayout>
     <LinearLayout
         android:id="@+id/linear"

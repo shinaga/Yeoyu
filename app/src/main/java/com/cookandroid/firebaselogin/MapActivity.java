@@ -95,6 +95,9 @@ public class MapActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        place_name = findViewById(R.id.place_name);
+        address = findViewById(R.id.address);
+
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON,
                 WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
@@ -685,6 +688,9 @@ mMap.addMarker(markerOptions);
     @Override
     public boolean onMarkerClick(Marker marker)
     {
+        place_name = findViewById(R.id.place_name);
+        address = findViewById(R.id.address);
+
         CameraUpdate center = CameraUpdateFactory.newLatLng(marker.getPosition());
         mMap.animateCamera(center);
         place_name.setText(marker.getTitle());

@@ -58,9 +58,9 @@ public class NoticeviewActivity extends AppCompatActivity{
             case R.id.delete:
                 if(id.equals(MainActivity.editId.getText().toString())){//삭제하려는 글의 아이디와 로그인한 유저의 아이디를 확인
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
-                    DatabaseReference user = database.getReference("notice").child(number+"");
+                    DatabaseReference notice = database.getReference("notice").child(number+"");
 
-                    user.removeValue();//글 삭제
+                    notice.removeValue();//글 삭제
                     Toast.makeText(getApplicationContext(), "글이 삭제 되었습니다.", Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(getApplicationContext(),NoticeActivity.class);

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
-    ///
+
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
@@ -14,44 +14,48 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light">
         <activity
+            android:name=".HomeActivity"
+            android:exported="false" />
+        <activity
             android:name=".NoticeviewActivity"
             android:exported="false" />
         <activity
             android:name=".SendEmailActivity"
-            android:parentActivityName=".MainActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".DiaryActivity"
-            android:parentActivityName=".IntegratedActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".IntegratedActivity" />
         <activity
             android:name=".MapActivity"
-            android:parentActivityName=".IntegratedActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".IntegratedActivity" />
         <activity
             android:name=".CheckListActivity"
-            android:parentActivityName=".IntegratedActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".IntegratedActivity" />
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBurBtHYVjmxlrEPD1OkZvEr9V4YAK5fRo" />
 
         <activity
             android:name=".IntegratedActivity"
-            android:parentActivityName=".MainActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".MainActivity" />
         <activity
             android:name=".WriteActivity"
-            android:parentActivityName=".NoticeActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".NoticeActivity" />
         <activity
             android:name=".NoticeActivity"
-            android:parentActivityName=".IntegratedActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".IntegratedActivity" />
         <activity
             android:name=".RegisterActivity"
-            android:parentActivityName=".SendEmailActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".SendEmailActivity" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
@@ -61,7 +65,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
     </application>
 
 </manifest>
