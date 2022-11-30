@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ActionBar actionBar = getSupportActionBar();
         actionBar.hide();//액션바 숨기기
-
+        //깃 오류 테스트
         editSet();
         btnSet();
         btnClick();
