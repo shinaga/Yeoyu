@@ -42,8 +42,8 @@
             android:text="식당 검색"
             android:textColor="@color/white"
             android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
             android:id="@+id/button_rest"
             android:background="@drawable/roundb1"
             />

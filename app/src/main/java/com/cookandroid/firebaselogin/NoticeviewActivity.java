@@ -30,7 +30,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -238,17 +237,17 @@ public class NoticeviewActivity extends AppCompatActivity{
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageReference = storage.getReference();
-        StorageReference pathReference = storageReference.child("notice/89/0.png");
+        for (int i=0;i<3;i++){
+            StorageReference pathReference = storageReference.child("notice/" + number + "/"+i+".png");
 
         if (pathReference == null) {
-            Toast.makeText(NoticeviewActivity.this, "저장소에 사진이 없습니다." ,Toast.LENGTH_SHORT).show();
         } else {
-            StorageReference submitProfile = storageReference.child("notice/89/0.png");
-            submitProfile.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            int finalI = i;//i를 직접 imgUpload배열에 넣을 수 없음
+            pathReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override
                 public void onSuccess(Uri uri) {
-                    ImageView i = findViewById(R.id.i);
-                    Glide.with(NoticeviewActivity.this).load(uri).into(i);
+                    Glide.with(NoticeviewActivity.this).load(uri).into(imgUpload[finalI]);
+                    imgUpload[finalI].setVisibility(View.VISIBLE);
                 }
             }).addOnFailureListener(new OnFailureListener() {
                 @Override
@@ -257,5 +256,6 @@ public class NoticeviewActivity extends AppCompatActivity{
                 }
             });
         }
+    }
     }
 }

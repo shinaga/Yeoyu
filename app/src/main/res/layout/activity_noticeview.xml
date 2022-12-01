@@ -17,13 +17,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-            <ImageView
-                android:id="@+id/i"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_launcher_background"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
+
             <TextView
                 android:id="@+id/nickname"
                 android:layout_width="wrap_content"
@@ -59,25 +53,32 @@
                     android:id="@+id/imgUpload1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:visibility="gone"
                     android:adjustViewBounds="true"
-                    android:layout_weight="1"
-                    android:src="@drawable/plus" />
+                    android:layout_weight="1"/>
 
                 <ImageView
                     android:id="@+id/imgUpload2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginRight="8dp"
+                    android:visibility="gone"
                     android:adjustViewBounds="true"
-                    android:layout_weight="1"
-                    android:src="@drawable/plus" />
+                    android:layout_weight="1" />
 
                 <ImageView
                     android:id="@+id/imgUpload3"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginRight="8dp"
+                    android:visibility="gone"
                     android:adjustViewBounds="true"
-                    android:layout_weight="1"
-                    android:src="@drawable/plus" />
+                    android:layout_weight="1"/>
             </LinearLayout>
             <TextView
                 android:id="@+id/context"
