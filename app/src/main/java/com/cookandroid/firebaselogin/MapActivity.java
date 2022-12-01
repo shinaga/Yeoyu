@@ -672,7 +672,7 @@ mMap.addMarker(markerOptions);
 
                 }
 
-//중복 마커 제거
+//중복 마커 제거 ㅁ
                 HashSet<Marker> hashSet = new HashSet<Marker>();
                 hashSet.addAll(previous_marker);
                 previous_marker.clear();
