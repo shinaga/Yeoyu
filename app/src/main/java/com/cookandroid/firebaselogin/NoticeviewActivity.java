@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -14,14 +15,20 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 
 import java.time.LocalDate;
@@ -33,6 +40,7 @@ public class NoticeviewActivity extends AppCompatActivity{
     TextView nickname,date,context;
     EditText editComment;
     ActionBar actionBar;
+    ImageView imgUpload[] = new ImageView[3];
 
     private RecyclerView recyclerView;
     private CommentListAdapter recyclerAdapter;
@@ -85,6 +93,7 @@ public class NoticeviewActivity extends AppCompatActivity{
 
         recyclerViewSet();//RecyclerView 세팅한다.
         loadComment();//리사이클러뷰에 담을 댓글 목록 가져오기
+        imgSet();
     }
 
 
@@ -222,5 +231,31 @@ public class NoticeviewActivity extends AppCompatActivity{
             }
         });
     }
+    private void imgSet() {
+        imgUpload[0] = findViewById(R.id.imgUpload1);
+        imgUpload[1] = findViewById(R.id.imgUpload2);
+        imgUpload[2] = findViewById(R.id.imgUpload3);
 
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageReference = storage.getReference();
+        StorageReference pathReference = storageReference.child("notice/89/0.png");
+
+        if (pathReference == null) {
+            Toast.makeText(NoticeviewActivity.this, "저장소에 사진이 없습니다." ,Toast.LENGTH_SHORT).show();
+        } else {
+            StorageReference submitProfile = storageReference.child("notice/89/0.png");
+            submitProfile.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    ImageView i = findViewById(R.id.i);
+                    Glide.with(NoticeviewActivity.this).load(uri).into(i);
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+
+                }
+            });
+        }
+    }
 }

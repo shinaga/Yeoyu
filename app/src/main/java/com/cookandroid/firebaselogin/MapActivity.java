@@ -660,7 +660,6 @@ mMap.addMarker(markerOptions);
             public void run() {
                 for (noman.googleplaces.Place place : places) {
 
-
                     LatLng latLng
                             = new LatLng(place.getLatitude()
                             , place.getLongitude());
