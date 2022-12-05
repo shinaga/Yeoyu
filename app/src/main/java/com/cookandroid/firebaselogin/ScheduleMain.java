@@ -1,7 +1,6 @@
 package com.cookandroid.firebaselogin;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,33 +11,14 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.ItemTouchHelper;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-
-import com.cookandroid.firebaselogin.CheckList.Schedule.Schedule;
 import com.cookandroid.firebaselogin.CheckList.Schedule.TimeTableView;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.cookandroid.firebaselogin.CheckList.Schedule.Schedule;
+import com.github.tlaabs.timetableview.TimetableView;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Objects;
 
-public class CheckListActivity extends AppCompatActivity implements DialogCloseListener, View.OnClickListener {
-
-    private DatabaseHandler db;
-
-    private RecyclerView tasksRecyclerView;
-    private ToDoAdapter tasksAdapter;
-    private FloatingActionButton fab;
-
-    private List<ToDoModel> taskList;
-
-
-    //기존의 CheckListActivity + ScheduleMainActivity 합침
-
+public class ScheduleMain extends AppCompatActivity implements View.OnClickListener {
     public static final int REQUEST_ADD = 1;
     public static final int REQUEST_EDIT = 2;
 
@@ -50,47 +30,12 @@ public class CheckListActivity extends AppCompatActivity implements DialogCloseL
     private Button loadBtn;
 
     private TimeTableView timetable;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.checklist_activity);
-        Objects.requireNonNull(getSupportActionBar()).hide();
-
-        db = new DatabaseHandler(this);
-        db.openDatabase();
-
-        tasksRecyclerView = findViewById(R.id.taskRecyclerView);
-        tasksRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        tasksAdapter = new ToDoAdapter(db, CheckListActivity.this);
-        tasksRecyclerView.setAdapter(tasksAdapter);
-
-        ItemTouchHelper itemTouchHelper = new
-                ItemTouchHelper(new RecyclerItemTouchHelper(tasksAdapter));
-        itemTouchHelper.attachToRecyclerView(tasksRecyclerView);
-
-        fab = findViewById(R.id.fab);
-
-        taskList = db.getAllTasks();
-        Collections.reverse(taskList);
-
-        tasksAdapter.setTasks(taskList);
-
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AddNewTask.newInstance().show(getSupportFragmentManager(), AddNewTask.TAG);
-            }
-        });
+        setContentView(R.layout.schedule_main);
 
         init();
-    }
-    @Override
-    public void handleDialogClose(DialogInterface dialog){
-        taskList = db.getAllTasks();
-        Collections.reverse(taskList);
-        tasksAdapter.setTasks(taskList);
-        tasksAdapter.notifyDataSetChanged();
     }
 
     private void init() {
@@ -101,9 +46,9 @@ public class CheckListActivity extends AppCompatActivity implements DialogCloseL
         saveBtn = findViewById(R.id.save_btn);
         loadBtn = findViewById(R.id.load_btn);
 
-
         timetable = findViewById(R.id.timetable);
         timetable.setHeaderHighlight(2);
+
         initView();
     }
 
@@ -125,7 +70,6 @@ public class CheckListActivity extends AppCompatActivity implements DialogCloseL
             }
         });
     }
-
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
@@ -149,28 +93,28 @@ public class CheckListActivity extends AppCompatActivity implements DialogCloseL
         }
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        switch (requestCode) {
-            case REQUEST_ADD:
-                if (resultCode == ScheduleEdit.RESULT_OK_ADD) {
-                    ArrayList<Schedule> item = (ArrayList<Schedule>) data.getSerializableExtra("schedules");
-                    timetable.add(item);
-                }
-                break;
-            case REQUEST_EDIT:
-                if (resultCode == ScheduleEdit.RESULT_OK_EDIT) {
-                    int idx = data.getIntExtra("idx", -1);
-                    ArrayList<Schedule> item = (ArrayList<Schedule>) data.getSerializableExtra("schedules");
-                    timetable.edit(idx, item);
-                } else if (resultCode == ScheduleEdit.RESULT_OK_DELETE) {
-                    int idx = data.getIntExtra("idx", -1);
-                    timetable.remove(idx);
-                }
-                break;
-        }
-    }
+   @Override
+   protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+       super.onActivityResult(requestCode, resultCode, data);
+       switch (requestCode) {
+           case REQUEST_ADD:
+               if (resultCode == ScheduleEdit.RESULT_OK_ADD) {
+                   ArrayList<Schedule> item = (ArrayList<Schedule>) data.getSerializableExtra("schedules");
+                   timetable.add(item);
+               }
+               break;
+           case REQUEST_EDIT:
+               if (resultCode == ScheduleEdit.RESULT_OK_EDIT) {
+                   int idx = data.getIntExtra("idx", -1);
+                   ArrayList<Schedule> item = (ArrayList<Schedule>) data.getSerializableExtra("schedules");
+                   timetable.edit(idx, item);
+               } else if (resultCode == ScheduleEdit.RESULT_OK_DELETE) {
+                   int idx = data.getIntExtra("idx", -1);
+                   timetable.remove(idx);
+               }
+               break;
+       }
+   }
 
     private void saveByPreference(String data){
         SharedPreferences mPref = PreferenceManager.getDefaultSharedPreferences(this);
@@ -188,7 +132,4 @@ public class CheckListActivity extends AppCompatActivity implements DialogCloseL
         timetable.load(savedData);
         Toast.makeText(this,"loaded!",Toast.LENGTH_SHORT).show();
     }
-
-
 }
-
