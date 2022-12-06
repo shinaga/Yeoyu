@@ -8,9 +8,15 @@ import android.view.MenuItem;
 
 import com.google.android.material.navigation.NavigationBarView;
 
-public class HomeActivity extends AppCompatActivity {
+import java.util.List;
+
+import noman.googleplaces.Place;
+import noman.googleplaces.PlacesException;
+import noman.googleplaces.PlacesListener;
+
+public class HomeActivity extends AppCompatActivity{
        MapFragment mapFragment;
-       //InfoFragment infoFragment;
+       NoticeFragment noticeFragment;
        //SettingFragment settingFragment;
 
     @Override
@@ -18,7 +24,8 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        mapFragment = new MapFragment();
+        mapFragment = new MapFragment(HomeActivity.this);
+        noticeFragment = new NoticeFragment(HomeActivity.this);
         //infoFragment = new InfoFragment();
         //settingFragment = new SettingFragment();
 
@@ -34,7 +41,7 @@ public class HomeActivity extends AppCompatActivity {
                         getSupportFragmentManager().beginTransaction().replace(R.id.containers, mapFragment).commit();
                         return true;
                     case R.id.setting:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.containers, mapFragment).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.containers, noticeFragment).commit();
                         return true;
                     case R.id.info:
                         getSupportFragmentManager().beginTransaction().replace(R.id.containers, mapFragment).commit();

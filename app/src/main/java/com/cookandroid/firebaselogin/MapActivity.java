@@ -55,9 +55,9 @@ import java.util.Locale;
 
 
 public class MapActivity extends AppCompatActivity
-        implements OnMapReadyCallback,
-        ActivityCompat.OnRequestPermissionsResultCallback,GoogleMap.OnMarkerClickListener,PlacesListener{
-//테스트!!!!!!!!
+   implements OnMapReadyCallback,
+   ActivityCompat.OnRequestPermissionsResultCallback,GoogleMap.OnMarkerClickListener,PlacesListener{
+    //테스트!!!!!!!!
 
     private GoogleMap mMap;
     private Marker currentMarker = null;
