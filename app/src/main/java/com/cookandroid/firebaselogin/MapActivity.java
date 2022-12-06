@@ -82,8 +82,7 @@ public class MapActivity extends AppCompatActivity
     private FusedLocationProviderClient mFusedLocationClient;
     private LocationRequest locationRequest;
     private Location location;
-    TextView place_name;
-    TextView address;
+
     LinearLayout linear;
 
     private View mLayout; // Snackbar 사용하기 위해서는 View가 필요합니다.
@@ -687,8 +686,6 @@ mMap.addMarker(markerOptions);
     {
         CameraUpdate center = CameraUpdateFactory.newLatLng(marker.getPosition());
         mMap.animateCamera(center);
-        place_name.setText(marker.getTitle());
-        address.setText(marker.getSnippet());
         return true;
     }
 
