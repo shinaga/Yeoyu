@@ -56,7 +56,7 @@ public class Write extends Activity implements View.OnClickListener  {
                 newNotice.child("context").setValue(content);
                 newNotice.child("date").setValue(LocalDate.now().toString());
                 newNotice.child("commentCount").setValue(0);
-
+                newNotice.child("hearthCount").setValue(0);
                 //이지미 등록을 위한 코드
                 for (int i = 0; i < 3; i++) {
                     FirebaseStorage storage = FirebaseStorage.getInstance();
