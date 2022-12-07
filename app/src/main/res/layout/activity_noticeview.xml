@@ -103,7 +103,7 @@
                     android:onClick="hearthClick"
                     android:src="@drawable/hearth"/>
                 <TextView
-                    android:id="@+id/heart_count"
+                    android:id="@+id/hearth_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"

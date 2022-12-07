@@ -34,6 +34,9 @@ public class NoticeActivity extends AppCompatActivity {
     final String[] title = new String[1];
     final String[] date = new String[1];
     final String[] context = new String[1];
+    final boolean[] isCheck = new boolean[1];
+    final int[] htCnt = new int[1];
+    final int[] cmtCnt = new int[1];
 
     final int[] next = new int[1];//다음 차례 글 번호를 불러오는 변수(홀수번째)
 
@@ -50,7 +53,7 @@ public class NoticeActivity extends AppCompatActivity {
 
         recyclerViewSet();//RecyclerView 세팅한다.
         readNotices();//리사이클러뷰에 담을 글 목록 가져오기
-        recyclerViewScrolled();//이제부터 스크롤 끝에 다다르면 이 함수가 실행된다.
+        //recyclerViewScrolled();//이제부터 스크롤 끝에 다다르면 이 함수가 실행된다.
     }
     private void btnSet() {btnWrite = findViewById(R.id.btnWrite);}//
     private void btnClick() {
@@ -75,27 +78,32 @@ public class NoticeActivity extends AppCompatActivity {
                 int i[] = new int[1];//for문에 쓸 i도 배열로 해야함
                 for(i[0]=count[0];i[0]>count[0]-10;i[0]--){//i는 noticeCount 수, 10개의 글을 보여주기 위함이다. 단 삭제된 글이 있으면 10개가 안될 수도 있다.
 
-                    notice.child(i[0]+"").addListenerForSingleValueEvent(new ValueEventListener() {//글을 읽어 오기 위함
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            if(snapshot.exists()){//없는 글을 불러오지 않기 위함
-                                number[0] = Integer.valueOf(snapshot.child("number").getValue()+"");
-                                title[0] = snapshot.child("title").getValue()+"";
-                                date[0] = snapshot.child("date").getValue()+"";
-                                context[0] = snapshot.child("context").getValue()+"";
+                      notice.child(i[0]+"").addListenerForSingleValueEvent(new ValueEventListener() {//글을 읽어 오기 위함
+                          @Override
+                          public void onDataChange(@NonNull DataSnapshot snapshot) {
+                              if(snapshot.exists()){//없는 글을 불러오지 않기 위함
+                                 number[0] = Integer.valueOf(snapshot.child("number").getValue()+"");
+                                 title[0] = snapshot.child("title").getValue()+"";
+                                 date[0] = snapshot.child("date").getValue()+"";
+                                 context[0] = snapshot.child("context").getValue()+"";
+                                 String id = MainActivity.editId.getText().toString();
+                                 if(snapshot.child("hearth").child(id).getValue()==null||(boolean)snapshot.child("hearth").child(id).getValue()==false){//내가 좋아요를 누른 글인지 아닌지 판단
+                                     isCheck[0] = false;
+                                 }
+                                 else isCheck[0] = true;
+                                 htCnt[0] = Integer.valueOf(snapshot.child("hearthCount").getValue()+"");
+                                 cmtCnt[0] = Integer.valueOf(snapshot.child("commentCount").getValue()+"");
 
-                                noticeList.add(new Notice(number[0], title[0],date[0], context[0]));
-                                recyclerAdapter.setNoticeList(noticeList);//리사이클러뷰에 데이터를 넣는다.
-                                next[0]=count[0]-10;//for문에 안넣으려 했으나 오류 때문에 반복문에 넣음
-
-                            }
-
-                        }
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
+                                 noticeList.add(new Notice(number[0], title[0],date[0], context[0],isCheck[0],htCnt[0],cmtCnt[0]));
+                                 recyclerAdapter.setNoticeList(noticeList);//리사이클러뷰에 데이터를 넣는다.
+                                 next[0]=count[0]-10;//for문에 안넣으려 했으나 오류 때문에 반복문에 넣음
+                                }
+                          }
+                             @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
                         }
                     });
-                    if(i[0]==count[0]-10+1&&noticeList.size()==0&&count[0]>0){
+                    if(i[0]==count[0]-10+1&&noticeList.size()==0&&count[0]>0){//삭제된 글로 인해 아무 글도 불러오지 않을때를 대비
                         flag=true;
                         count[0]=-10;
                         readNotices();
@@ -153,9 +161,15 @@ public class NoticeActivity extends AppCompatActivity {
                                 title[0] = snapshot.child("title").getValue().toString();
                                 date[0] = snapshot.child("date").getValue().toString();
                                 context[0] = snapshot.child("context").getValue().toString();
+                                String id = MainActivity.editId.getText().toString();
+                                if(snapshot.child("hearth").child(id).getValue()==null||(boolean)snapshot.child("hearth").child(id).getValue()==false){//내가 좋아요를 누른 글인지 아닌지 판단
+                                    isCheck[0]=false;
+                                }
+                                htCnt[0] = Integer.valueOf(snapshot.child("hearthCount").getValue()+"");
+                                cmtCnt[0] = Integer.valueOf(snapshot.child("commentCount").getValue()+"");
 
                                 ArrayList<Notice> n = new ArrayList<Notice>();
-                                n.add(new Notice(number[0], title[0], date[0], context[0]));
+                                n.add(new Notice(number[0], title[0],date[0], context[0],isCheck[0],htCnt[0],cmtCnt[0]));
                                 recyclerAdapter.addNoticeList(n);
                             }
                         }

@@ -4,11 +4,18 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
@@ -47,6 +54,9 @@ public class NoticeListAdapter extends RecyclerView.Adapter<NoticeListAdapter.Vi
         TextView title;
         TextView date;
         TextView context;
+        TextView hearth_count;
+        TextView comment_count;
+        ImageView hearth;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -55,6 +65,9 @@ public class NoticeListAdapter extends RecyclerView.Adapter<NoticeListAdapter.Vi
             title = (TextView) itemView.findViewById(R.id.title);
             date = (TextView) itemView.findViewById(R.id.date);
             context = (TextView) itemView.findViewById(R.id.context);
+            hearth_count = (TextView) itemView.findViewById(R.id.hearth_count);
+            comment_count = (TextView) itemView.findViewById(R.id.comment_count);
+            hearth = (ImageView) itemView.findViewById(R.id.hearth);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -71,6 +84,12 @@ public class NoticeListAdapter extends RecyclerView.Adapter<NoticeListAdapter.Vi
             title.setText(item.getTitle());
             date.setText(item.getDate());
             context.setText(item.getContext());
+            hearth_count.setText(item.getHtCnt()+"");
+            comment_count.setText(item.getCmtCnt()+"");
+            if(item.getIsCheck()==false){
+                hearth.setImageResource(R.drawable.hearth);
+            }
+            else hearth.setImageResource(R.drawable.hearth_check);
         }
     }
     @Override

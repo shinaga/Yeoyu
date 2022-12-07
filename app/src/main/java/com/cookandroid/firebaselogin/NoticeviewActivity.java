@@ -36,7 +36,7 @@ import java.util.ArrayList;
 public class NoticeviewActivity extends AppCompatActivity{
     int number;
     String id,nick;
-    TextView nickname,date,context,heart_count,comment_count;
+    TextView nickname,date,context,hearth_count,comment_count;
     EditText editComment;
     ActionBar actionBar;
     ImageView imgUpload[] = new ImageView[3];
@@ -114,7 +114,7 @@ public class NoticeviewActivity extends AppCompatActivity{
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             int cnt =  Integer.parseInt(snapshot.getValue()+"");
                             htCnt.setValue(cnt+1);
-                            heart_count.setText(cnt+1+"");
+                            hearth_count.setText(cnt+1+"");
 
                         }
 
@@ -135,7 +135,7 @@ public class NoticeviewActivity extends AppCompatActivity{
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             int cnt =  Integer.parseInt(snapshot.getValue()+"");
                             htCnt.setValue(cnt-1);
-                            heart_count.setText(cnt-1+"");
+                            hearth_count.setText(cnt-1+"");
                         }
 
                         @Override
@@ -180,7 +180,7 @@ public class NoticeviewActivity extends AppCompatActivity{
         date = findViewById(R.id.date);
         context = findViewById(R.id.context);
 
-        heart_count = findViewById(R.id.heart_count);
+        hearth_count = findViewById(R.id.hearth_count);
         comment_count = findViewById(R.id.comment_count);
     }
     private void editSet() {
@@ -330,7 +330,7 @@ public class NoticeviewActivity extends AppCompatActivity{
         notice.child("hearthCount").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                heart_count.setText(snapshot.getValue()+"");
+                hearth_count.setText(snapshot.getValue()+"");
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
