@@ -53,7 +53,7 @@ public class NoticeActivity extends AppCompatActivity {
 
         recyclerViewSet();//RecyclerView 세팅한다.
         readNotices();//리사이클러뷰에 담을 글 목록 가져오기
-        //recyclerViewScrolled();//이제부터 스크롤 끝에 다다르면 이 함수가 실행된다.
+        recyclerViewScrolled();//이제부터 스크롤 끝에 다다르면 이 함수가 실행된다.
     }
     private void btnSet() {btnWrite = findViewById(R.id.btnWrite);}//
     private void btnClick() {

@@ -36,13 +36,13 @@ import java.util.Collections;
 import java.util.List;
 
 public class CheckFragment extends Fragment implements DialogCloseListener, View.OnClickListener{
-    private DatabaseHandler db;
+    public static DatabaseHandler db;
 
     private RecyclerView tasksRecyclerView;
-    private ToDoAdapter tasksAdapter;
+    public static ToDoAdapter tasksAdapter;
     private FloatingActionButton fab;
 
-    private List<ToDoModel> taskList;
+    public static List<ToDoModel> taskList;
 
 
     //기존의 CheckListActivity + ScheduleMainActivity 합침
@@ -96,7 +96,6 @@ public class CheckFragment extends Fragment implements DialogCloseListener, View
         init();
         return view;
     }
-
     @Override
     public void handleDialogClose(DialogInterface dialog){
         taskList = db.getAllTasks();

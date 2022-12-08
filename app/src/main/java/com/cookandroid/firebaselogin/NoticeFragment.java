@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -61,12 +62,12 @@ public class NoticeFragment extends Fragment {
         btnClick();//글작성 버튼 클릭시 발생하는 이벤트 함수 설정한다.
 
         recyclerViewSet();//RecyclerView 세팅한다.
-        readNotices();//리사이클러뷰에 담을 글 목록 가져오기
+        readNotices(-100);//리사이클러뷰에 담을 글 목록 가져오기, 맨처음에는 -100을 줘서 맨처음 임을 암시
         recyclerViewScrolled();//이제부터 스크롤 끝에 다다르면 이 함수가 실행된다.
         return view;
 
     }
-    private void btnSet() {btnWrite = view.findViewById(R.id.btnWrite);}//
+    private void btnSet() {btnWrite = view.findViewById(R.id.btnWrite);}
     private void btnClick() {
         btnWrite.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,7 +78,7 @@ public class NoticeFragment extends Fragment {
         });
 
     }
-    private void readNotices(){
+    private void readNotices(int tmp){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference noticeCount = database.getReference("noticeCount");
 
@@ -87,10 +88,10 @@ public class NoticeFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(flag==false)count[0]=Integer.valueOf(snapshot.getValue().toString());//str을 int로 변환후 number[0]에 저장
-
-
                 int i[] = new int[1];//for문에 쓸 i도 배열로 해야함
-                for(i[0]=count[0];i[0]>count[0]-10;i[0]--){//i는 noticeCount 수, 10개의 글을 보여주기 위함이다. 단 삭제된 글이 있으면 10개가 안될 수도 있다.
+                if(tmp==-100) i[0]=count[0];
+                else i[0]=tmp;
+                for(;i[0]>count[0]-10;i[0]--){//i는 noticeCount 수, 10개의 글을 보여주기 위함이다. 단 삭제된 글이 있으면 10개가 안될 수도 있다.
 
                     notice.child(i[0]+"").addListenerForSingleValueEvent(new ValueEventListener() {//글을 읽어 오기 위함
                         @Override
@@ -118,9 +119,8 @@ public class NoticeFragment extends Fragment {
                         }
                     });
                     if(i[0]==count[0]-10+1&&noticeList.size()==0&&count[0]>0){//삭제된 글로 인해 아무 글도 불러오지 않을때를 대비
-                        flag=true;
-                        count[0]=-10;
-                        readNotices();
+                        flag=true;//이미 한번 불러왔다는 뜻
+                        readNotices(count[0]-10);//다시 한번 불러온다.
                     }
                 }
 

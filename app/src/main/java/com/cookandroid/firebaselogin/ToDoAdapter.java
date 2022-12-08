@@ -37,17 +37,24 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position){
         db.openDatabase();
         ToDoModel item = todoList.get(position);
+        if(position>0){
+            item = todoList.get(position-1);
+        }else{
+            item = todoList.get(0);
+        }
+
         holder.task.setText(item.getTask());
         holder.task.setChecked(toBoolean(item.getStatus()));
+        ToDoModel finalItem = item;//이렇게 해줘야 updateStatus에 넣을 수 있음
         holder.task.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked){
-                    db.updateStatus(item.get_id(), 1);
+                    db.updateStatus(finalItem.get_id(), 1);
                 }
                 else{
-                    db.updateStatus(item.get_id(), 0);
+                    db.updateStatus(finalItem.get_id(), 0);
                 }
             }
         });

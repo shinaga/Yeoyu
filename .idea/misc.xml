@@ -15,7 +15,10 @@
         <entry key="..\:/AndroidProject/Yeoyu/app/src/main/res/layout/activity_register.xml" value="0.33" />
         <entry key="..\:/AndroidProject/Yeoyu/app/src/main/res/layout/activity_send_email.xml" value="0.33" />
         <entry key="..\:/AndroidProject/Yeoyu/app/src/main/res/layout/activity_write.xml" value="0.22291666666666668" />
+        <entry key="..\:/AndroidProject/Yeoyu/app/src/main/res/layout/checklist_activity.xml" value="0.1875" />
         <entry key="..\:/AndroidProject/Yeoyu/app/src/main/res/layout/fragment_map.xml" value="0.2125" />
+        <entry key="..\:/AndroidProject/Yeoyu/app/src/main/res/layout/new_task.xml" value="0.36614583333333334" />
+        <entry key="..\:/AndroidProject/Yeoyu/app/src/main/res/layout/schedule_main.xml" value="0.36614583333333334" />
         <entry key="..\:/AndroidProject/Yeoyu/app/src/main/res/menu/bottom_menu.xml" value="0.36614583333333334" />
         <entry key="..\:/AndroidProject/Yeoyu/app/src/main/res/menu/menu.xml" value="0.22291666666666668" />
         <entry key="..\:/Users/shina/AndroidStudioProjects/FIrebaseLogin/app/src/main/res/drawable/bg_gradient.xml" value="0.2605" />
@@ -37,18 +40,15 @@
         <entry key="..\:/Users/shina/AndroidStudioProjects/Yeoyu/app/src/main/res/drawable/edit_comment.xml" value="0.223" />
         <entry key="..\:/Users/shina/AndroidStudioProjects/Yeoyu/app/src/main/res/layout/activity_home.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/shina/AndroidStudioProjects/Yeoyu/app/src/main/res/layout/activity_integrated.xml" value="0.2520833333333333" />
-        <entry key="..\:/Users/shina/AndroidStudioProjects/Yeoyu/app/src/main/res/layout/activity_map.xml" value="0.25" />
+        <entry key="..\:/Users/shina/AndroidStudioProjects/Yeoyu/app/src/main/res/layout/activity_map.xml" value="0.16" />
         <entry key="..\:/Users/shina/AndroidStudioProjects/Yeoyu/app/src/main/res/layout/activity_notice.xml" value="0.25" />
-        <entry key="..\:/Users/shina/AndroidStudioProjects/Yeoyu/app/src/main/res/layout/activity_noticeview.xml" value="0.33" />
+        <entry key="..\:/Users/shina/AndroidStudioProjects/Yeoyu/app/src/main/res/layout/activity_noticeview.xml" value="0.2" />
         <entry key="..\:/Users/shina/AndroidStudioProjects/Yeoyu/app/src/main/res/layout/activity_write.xml" value="0.36614583333333334" />
-        <entry key="..\:/Users/shina/AndroidStudioProjects/Yeoyu/app/src/main/res/layout/checklist_activity.xml" value="0.36614583333333334" />
-        <entry key="..\:/Users/shina/AndroidStudioProjects/Yeoyu/app/src/main/res/layout/comment_borad_recyclerview.xml" value="0.25" />
-        <entry key="..\:/Users/shina/AndroidStudioProjects/Yeoyu/app/src/main/res/layout/fragment_blank.xml" value="0.36614583333333334" />
-        <entry key="..\:/Users/shina/AndroidStudioProjects/Yeoyu/app/src/main/res/layout/fragment_check.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/shina/AndroidStudioProjects/Yeoyu/app/src/main/res/layout/comment_borad_recyclerview.xml" value="0.22" />
         <entry key="..\:/Users/shina/AndroidStudioProjects/Yeoyu/app/src/main/res/layout/fragment_map2.xml" value="0.25" />
         <entry key="..\:/Users/shina/AndroidStudioProjects/Yeoyu/app/src/main/res/layout/map_fragment.xml" value="0.1875" />
         <entry key="..\:/Users/shina/AndroidStudioProjects/Yeoyu/app/src/main/res/layout/menu.xml" value="0.21302083333333333" />
-        <entry key="..\:/Users/shina/AndroidStudioProjects/Yeoyu/app/src/main/res/layout/notice_borad_recyclerview.xml" value="0.33" />
+        <entry key="..\:/Users/shina/AndroidStudioProjects/Yeoyu/app/src/main/res/layout/notice_borad_recyclerview.xml" value="0.2" />
         <entry key="..\:/Users/shina/AndroidStudioProjects/Yeoyu/app/src/main/res/menu/bottom_menu.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/shina/AndroidStudioProjects/Yeoyu/app/src/main/res/menu/menu.xml" value="0.21302083333333333" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Yeoyu/app/src/main/res/layout/activity_map.xml" value="0.2" />
