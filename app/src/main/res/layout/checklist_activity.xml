@@ -1,45 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
-        android:id="@+id/tasksText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:text="오늘의 일과"
-        android:textColor="@color/black"
-        android:layout_marginStart="16dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginTop="16dp"
-        android:textSize="32sp" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/taskRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tasksText"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        android:nestedScrollingEnabled="true" />
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_margin="32dp"
-        android:backgroundTint="@color/green"
-        android:src="@drawable/ic_baseline_add"/>
 
 
+        <View
+            android:id="@+id/line_5"
+            android:layout_width="328dp"
+            android:layout_height="0dp"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="16dp"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="24dp"
+            android:background="@drawable/line_5"
+            />
 
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/taskRecyclerView"
+            android:layout_below="@+id/timetable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-75dp"
+            android:nestedScrollingEnabled="true"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_below="@id/taskRecyclerView"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/save_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Save" />
+
+                <Button
+                    android:id="@+id/load_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Load" />
+
+                <Button
+                    android:id="@+id/add_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Add" />
+
+                <Button
+                    android:id="@+id/clear_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Clear" />
+
+        </LinearLayout>
+
+        <com.cookandroid.firebaselogin.CheckList.Schedule.TimeTableView
+            android:id="@+id/timetable"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:header_highlight_image_size="36dp"
+            app:header_highlight_type="image"
+            app:header_title="@array/header_title" />
 
 
-
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="32dp"
+            android:backgroundTint="@color/green"
+            android:src="@drawable/ic_baseline_add"/>
 
 
 </RelativeLayout>

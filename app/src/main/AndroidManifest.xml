@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="false"
@@ -32,14 +31,14 @@
             android:exported="false"
             android:parentActivityName=".IntegratedActivity" />
         <activity
-            android:name=".CheckListActivity"
-            android:exported="false"
-            android:parentActivityName=".IntegratedActivity" />
+            android:name=".SplashActivity"
+            android:exported="true" />
+        <activity android:name=".ScheduleEdit"
+            android:exported="false" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBurBtHYVjmxlrEPD1OkZvEr9V4YAK5fRo" />
-
         <activity
             android:name=".IntegratedActivity"
             android:exported="false"
