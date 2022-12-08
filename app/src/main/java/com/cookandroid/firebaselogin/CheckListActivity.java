@@ -57,31 +57,31 @@ public class CheckListActivity extends AppCompatActivity implements DialogCloseL
         setContentView(R.layout.checklist_activity);
         //Objects.requireNonNull(getSupportActionBar()).hide();
 
-        db = new DatabaseHandler(this);
-        db.openDatabase();
-
-        tasksRecyclerView = findViewById(R.id.taskRecyclerView);
-        tasksRecyclerView.setLayoutManager(new LinearLayoutManager(this));
-        tasksAdapter = new ToDoAdapter(db, CheckListActivity.this);
-        tasksRecyclerView.setAdapter(tasksAdapter);
-
-        ItemTouchHelper itemTouchHelper = new
-                ItemTouchHelper(new RecyclerItemTouchHelper(tasksAdapter));
-        itemTouchHelper.attachToRecyclerView(tasksRecyclerView);
-
-        fab = findViewById(R.id.fab);
-
-        taskList = db.getAllTasks();
-        Collections.reverse(taskList);
-
-        tasksAdapter.setTasks(taskList);
-
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AddNewTask.newInstance().show(getSupportFragmentManager(), AddNewTask.TAG);
-            }
-        });
+        //db = new DatabaseHandler(this);
+        //db.openDatabase();
+//
+        //tasksRecyclerView = findViewById(R.id.taskRecyclerView);
+        //tasksRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+        //tasksAdapter = new ToDoAdapter(db, CheckListActivity.this);
+        //tasksRecyclerView.setAdapter(tasksAdapter);
+//
+        //ItemTouchHelper itemTouchHelper = new
+        //        ItemTouchHelper(new RecyclerItemTouchHelper(tasksAdapter));
+        //itemTouchHelper.attachToRecyclerView(tasksRecyclerView);
+//
+        //fab = findViewById(R.id.fab);
+//
+        //taskList = db.getAllTasks();
+        //Collections.reverse(taskList);
+//
+        //tasksAdapter.setTasks(taskList);
+//
+        //fab.setOnClickListener(new View.OnClickListener() {
+        //    @Override
+        //    public void onClick(View v) {
+        //        AddNewTask.newInstance().show(getSupportFragmentManager(), AddNewTask.TAG);
+        //    }
+        //});
 
         init();
     }

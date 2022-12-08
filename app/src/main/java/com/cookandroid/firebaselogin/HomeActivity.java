@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.cookandroid.firebaselogin.CheckList.Schedule.CheckFragment;
 import com.google.android.material.navigation.NavigationBarView;
 
 import java.util.List;
@@ -17,7 +18,7 @@ import noman.googleplaces.PlacesListener;
 public class HomeActivity extends AppCompatActivity{
        MapFragment mapFragment;
        NoticeFragment noticeFragment;
-       //SettingFragment settingFragment;
+       CheckFragment checkFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +27,7 @@ public class HomeActivity extends AppCompatActivity{
 
         mapFragment = new MapFragment(HomeActivity.this);
         noticeFragment = new NoticeFragment(HomeActivity.this);
-        //infoFragment = new InfoFragment();
-        //settingFragment = new SettingFragment();
+        checkFragment = new CheckFragment(HomeActivity.this,HomeActivity.this);
 
          getSupportFragmentManager().beginTransaction().replace(R.id.containers, mapFragment).commit();
 
@@ -44,7 +44,7 @@ public class HomeActivity extends AppCompatActivity{
                         getSupportFragmentManager().beginTransaction().replace(R.id.containers, noticeFragment).commit();
                         return true;
                     case R.id.info:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.containers, mapFragment).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.containers, checkFragment).commit();
                         return true;
                 }
                 return false;

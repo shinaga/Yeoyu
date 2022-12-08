@@ -16,10 +16,10 @@ import java.util.List;
 public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
 
     private List<ToDoModel> todoList;
-    private CheckListActivity activity;
+    private HomeActivity activity;
     private DatabaseHandler db;
 
-    public ToDoAdapter(DatabaseHandler db, CheckListActivity activity){
+    public ToDoAdapter(DatabaseHandler db, HomeActivity activity){
         this.db = db;
         this.activity = activity;
     }
