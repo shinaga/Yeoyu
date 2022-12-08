@@ -83,7 +83,9 @@ public class MapActivity extends AppCompatActivity
     private FusedLocationProviderClient mFusedLocationClient;
     private LocationRequest locationRequest;
     private Location location;
-
+    Button button_rest = (Button)findViewById(R.id.button_rest);
+    Button button_conv = (Button)findViewById(R.id.button_conv);
+    Button button_cafe = (Button)findViewById(R.id.button_cafe);
     LinearLayout linear;
 
     private View mLayout; // Snackbar 사용하기 위해서는 View가 필요합니다.
@@ -124,47 +126,53 @@ public class MapActivity extends AppCompatActivity
         mapFragment.getMapAsync(this);
         previous_marker = new ArrayList<Marker>();
         //카페 찾기
-        Button button_cafe = (Button)findViewById(R.id.button_cafe);
         button_cafe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                setDefaultColor();
                 button_cafe.setBackgroundColor(Color.parseColor("#6667AB"));
                 button_cafe.setTextColor(Color.parseColor("FFFFFF"));
                 showPlace_Cafe(currentPosition);
             }
         });
         //식당 찾기
-        Button button_rest = (Button)findViewById(R.id.button_rest);
         button_rest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                setDefaultColor();
                 button_rest.setBackgroundColor(Color.parseColor("#6667AB"));
                 button_rest.setTextColor(Color.parseColor("FFFFFF"));
                 showPlace_Res(currentPosition);
             }
         });
         //편의점 찾기
-        Button button_conv = (Button)findViewById(R.id.button_conv);
         button_conv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                setDefaultColor();
                 button_conv.setBackgroundColor(Color.parseColor("#6667AB"));
                 button_conv.setTextColor(Color.parseColor("FFFFFF"));
                 showPlace_Conv(currentPosition);
             }
         });
-        /*public void setDefaultColor(){
-            button_cafe.setTextColor(Color.parseColor("#84837D"));
-            button_cafe.setBackgroundColor(Color.parseColor("F5F5F5"));
-        }*/
+
         //마커 클릭 감지
-            linear.setOnClickListener(new View.OnClickListener() {
+        linear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onMarkerClick(currentMarker);
             }
         });
 
+
+    }
+    public void setDefaultColor(){
+        button_cafe.setTextColor(Color.parseColor("#84837D"));
+        button_cafe.setBackgroundColor(Color.parseColor("F5F5F5"));
+        button_rest.setTextColor(Color.parseColor("#84837D"));
+        button_rest.setBackgroundColor(Color.parseColor("F5F5F5"));
+        button_conv.setTextColor(Color.parseColor("#84837D"));
+        button_conv.setBackgroundColor(Color.parseColor("F5F5F5"));
     }
 
     @Override
