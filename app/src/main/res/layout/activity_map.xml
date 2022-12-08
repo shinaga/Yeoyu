@@ -31,7 +31,7 @@
         android:orientation="horizontal">
     <Button
         android:text="카페 검색"
-        android:textColor="@color/white"
+        android:textColor="#84837D"
         android:layout_weight="1"
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -40,16 +40,16 @@
         />
         <Button
             android:text="식당 검색"
-            android:textColor="@color/white"
+            android:textColor="#84837D"
             android:layout_weight="1"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
             android:id="@+id/button_rest"
             android:background="@drawable/roundb1"
             />
         <Button
             android:text="편의점 검색"
-            android:textColor="@color/white"
+            android:textColor="#84837D"
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="50dp"

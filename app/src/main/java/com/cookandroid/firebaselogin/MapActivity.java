@@ -11,6 +11,7 @@ import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -122,33 +123,42 @@ public class MapActivity extends AppCompatActivity
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         previous_marker = new ArrayList<Marker>();
-//카페 찾기
+        //카페 찾기
         Button button_cafe = (Button)findViewById(R.id.button_cafe);
         button_cafe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                button_cafe.setBackgroundColor(Color.parseColor("#6667AB"));
+                button_cafe.setTextColor(Color.parseColor("FFFFFF"));
                 showPlace_Cafe(currentPosition);
             }
         });
-//식당 찾기
+        //식당 찾기
         Button button_rest = (Button)findViewById(R.id.button_rest);
         button_rest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                button_rest.setBackgroundColor(Color.parseColor("#6667AB"));
+                button_rest.setTextColor(Color.parseColor("FFFFFF"));
                 showPlace_Res(currentPosition);
             }
         });
-//편의점 찾기
-        Button button_bus = (Button)findViewById(R.id.button_conv);
-        button_bus.setOnClickListener(new View.OnClickListener() {
+        //편의점 찾기
+        Button button_conv = (Button)findViewById(R.id.button_conv);
+        button_conv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                button_conv.setBackgroundColor(Color.parseColor("#6667AB"));
+                button_conv.setTextColor(Color.parseColor("FFFFFF"));
                 showPlace_Conv(currentPosition);
             }
         });
+        /*public void setDefaultColor(){
+            button_cafe.setTextColor(Color.parseColor("#84837D"));
+            button_cafe.setBackgroundColor(Color.parseColor("F5F5F5"));
+        }*/
         //마커 클릭 감지
-        LinearLayout linear = (LinearLayout)findViewById(R.id.linear);
-        linear.setOnClickListener(new View.OnClickListener() {
+            linear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onMarkerClick(currentMarker);
