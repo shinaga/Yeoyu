@@ -11,6 +11,7 @@ import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
 import android.location.Location;
@@ -82,8 +83,9 @@ public class MapActivity extends AppCompatActivity
     private FusedLocationProviderClient mFusedLocationClient;
     private LocationRequest locationRequest;
     private Location location;
-    TextView place_name;
-    TextView address;
+    Button button_rest = (Button)findViewById(R.id.button_rest);
+    Button button_conv = (Button)findViewById(R.id.button_conv);
+    Button button_cafe = (Button)findViewById(R.id.button_cafe);
     LinearLayout linear;
 
     private View mLayout; // Snackbar 사용하기 위해서는 View가 필요합니다.
@@ -126,32 +128,38 @@ public class MapActivity extends AppCompatActivity
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         previous_marker = new ArrayList<Marker>();
-//카페 찾기
-        Button button_cafe = (Button)findViewById(R.id.button_cafe);
+        //카페 찾기
         button_cafe.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                setDefaultColor();
+                button_cafe.setBackgroundColor(Color.parseColor("#6667AB"));
+                button_cafe.setTextColor(Color.parseColor("FFFFFF"));
                 showPlace_Cafe(currentPosition);
             }
         });
-//식당 찾기
-        Button button_rest = (Button)findViewById(R.id.button_rest);
+        //식당 찾기
         button_rest.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                setDefaultColor();
+                button_rest.setBackgroundColor(Color.parseColor("#6667AB"));
+                button_rest.setTextColor(Color.parseColor("FFFFFF"));
                 showPlace_Res(currentPosition);
             }
         });
-//편의점 찾기
-        Button button_bus = (Button)findViewById(R.id.button_conv);
-        button_bus.setOnClickListener(new View.OnClickListener() {
+        //편의점 찾기
+        button_conv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                setDefaultColor();
+                button_conv.setBackgroundColor(Color.parseColor("#6667AB"));
+                button_conv.setTextColor(Color.parseColor("FFFFFF"));
                 showPlace_Conv(currentPosition);
             }
         });
+
         //마커 클릭 감지
-        LinearLayout linear = (LinearLayout)findViewById(R.id.linear);
         linear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -159,6 +167,15 @@ public class MapActivity extends AppCompatActivity
             }
         });
 
+
+    }
+    public void setDefaultColor(){
+        button_cafe.setTextColor(Color.parseColor("#84837D"));
+        button_cafe.setBackgroundColor(Color.parseColor("F5F5F5"));
+        button_rest.setTextColor(Color.parseColor("#84837D"));
+        button_rest.setBackgroundColor(Color.parseColor("F5F5F5"));
+        button_conv.setTextColor(Color.parseColor("#84837D"));
+        button_conv.setBackgroundColor(Color.parseColor("F5F5F5"));
     }
 
     @Override
@@ -689,8 +706,6 @@ mMap.addMarker(markerOptions);
 
         CameraUpdate center = CameraUpdateFactory.newLatLng(marker.getPosition());
         mMap.animateCamera(center);
-        place_name.setText(marker.getTitle());
-        address.setText(marker.getSnippet());
         return true;
     }
 
