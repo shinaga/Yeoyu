@@ -35,12 +35,13 @@
 
     <Button
         android:id="@+id/btn_idOverlap"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
-        android:text="중복\n확인"
-        android:textSize="10dp"
-        android:background="@drawable/boder_blue_button"
-        android:layout_marginTop="4dp"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:text="중복확인"
+        android:textSize="14dp"
+        android:background="@drawable/small_button"
+        android:textColor="@color/white"
+        android:layout_marginTop="8dp"
         android:layout_marginRight="5dp"
         app:layout_constraintEnd_toEndOf="@+id/editId"
         app:layout_constraintTop_toTopOf="@+id/editId">
@@ -76,12 +77,13 @@
         app:layout_constraintTop_toBottomOf="@+id/editId" />
     <Button
         android:id="@+id/btn_nicknameOverlap"
-        android:layout_width="50dp"
-        android:layout_height="40dp"
-        android:text="중복\n확인"
-        android:textSize="10dp"
-        android:background="@drawable/boder_blue_button"
-        android:layout_marginTop="4dp"
+        android:layout_width="wrap_content"
+        android:layout_height="32dp"
+        android:text="중복확인"
+        android:textSize="14dp"
+        android:background="@drawable/small_button"
+        android:textColor="@color/white"
+        android:layout_marginTop="8dp"
         android:layout_marginRight="5dp"
         app:layout_constraintEnd_toEndOf="@+id/editNinkname"
         app:layout_constraintTop_toTopOf="@+id/editNinkname">

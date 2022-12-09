@@ -2,26 +2,26 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/home"
+        android:id="@+id/notice"
         android:enabled="true"
         android:icon="@drawable/map"
-        android:title="지도"
-        app:showAsAction="always"
-        />
-
-    <item
-        android:id="@+id/setting"
-        android:enabled="true"
-        android:icon="@drawable/notice"
         android:title="게시판"
         app:showAsAction="always"
         />
 
     <item
-        android:id="@+id/info"
+        android:id="@+id/schedule"
+        android:enabled="true"
+        android:icon="@drawable/notice"
+        android:title="스케줄"
+        app:showAsAction="always"
+        />
+
+    <item
+        android:id="@+id/map"
         android:enabled="true"
         android:icon="@drawable/schedule"
-        android:title="시간표"
+        android:title="지도"
         app:showAsAction="always"
         />
 </menu>

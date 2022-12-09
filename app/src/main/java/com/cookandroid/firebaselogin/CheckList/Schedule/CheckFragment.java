@@ -123,7 +123,6 @@ public class CheckFragment extends Fragment implements DialogCloseListener, View
         saveBtn.setOnClickListener(this);
         loadBtn.setOnClickListener(this);
 
-
         timetable.setOnStickerSelectEventListener(new TimeTableView.OnStickerSelectedListener() {
             @Override
             public void OnStickerSelected(int idx, ArrayList<Schedule> schedules) {

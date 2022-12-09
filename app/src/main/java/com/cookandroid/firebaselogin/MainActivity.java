@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cookandroid.firebaselogin.CheckList.Schedule.FindpwActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -66,6 +67,10 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(this,SendEmailActivity.class);
                 startActivity(intent);
             return;
+        });
+        textFindPw.setOnClickListener(v ->{
+            Intent intent = new Intent(this, FindpwActivity.class);
+            startActivity(intent);
         });
     }
 }

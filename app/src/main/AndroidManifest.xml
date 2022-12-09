@@ -13,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light">
         <activity
+            android:name=".FindpwActivity"
+            android:exported="false" />
+        <activity
             android:name=".HomeActivity"
             android:exported="false" />
         <activity
@@ -33,12 +36,14 @@
         <activity
             android:name=".SplashActivity"
             android:exported="true" />
-        <activity android:name=".ScheduleEdit"
+        <activity
+            android:name=".ScheduleEdit"
             android:exported="false" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBurBtHYVjmxlrEPD1OkZvEr9V4YAK5fRo" />
+
         <activity
             android:name=".IntegratedActivity"
             android:exported="false"
