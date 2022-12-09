@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/layout_main"
     android:orientation="vertical"
-    tools:context=".MapFragment">
+    tools:context=".MapActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -16,13 +16,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:orientation="vertical">
-        <com.google.android.gms.maps.MapView
+        <fragment
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="0.8"
             android:id="@+id/map"
             tools:context=".MapsActivity"
-            android:name="com.google.android.gms.maps.MapFragment"
+            android:name="com.google.android.gms.maps.SupportMapFragment"
             tools:layout="@layout/activity_map"/>
 
         <LinearLayout
@@ -31,16 +31,16 @@
             android:orientation="horizontal">
             <Button
                 android:text="카페 검색"
-                android:textColor="@color/white"
+                android:textColor="#84837D"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:id="@+id/button_cafe"
-                android:background="@drawable/roundb"
+                android:background="@drawable/roundb1"
                 />
             <Button
                 android:text="식당 검색"
-                android:textColor="@color/white"
+                android:textColor="#84837D"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
@@ -49,34 +49,22 @@
                 />
             <Button
                 android:text="편의점 검색"
-                android:textColor="@color/white"
+                android:textColor="#84837D"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:id="@+id/button_conv"
-                android:background="@drawable/roundb2"
+                android:background="@drawable/roundb1"
+                />
+            <Button
+                android:text="🤍"
+                android:textColor="#84837D"
+                android:layout_weight="1"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:id="@+id/button_ht"
+                android:background="@drawable/roundb1"
                 />
         </LinearLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/linear"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#ffffff"
-        android:layout_marginBottom="55dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id = "@+id/place_name"
-            android:text="여기에 장소 이름이 와야함"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id = "@+id/address"
-            android:text="여기에 주소가 와야함"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
