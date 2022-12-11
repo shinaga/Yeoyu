@@ -112,6 +112,8 @@ public class MapActivity extends AppCompatActivity
 
     View marker_root_view;//커스텀 마거 뷰
     TextView tv_marker;//마커에 있는 텍스트뷰
+    TextView tv_marker_check;//마커에 있는 텍스트뷰
+    Marker marker;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -150,12 +152,52 @@ public class MapActivity extends AppCompatActivity
     {   CameraUpdate center = CameraUpdateFactory.newLatLng(marker.getPosition());
         mMap.animateCamera(center);
 
+
+        this.marker = marker;
         marker.setTitle(marker.getTitle());
         marker.showInfoWindow();
         latitude = marker.getPosition().latitude;
         longitude = marker.getPosition().longitude;
 
         button_hearth.setVisibility(View.VISIBLE);//이때부터 하트버튼 클릭 가능
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference map = database.getReference("map");
+        map.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+
+                String location = latitude+" "+longitude;
+                String loc = "";
+                for(char c : location.toCharArray()){// 점'.'이 파이어베이스 문자열로 못들어 가기 떄문에 '-'로 변경
+                    if(c=='.'){
+                        loc += "-";
+                    }
+                    else loc += c;
+                }
+                int heartCount = 0;//하트 개수를 담을 변수
+                if(snapshot.child(loc).child("heartCount").getValue()!=null) {//하트를 아무도 안눌렀으면 발동하지 않음
+                    heartCount = Integer.parseInt(snapshot.child(loc).child("heartCount").getValue()+"");
+                }
+
+                String id = MainActivity.editId.getText().toString();//id
+                if(snapshot.child(loc).child(id).getValue()==null){//좋아요를 누른적이 없으면
+                    button_hearth.setText(heartCount+" \uD83E\uDD0D");
+                }
+                else if((boolean)snapshot.child(loc).child(id).getValue()==false){//좋아요가 안눌러져 있으면
+                    button_hearth.setText(heartCount+" \uD83E\uDD0D");
+                }
+                else{
+                    button_hearth.setText(heartCount+" \uD83E\uDDE1");
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         return true;
     }
 
@@ -254,6 +296,7 @@ public class MapActivity extends AppCompatActivity
     private void setCustomMarkerView() {
         marker_root_view = LayoutInflater.from(this).inflate(R.layout.marker, null);
         tv_marker = (TextView) marker_root_view.findViewById(R.id.tv_marker);
+        tv_marker_check = (TextView) marker_root_view.findViewById(R.id.tv_marker_check);
     }
     LocationCallback locationCallback = new LocationCallback() {
         @Override
@@ -504,17 +547,29 @@ public class MapActivity extends AppCompatActivity
                             map.child(loc).child(id).setValue(true);
                             map.child(loc).child("heartCount").setValue(++heartCount+"");
                             button_hearth.setText(heartCount+" \uD83E\uDDE1");
+
+                            tv_marker.setVisibility(View.GONE);
+                            tv_marker_check.setVisibility(View.VISIBLE);
                         }
                         else if((boolean)snapshot.child(loc).child(id).getValue()==false){//좋아요가 안눌러져 있으면
                             map.child(loc).child(id).setValue(true);
                             map.child(loc).child("heartCount").setValue(++heartCount+"");
                             button_hearth.setText(heartCount+" \uD83E\uDDE1");
+
+                            tv_marker.setVisibility(View.GONE);
+                            tv_marker_check.setVisibility(View.VISIBLE);
                         }
                         else{
                             map.child(loc).child(id).setValue(false);
                             map.child(loc).child("heartCount").setValue(--heartCount+"");
                             button_hearth.setText(heartCount+" \uD83E\uDD0D");
+
+                            tv_marker.setVisibility(View.VISIBLE);
+                            tv_marker_check.setVisibility(View.GONE);
                         }
+                        tv_marker.setText(heartCount+"");
+                        tv_marker_check.setText(heartCount+"");
+                        marker.setIcon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(MapActivity.this, marker_root_view)));
                     }
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
@@ -773,6 +828,8 @@ public class MapActivity extends AppCompatActivity
                     map.addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+
                             String location = place.getLatitude()+" "+place.getLongitude();
                             String loc = "";
                             for(char c : location.toCharArray()){// 점'.'이 파이어베이스 문자열로 못들어 가기 떄문에 '-'로 변경
@@ -781,11 +838,25 @@ public class MapActivity extends AppCompatActivity
                                 }
                                 else loc += c;
                             }
+                            String id = MainActivity.editId.getText().toString();//id
+                            if(snapshot.child(loc).child(id).getValue()==null){//좋아요를 누른적이 없으면
+                                tv_marker.setVisibility(View.VISIBLE);
+                                tv_marker_check.setVisibility(View.GONE);
+                            }
+                            else if((boolean)snapshot.child(loc).child(id).getValue()==false){//좋아요가 안눌러져 있으면
+                                tv_marker.setVisibility(View.VISIBLE);
+                                tv_marker_check.setVisibility(View.GONE);
+                            }
+                            else{
+                                tv_marker.setVisibility(View.GONE);
+                                tv_marker_check.setVisibility(View.VISIBLE);
+                            }
                             int heartCount = 0;//하트 개수를 담을 변수
                             if(snapshot.child(loc).child("heartCount").getValue()!=null) {//하트를 아무도 안눌렀으면 발동하지 않음
                                 heartCount = Integer.parseInt(snapshot.child(loc).child("heartCount").getValue()+"");
                             }
                             tv_marker.setText(heartCount+"");
+                            tv_marker_check.setText(heartCount+"");
                             markerOptions.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(MapActivity.this, marker_root_view)));//커스텀 마커
                             Marker item = mMap.addMarker(markerOptions);
                             previous_marker.add(item);

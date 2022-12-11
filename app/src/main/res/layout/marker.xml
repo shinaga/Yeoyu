@@ -6,10 +6,20 @@
     >
 
     <TextView
-        android:id="@+id/tv_marker"
+        android:id="@+id/tv_marker_check"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:background="@drawable/marker_check"
+        android:gravity="center"
+        android:visibility="gone"
+        android:text=""
+        android:textSize="16sp"/>
+    <TextView
+        android:id="@+id/tv_marker"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:background="@drawable/marker"
+        android:visibility="gone"
         android:gravity="center"
         android:text=""
         android:textSize="16sp"/>
