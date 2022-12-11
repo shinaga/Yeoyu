@@ -15,7 +15,7 @@
     <color name="colorHeader">#fcfcfc</color>
     <color name="colorHeaderText">#7d7d7d</color>
     <color name="colorTableItem">#efefef</color>
-
+    <color name="logoColor">#6667AB</color>
     <string-array name="default_sticker_color">
         <item>#f08676</item>
         <item>#ecc369</item>
@@ -27,6 +27,7 @@
         <item>#78cb87</item>
         <item>#d397ed</item>
     </string-array>
+
 
     <color name="default_side_header_font_color">#7d7d7d</color>
     <color name="default_header_font_color">#7d7d7d</color>

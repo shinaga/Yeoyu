@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             tool:text="This is an Sample Task inside the application"
             android:paddingStart="8dp"
-            android:buttonTint="@color/green"/>
+            android:buttonTint="@color/logoColor"/>
 
     </RelativeLayout>
 
