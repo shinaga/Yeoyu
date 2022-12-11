@@ -1,86 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:andorid="http://schemas.android.com/tools"
     android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+        <ImageView
+            android:id="@+id/some_id"
+            android:layout_width="32dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:layout_gravity="center_horizontal"
+            android:background="@drawable/yeoyulogo"/>
 
 
         <View
             android:id="@+id/line_5"
-            android:layout_width="328dp"
-            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:layout_below="@id/some_id"
             android:layout_alignParentLeft="true"
-            android:layout_marginLeft="16dp"
+            android:layout_alignParentRight="true"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="24dp"
-            android:background="@drawable/line_5"
-            />
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/line_5" />
 
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/taskRecyclerView"
-            android:layout_below="@+id/timetable"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="-75dp"
-            android:nestedScrollingEnabled="true"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            android:layout_height="match_parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:layout_below="@id/taskRecyclerView"
-            android:gravity="center"
-            android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/save_btn"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Save" />
+                    android:orientation="vertical">
 
-                <Button
-                    android:id="@+id/load_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Load" />
+                        <LinearLayout
+                            android:id="@+id/edit_bar_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginLeft="16dp"
+                            android:layout_below="@id/line_5"
+                            android:gravity="start"
+                            android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/add_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Add" />
+                                <ImageView
+                                    android:background="@drawable/ic_baseline_access_time"
+                                    android:layout_width="36dp"
+                                    android:layout_height="36dp"/>
 
-                <Button
-                    android:id="@+id/clear_btn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Clear" />
+                                <TextView
+                                    android:layout_width="90dp"
+                                    android:layout_height="36dp"
+                                    android:layout_marginLeft="10dp"
+                                    android:layout_gravity="center_horizontal"
+                                    android:text="시간표"
+                                    android:textColor="@color/logoColor"
+                                    android:textSize="24dp"
+                                    android:textStyle="bold" />
 
-        </LinearLayout>
+                                <Button
+                                    android:id="@+id/save_btn"
+                                    android:layout_marginLeft="80dp"
+                                    android:background="@drawable/round_box"
+                                    android:drawableTop="@drawable/ic_baseline_save_alt"
+                                    android:layout_width="36dp"
+                                    android:layout_height="36dp" />
 
-        <com.cookandroid.firebaselogin.CheckList.Schedule.TimeTableView
-            android:id="@+id/timetable"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:header_highlight_image_size="36dp"
-            app:header_highlight_type="image"
-            app:header_title="@array/header_title" />
+                                <Button
+                                    android:id="@+id/load_btn"
+                                    android:background="@drawable/round_box"
+                                    android:drawableTop="@drawable/ic_baseline_upload"
+                                    android:layout_width="36dp"
+                                    android:layout_height="36dp" />
+
+                                <Button
+                                    android:id="@+id/add_btn"
+                                    android:background="@drawable/round_box"
+                                    android:drawableTop="@drawable/ic_baseline_add_1"
+                                    android:layout_width="36dp"
+                                    android:layout_height="36dp" />
+
+                                <Button
+                                    android:id="@+id/clear_btn"
+                                    android:background="@drawable/round_box"
+                                    android:drawableTop="@drawable/ic_baseline_delete_1"
+                                    android:layout_width="36dp"
+                                    android:layout_height="36dp" />
+
+                        </LinearLayout>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                                <com.cookandroid.firebaselogin.CheckList.Schedule.TimeTableView
+
+                                    android:background="@drawable/round_box"
+                                    android:id="@+id/timetable"
+                                    android:paddingTop="30dp"
+                                    android:paddingLeft="26dp"
+                                    android:paddingRight="26dp"
+                                    android:paddingBottom="30dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    andorid:layout_weight="1" />
+
+                                <LinearLayout
+                                    android:id="@+id/line_layout"
+                                    android:layout_below="@id/timetable"
+                                    android:layout_marginTop="20dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="16dp"
+                                    android:gravity="start"
+                                    android:orientation="horizontal">
+                                        <ImageView
+                                            android:id="@+id/checklist_image"
+                                            android:background="@drawable/checklist_add_btn"
+                                            android:layout_width="36dp"
+                                            android:layout_height="36dp"
+                                            android:layout_below="@id/timetable"/>
+
+                                        <TextView
+                                            android:layout_width="120dp"
+                                            android:layout_height="36dp"
+                                            android:layout_below="@id/timetable"
+                                            android:text="체크리스트"
+                                            android:textSize="24dp"
+                                            android:textColor="@color/logoColor"
+                                            android:textStyle="bold"
+                                            android:layout_marginLeft="10dp"
+                                            android:gravity="center_horizontal"/>
+
+                                </LinearLayout>
+                                <androidx.recyclerview.widget.RecyclerView
+                                    android:id="@+id/taskRecyclerView"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/line_layout"
+                                    android:layout_marginTop="20dp"
+                                    android:nestedScrollingEnabled="true"
+                                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+                                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                                    android:id="@+id/fab"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_marginRight="32dp"
+                                    android:layout_marginBottom="32dp"
+                                    android:backgroundTint="@color/logoColor"
+                                    android:src="@drawable/ic_baseline_add"/>
 
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fab"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="32dp"
-            android:layout_marginEnd="32dp"
-            android:layout_marginBottom="32dp"
-            android:backgroundTint="@color/green"
-            android:src="@drawable/ic_baseline_add" />
-</RelativeLayout>
+
+
+                        </RelativeLayout>
+
+
+                </LinearLayout>
+
+        </ScrollView>
+
+
+</LinearLayout>
+

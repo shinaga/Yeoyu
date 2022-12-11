@@ -129,7 +129,7 @@ public class TimeTableView extends LinearLayout {
 
         return allSchedules;
     }
-    public ArrayList<com.cookandroid.firebaselogin.CheckList.Schedule.Schedule> getAllSchedulesInStickersExceptIdx(int idx) {
+    public ArrayList<Schedule> getAllSchedulesInStickersExceptIdx(int idx) {
         ArrayList<Schedule> allSchedules = new ArrayList<Schedule>();
         for (int key : stickers.keySet()) {
             if (idx == key) continue;
@@ -180,14 +180,14 @@ public class TimeTableView extends LinearLayout {
 
 
     public String createSaveData() {
-        return com.cookandroid.firebaselogin.CheckList.Schedule.SaveManager.saveSticker(stickers);
+        return SaveManager.saveSticker(stickers);
     }
     public void load(String data) {
         removeAll();
         stickers = SaveManager.loadSticker(data);
         int maxKey = 0;
         for (int key : stickers.keySet()) {
-            ArrayList<com.cookandroid.firebaselogin.CheckList.Schedule.Schedule> schedules = stickers.get(key).getSchedules();
+            ArrayList<Schedule> schedules = stickers.get(key).getSchedules();
             add(schedules, key);
             if (maxKey < key) maxKey = key;
         }
@@ -197,7 +197,7 @@ public class TimeTableView extends LinearLayout {
 
     public void removeAll() {
         for (int key : stickers.keySet()) {
-            com.cookandroid.firebaselogin.CheckList.Schedule.Sticker sticker = stickers.get(key);
+            Sticker sticker = stickers.get(key);
             for (TextView tv : sticker.getView()) {
                 stickerBox.removeView(tv);
             }
@@ -205,7 +205,7 @@ public class TimeTableView extends LinearLayout {
         stickers.clear();
     }
 
-    public void edit(int idx, ArrayList<com.cookandroid.firebaselogin.CheckList.Schedule.Schedule> schedules) {
+    public void edit(int idx, ArrayList<Schedule> schedules) {
         remove(idx);
         add(schedules, idx);
     }
@@ -280,14 +280,14 @@ public class TimeTableView extends LinearLayout {
                 tv.setLayoutParams(createTableRowParam(cellHeight));
                 if (k == 0) {
                     tv.setText(getHeaderTime(i));
-                    tv.setTextColor(getResources().getColor(com.github.tlaabs.timetableview.R.color.colorHeaderText));
+                    tv.setTextColor(getResources().getColor(R.color.colorHeaderText));
                     tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP, DEFAULT_SIDE_HEADER_FONT_SIZE_DP);
-                    tv.setBackgroundColor(getResources().getColor(com.github.tlaabs.timetableview.R.color.colorHeader));
+                    tv.setBackgroundColor(getResources().getColor(R.color.colorHeader));
                     tv.setGravity(Gravity.TOP | Gravity.CENTER_HORIZONTAL);
                     tv.setLayoutParams(createTableRowParam(sideCellWidth, cellHeight));
                 } else {
                     tv.setText("");
-                    tv.setBackground(getResources().getDrawable(com.github.tlaabs.timetableview.R.drawable.item_border));
+                    tv.setBackground(getResources().getDrawable(R.drawable.item_border));
                     tv.setGravity(Gravity.RIGHT);
                 }
                 tableRow.addView(tv);
@@ -307,7 +307,7 @@ public class TimeTableView extends LinearLayout {
             } else {
                 tv.setLayoutParams(createTableRowParam(cellHeight));
             }
-            tv.setTextColor(getResources().getColor(com.cookandroid.firebaselogin.R.color.colorHeaderText));
+            tv.setTextColor(getResources().getColor(R.color.colorHeaderText));
             tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP, DEFAULT_HEADER_FONT_SIZE_DP);
             tv.setText(headerTitle[i]);
             tv.setGravity(Gravity.CENTER);
@@ -317,7 +317,7 @@ public class TimeTableView extends LinearLayout {
         tableHeader.addView(tableRow);
     }
 
-    private RelativeLayout.LayoutParams createStickerParam(com.cookandroid.firebaselogin.CheckList.Schedule.Schedule schedule) {
+    private RelativeLayout.LayoutParams createStickerParam(Schedule schedule) {
         int cell_w = calCellWidth();
 
         RelativeLayout.LayoutParams param = new RelativeLayout.LayoutParams(cell_w, calStickerHeightPx(schedule));
@@ -336,7 +336,7 @@ public class TimeTableView extends LinearLayout {
         return cell_w;
     }
 
-    private int calStickerHeightPx(com.cookandroid.firebaselogin.CheckList.Schedule.Schedule schedule) {
+    private int calStickerHeightPx(Schedule schedule) {
         int startTopPx = calStickerTopPxByTime(schedule.getStartTime());
         int endTopPx = calStickerTopPxByTime(schedule.getEndTime());
         int d = endTopPx - startTopPx;
@@ -406,10 +406,10 @@ public class TimeTableView extends LinearLayout {
             columnCount = DEFAULT_COLUMN_COUNT;
             cellHeight = dp2Px(DEFAULT_CELL_HEIGHT_DP);
             sideCellWidth = dp2Px(DEFAULT_SIDE_CELL_WIDTH_DP);
-            headerTitle = context.getResources().getStringArray(com.github.tlaabs.timetableview.R.array.default_header_title);
-            stickerColors = context.getResources().getStringArray(com.github.tlaabs.timetableview.R.array.default_sticker_color);
+            headerTitle = context.getResources().getStringArray(R.array.default_header_title);
+            stickerColors = context.getResources().getStringArray(R.array.default_sticker_color);
             startTime = DEFAULT_START_TIME;
-            headerHighlightColor = context.getResources().getColor(com.github.tlaabs.timetableview.R.color.default_header_highlight_color);
+            headerHighlightColor = context.getResources().getColor(R.color.default_header_highlight_color);
         }
 
         public TimeTableView.Builder setRowCount(int n) {

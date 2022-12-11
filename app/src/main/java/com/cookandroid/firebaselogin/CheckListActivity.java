@@ -177,7 +177,7 @@ public class CheckListActivity extends AppCompatActivity implements DialogCloseL
         SharedPreferences.Editor editor = mPref.edit();
         editor.putString("timetable_demo",data);
         editor.commit();
-        Toast.makeText(this,"saved!",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,"시간표 저장!",Toast.LENGTH_SHORT).show();
     }
 
     private void loadSavedData(){
@@ -186,7 +186,7 @@ public class CheckListActivity extends AppCompatActivity implements DialogCloseL
         String savedData = mPref.getString("timetable_demo","");
         if(savedData == null && savedData.equals("")) return;
         timetable.load(savedData);
-        Toast.makeText(this,"loaded!",Toast.LENGTH_SHORT).show();
+        Toast.makeText(this,"불러오기 성공!",Toast.LENGTH_SHORT).show();
     }
 
 
