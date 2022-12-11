@@ -38,7 +38,6 @@ public class HomeActivity extends AppCompatActivity{
         navigationBarView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-
                 switch(item.getItemId()){
                     case R.id.notice:
                         getSupportFragmentManager().beginTransaction().replace(R.id.containers, noticeFragment).commit();

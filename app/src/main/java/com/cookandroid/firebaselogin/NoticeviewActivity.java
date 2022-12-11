@@ -168,6 +168,7 @@ public class NoticeviewActivity extends AppCompatActivity{
                 comment.child(count[0]+"").child("date").setValue(LocalDate.now().toString());
                 comment.child(count[0]+"").child("comment").setValue(editComment.getText().toString());
                 editComment.setText("");
+                hearth_commentSet();//다시 한번 댓글과 좋아요 개수 불러오기
                 loadComment();//다시 한번 댓글 불러오기
             }
             @Override

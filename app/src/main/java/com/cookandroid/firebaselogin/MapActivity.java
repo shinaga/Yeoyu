@@ -8,9 +8,13 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.location.Address;
 import android.location.Geocoder;
@@ -18,10 +22,15 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.Bundle;
 import android.os.Looper;
+import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -40,6 +49,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.database.collection.LLRBNode;
 
 import noman.googleplaces.NRPlaces;
@@ -86,7 +100,18 @@ public class MapActivity extends AppCompatActivity
 
     private View mLayout;  // Snackbar 사용하기 위해서는 View가 필요합니다.
     // (참고로 Toast에서는 Context가 필요했습니다.)
+    private double latitude;//마커 클릭시 변경되는 위도 값
+    private double longitude;//마커 클릭시 변경되는 경도 값
 
+    private LinearLayout linear;
+
+    private Button button_cafe;
+    private Button button_rest;
+    private Button button_conv;
+    private Button button_hearth;
+
+    View marker_root_view;//커스텀 마거 뷰
+    TextView tv_marker;//마커에 있는 텍스트뷰
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -117,51 +142,21 @@ public class MapActivity extends AppCompatActivity
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
         previous_marker = new ArrayList<Marker>();
-        //카페 찾기
-        Button button_cafe = (Button)findViewById(R.id.button_cafe);
-        Button button_rest = (Button)findViewById(R.id.button_rest);
-        Button button_conv = (Button)findViewById(R.id.button_conv);
-        button_cafe.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                button_cafe.setTextColor(Color.parseColor("#F5F5F5"));
-                button_rest.setTextColor(Color.parseColor("#84837D"));
-                button_conv.setTextColor(Color.parseColor("#84837D"));
-                button_cafe.setBackgroundResource(R.drawable.search_button);
-                button_rest.setBackgroundResource(R.drawable.roundb1);
-                button_conv.setBackgroundResource(R.drawable.roundb1);
-                Toast.makeText(MapActivity.this,"카페를 찾고 있습니다. 잠시만 기다려 주세요.",Toast.LENGTH_SHORT).show();
-                showPlace_Cafe(currentPosition);
-            }
-        });
-        //식당 찾기
-        button_rest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                button_cafe.setTextColor(Color.parseColor("#84837D"));
-                button_rest.setTextColor(Color.parseColor("#F5F5F5"));
-                button_conv.setTextColor(Color.parseColor("#84837D"));
-                button_cafe.setBackgroundResource(R.drawable.roundb1);
-                button_rest.setBackgroundResource(R.drawable.search_button);
-                button_conv.setBackgroundResource(R.drawable.roundb1);
-                Toast.makeText(MapActivity.this,"식당을 찾고 있습니다. 잠시만 기다려 주세요.",Toast.LENGTH_SHORT).show();
-                showPlace_Res(currentPosition);
-            }
-        });
-        //편의점 찾기
-        button_conv.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                button_cafe.setTextColor(Color.parseColor("#84837D"));
-                button_rest.setTextColor(Color.parseColor("#84837D"));
-                button_conv.setTextColor(Color.parseColor("#F5F5F5"));
-                button_cafe.setBackgroundResource(R.drawable.roundb1);
-                button_rest.setBackgroundResource(R.drawable.roundb1);
-                button_conv.setBackgroundResource(R.drawable.search_button);
-                Toast.makeText(MapActivity.this,"편의점을 찾고 있습니다. 잠시만 기다려 주세요.",Toast.LENGTH_SHORT).show();
-                showPlace_Conv(currentPosition);
-            }
-        });
+        setCustomMarkerView();//커스텀 마커
+    }
+
+    @Override
+    public boolean onMarkerClick(Marker marker)
+    {   CameraUpdate center = CameraUpdateFactory.newLatLng(marker.getPosition());
+        mMap.animateCamera(center);
+
+        marker.setTitle(marker.getTitle());
+        marker.showInfoWindow();
+        latitude = marker.getPosition().latitude;
+        longitude = marker.getPosition().longitude;
+
+        button_hearth.setVisibility(View.VISIBLE);//이때부터 하트버튼 클릭 가능
+        return true;
     }
 
     @Override
@@ -253,8 +248,13 @@ public class MapActivity extends AppCompatActivity
                 Log.d( TAG, "onMapClick :");
             }
         });
+
     }
 
+    private void setCustomMarkerView() {
+        marker_root_view = LayoutInflater.from(this).inflate(R.layout.marker, null);
+        tv_marker = (TextView) marker_root_view.findViewById(R.id.tv_marker);
+    }
     LocationCallback locationCallback = new LocationCallback() {
         @Override
         public void onLocationResult(LocationResult locationResult) {
@@ -426,6 +426,102 @@ public class MapActivity extends AppCompatActivity
 
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(currentPosition, 15);
         mMap.animateCamera(cameraUpdate);
+
+        //여기 다가 클릭 이벤트를 지정하는 이유는 액티비티 실행하자마자 바로 클릭하면 오류가 뜨기 때문
+        linear = findViewById(R.id.linear);
+        linear.setVisibility(View.VISIBLE);
+        //카페 찾기
+        button_cafe = (Button)findViewById(R.id.button_cafe);
+        button_rest = (Button)findViewById(R.id.button_rest);
+        button_conv = (Button)findViewById(R.id.button_conv);
+        button_hearth = (Button)findViewById(R.id.button_hearth);
+        button_cafe.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                button_cafe.setTextColor(Color.parseColor("#F5F5F5"));
+                button_rest.setTextColor(Color.parseColor("#84837D"));
+                button_conv.setTextColor(Color.parseColor("#84837D"));
+                button_cafe.setBackgroundResource(R.drawable.search_button);
+                button_rest.setBackgroundResource(R.drawable.roundb1);
+                button_conv.setBackgroundResource(R.drawable.roundb1);
+                Toast.makeText(MapActivity.this,"카페를 찾고 있습니다. 잠시만 기다려 주세요.",Toast.LENGTH_SHORT).show();
+                showPlace_Cafe(currentPosition);
+            }
+        });
+        //식당 찾기
+        button_rest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                button_cafe.setTextColor(Color.parseColor("#84837D"));
+                button_rest.setTextColor(Color.parseColor("#F5F5F5"));
+                button_conv.setTextColor(Color.parseColor("#84837D"));
+                button_cafe.setBackgroundResource(R.drawable.roundb1);
+                button_rest.setBackgroundResource(R.drawable.search_button);
+                button_conv.setBackgroundResource(R.drawable.roundb1);
+                Toast.makeText(MapActivity.this,"식당을 찾고 있습니다. 잠시만 기다려 주세요.",Toast.LENGTH_SHORT).show();
+                showPlace_Res(currentPosition);
+            }
+        });
+        //편의점 찾기
+        button_conv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                button_cafe.setTextColor(Color.parseColor("#84837D"));
+                button_rest.setTextColor(Color.parseColor("#84837D"));
+                button_conv.setTextColor(Color.parseColor("#F5F5F5"));
+                button_cafe.setBackgroundResource(R.drawable.roundb1);
+                button_rest.setBackgroundResource(R.drawable.roundb1);
+                button_conv.setBackgroundResource(R.drawable.search_button);
+                Toast.makeText(MapActivity.this,"편의점을 찾고 있습니다. 잠시만 기다려 주세요.",Toast.LENGTH_SHORT).show();
+                showPlace_Conv(currentPosition);
+            }
+        });
+        //하트 버튼 클릭시
+        button_hearth.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+                DatabaseReference map = database.getReference("map");
+                map.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                        String location = latitude+" "+longitude;
+                        String loc = "";
+                        for(char c : location.toCharArray()){// 점'.'이 파이어베이스 문자열로 못들어 가기 떄문에 '-'로 변경
+                            if(c=='.'){
+                                loc += "-";
+                            }
+                            else loc += c;
+                        }
+
+                        int heartCount = 0;//하트 개수를 담을 변수
+                        if(snapshot.child(loc).child("heartCount").getValue()!=null) {//하트를 아무도 안눌렀으면 발동하지 않음
+                            heartCount = Integer.parseInt(snapshot.child(loc).child("heartCount").getValue()+"");
+                        }
+
+                        String id = MainActivity.editId.getText().toString();//id
+                        if(snapshot.child(loc).child(id).getValue()==null){//좋아요를 누른적이 없으면
+                            map.child(loc).child(id).setValue(true);
+                            map.child(loc).child("heartCount").setValue(++heartCount+"");
+                            button_hearth.setText(heartCount+" \uD83E\uDDE1");
+                        }
+                        else if((boolean)snapshot.child(loc).child(id).getValue()==false){//좋아요가 안눌러져 있으면
+                            map.child(loc).child(id).setValue(true);
+                            map.child(loc).child("heartCount").setValue(++heartCount+"");
+                            button_hearth.setText(heartCount+" \uD83E\uDDE1");
+                        }
+                        else{
+                            map.child(loc).child(id).setValue(false);
+                            map.child(loc).child("heartCount").setValue(--heartCount+"");
+                            button_hearth.setText(heartCount+" \uD83E\uDD0D");
+                        }
+                    }
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                    }
+                });
+            }
+        });
 
     }
 
@@ -654,7 +750,6 @@ public class MapActivity extends AppCompatActivity
     public void onPlacesStart() {
 
     }
-
     @Override
     public void onPlacesSuccess(final List<Place> places) {
 
@@ -672,10 +767,35 @@ public class MapActivity extends AppCompatActivity
                     markerOptions.position(latLng);
                     markerOptions.title(place.getName());
                     markerOptions.snippet(markerSnippet);
-                    markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
-                    Marker item = mMap.addMarker(markerOptions);
-                    previous_marker.add(item);
+                    //markerOptions.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE));
+                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+                    DatabaseReference map = database.getReference("map");
+                    map.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            String location = place.getLatitude()+" "+place.getLongitude();
+                            String loc = "";
+                            for(char c : location.toCharArray()){// 점'.'이 파이어베이스 문자열로 못들어 가기 떄문에 '-'로 변경
+                                if(c=='.'){
+                                    loc += "-";
+                                }
+                                else loc += c;
+                            }
+                            int heartCount = 0;//하트 개수를 담을 변수
+                            if(snapshot.child(loc).child("heartCount").getValue()!=null) {//하트를 아무도 안눌렀으면 발동하지 않음
+                                heartCount = Integer.parseInt(snapshot.child(loc).child("heartCount").getValue()+"");
+                            }
+                            tv_marker.setText(heartCount+"");
+                            markerOptions.icon(BitmapDescriptorFactory.fromBitmap(createDrawableFromView(MapActivity.this, marker_root_view)));//커스텀 마커
+                            Marker item = mMap.addMarker(markerOptions);
+                            previous_marker.add(item);
+                        }
 
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
                 }
 
                 //중복 마커 제거
@@ -688,16 +808,23 @@ public class MapActivity extends AppCompatActivity
         });
 
     }
-    @Override
-    public boolean onMarkerClick(Marker marker)
-    {   CameraUpdate center = CameraUpdateFactory.newLatLng(marker.getPosition());
-        mMap.animateCamera(center);
 
-        marker.showInfoWindow();
-        return true;
+    // View를 Bitmap으로 변환
+    private Bitmap createDrawableFromView(Context context, View view) {
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        ((Activity)context).getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        view.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+        view.measure(displayMetrics.widthPixels, displayMetrics.heightPixels);
+        view.layout(0, 0, displayMetrics.widthPixels, displayMetrics.heightPixels);
+        view.buildDrawingCache();
+        Bitmap bitmap = Bitmap.createBitmap(view.getMeasuredWidth(), view.getMeasuredHeight(), Bitmap.Config.ARGB_8888);
+
+        Canvas canvas = new Canvas(bitmap);
+        view.draw(canvas);
+
+        return bitmap;
     }
-
-
     @Override
     public void onPlacesFinished() {
 

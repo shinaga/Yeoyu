@@ -26,9 +26,11 @@
             tools:layout="@layout/activity_map"/>
 
         <LinearLayout
+            android:id="@+id/linear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="invisible">
             <Button
                 android:text="카페 검색"
                 android:textColor="#84837D"
@@ -57,12 +59,13 @@
                 android:background="@drawable/roundb1"
                 />
             <Button
+                android:id="@+id/button_hearth"
                 android:text="🤍"
                 android:textColor="#84837D"
                 android:layout_weight="1"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/button_ht"
                 android:background="@drawable/roundb1"
                 />
         </LinearLayout>
