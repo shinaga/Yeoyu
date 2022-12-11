@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">FirebaseLogin</string>
+    <string name="app_name">여유</string>
     <string-array name="header_title">
         <item></item>
         <item>Mon</item>

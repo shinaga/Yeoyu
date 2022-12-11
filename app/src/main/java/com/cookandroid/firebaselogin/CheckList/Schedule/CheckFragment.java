@@ -111,7 +111,6 @@ public class CheckFragment extends Fragment implements DialogCloseListener, View
         saveBtn = view.findViewById(R.id.save_btn);
         loadBtn = view.findViewById(R.id.load_btn);
 
-
         timetable = view.findViewById(R.id.timetable);
         timetable.setHeaderHighlight(2);
         initView();
@@ -123,6 +122,7 @@ public class CheckFragment extends Fragment implements DialogCloseListener, View
         saveBtn.setOnClickListener(this);
         loadBtn.setOnClickListener(this);
 
+        loadSavedData();//자동 로드
         timetable.setOnStickerSelectEventListener(new TimeTableView.OnStickerSelectedListener() {
             @Override
             public void OnStickerSelected(int idx, ArrayList<Schedule> schedules) {
@@ -181,12 +181,13 @@ public class CheckFragment extends Fragment implements DialogCloseListener, View
         }
     }
 
-    private void saveByPreference(String data){
+    private void
+    saveByPreference(String data){
         SharedPreferences mPref = PreferenceManager.getDefaultSharedPreferences(con);
         SharedPreferences.Editor editor = mPref.edit();
         editor.putString("timetable_demo",data);
         editor.commit();
-        Toast.makeText(con,"saved!",Toast.LENGTH_SHORT).show();
+        Toast.makeText(con,"시간표가 저장되었습니다!",Toast.LENGTH_SHORT).show();
     }
 
     private void loadSavedData(){
@@ -195,6 +196,5 @@ public class CheckFragment extends Fragment implements DialogCloseListener, View
         String savedData = mPref.getString("timetable_demo","");
         if(savedData == null && savedData.equals("")) return;
         timetable.load(savedData);
-        Toast.makeText(con,"loaded!",Toast.LENGTH_SHORT).show();
     }
 }

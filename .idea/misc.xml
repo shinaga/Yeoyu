@@ -62,7 +62,7 @@
         <entry key="..\:/Users/shina/AndroidStudioProjects/Yeoyu/app/src/main/res/layout/checklist_activity.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/shina/AndroidStudioProjects/Yeoyu/app/src/main/res/layout/comment_borad_recyclerview.xml" value="0.25" />
         <entry key="..\:/Users/shina/AndroidStudioProjects/Yeoyu/app/src/main/res/layout/fragment_blank.xml" value="0.36614583333333334" />
-        <entry key="..\:/Users/shina/AndroidStudioProjects/Yeoyu/app/src/main/res/layout/fragment_check.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/shina/AndroidStudioProjects/Yeoyu/app/src/main/res/layout/fragment_check.xml" value="0.2" />
         <entry key="..\:/Users/shina/AndroidStudioProjects/Yeoyu/app/src/main/res/layout/fragment_map2.xml" value="0.25" />
         <entry key="..\:/Users/shina/AndroidStudioProjects/Yeoyu/app/src/main/res/layout/map_fragment.xml" value="0.1875" />
         <entry key="..\:/Users/shina/AndroidStudioProjects/Yeoyu/app/src/main/res/layout/marker.xml" value="0.67" />
@@ -72,6 +72,8 @@
         <entry key="..\:/Users/shina/AndroidStudioProjects/Yeoyu/app/src/main/res/layout/schedule_main.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/shina/AndroidStudioProjects/Yeoyu/app/src/main/res/menu/bottom_menu.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/shina/AndroidStudioProjects/Yeoyu/app/src/main/res/menu/menu.xml" value="0.21302083333333333" />
+        <entry key="..\:/Users/shina/AndroidStudioProjects/Yeoyu/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.181" />
+        <entry key="..\:/Users/shina/AndroidStudioProjects/Yeoyu/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.181" />
         <entry key="..\:/Users/user/AndroidStudioProjects/Yeoyu/app/src/main/res/layout/activity_map.xml" value="0.2" />
       </map>
     </option>

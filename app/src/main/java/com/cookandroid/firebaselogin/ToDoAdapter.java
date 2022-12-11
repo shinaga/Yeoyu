@@ -37,11 +37,8 @@ public class ToDoAdapter extends RecyclerView.Adapter<ToDoAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position){
         db.openDatabase();
         ToDoModel item = todoList.get(position);
-        if(position>0){
-            item = todoList.get(position-1);
-        }else{
-            item = todoList.get(0);
-        }
+            item = todoList.get(position);
+
 
         holder.task.setText(item.getTask());
         holder.task.setChecked(toBoolean(item.getStatus()));
