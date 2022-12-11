@@ -1,5 +1,6 @@
 package com.cookandroid.firebaselogin.CheckList.Schedule;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -59,6 +60,7 @@ public class CheckFragment extends Fragment implements DialogCloseListener, View
     Context con;
     View view;
     HomeActivity h;
+    private SharedPreferences preferences;
     public CheckFragment(Context context, HomeActivity h) {
         this.con = context;
         this.h = h;
@@ -122,7 +124,14 @@ public class CheckFragment extends Fragment implements DialogCloseListener, View
         saveBtn.setOnClickListener(this);
         loadBtn.setOnClickListener(this);
 
-        loadSavedData();//자동 로드
+        SharedPreferences pref;
+        SharedPreferences.Editor edit;
+        pref = con.getSharedPreferences("pref", Activity.MODE_PRIVATE);
+
+        String isSave = pref.getString("save","false");
+        if(isSave.equals("true")){
+            loadSavedData();//자동 로드
+        }
         timetable.setOnStickerSelectEventListener(new TimeTableView.OnStickerSelectedListener() {
             @Override
             public void OnStickerSelected(int idx, ArrayList<Schedule> schedules) {
@@ -188,6 +197,13 @@ public class CheckFragment extends Fragment implements DialogCloseListener, View
         editor.putString("timetable_demo",data);
         editor.commit();
         Toast.makeText(con,"시간표가 저장되었습니다!",Toast.LENGTH_SHORT).show();
+
+        SharedPreferences pref;
+        SharedPreferences.Editor edit;
+        pref = con.getSharedPreferences("pref", Activity.MODE_PRIVATE);
+        edit = pref.edit();
+        edit.putString("save","true");
+        edit.apply();
     }
 
     private void loadSavedData(){
