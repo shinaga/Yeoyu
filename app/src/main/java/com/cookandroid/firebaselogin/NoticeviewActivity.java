@@ -50,6 +50,8 @@ public class NoticeviewActivity extends AppCompatActivity{
     String c_date;
     String c_comment;
 
+    String userid;
+    String userninkname;
     @Override//액션바 생성
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -84,7 +86,7 @@ public class NoticeviewActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_noticeview);
         actionBar = getSupportActionBar();//액션바
-
+        stringSet();//String세팅
         textSet();//TextVeiw 세팅
         editSet();//EditText 세팅
         numberSet();//받아온 게시글의 number를 가져옴
@@ -96,9 +98,14 @@ public class NoticeviewActivity extends AppCompatActivity{
         hearth_commentSet();//좋아요, 댓글 개수 세팅
     }
 
+    private void stringSet() {
+        userid = MainActivity.editId.getText().toString();
+        userninkname = MainActivity.ninkname;
+    }
+
     public void hearthClick(View v){
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference hearth = database.getReference("notice").child(number+"").child("hearth").child(id);//댓글을 작성할 곳
+        DatabaseReference hearth = database.getReference("notice").child(number+"").child("hearth").child(userid);//하트 누를곳
         hearth.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -164,7 +171,7 @@ public class NoticeviewActivity extends AppCompatActivity{
                 commentCount.setValue(++count[0]);
 
                 comment.child(count[0]+"").child("id").setValue(id);
-                comment.child(count[0]+"").child("nickname").setValue(nickname.getText().toString());
+                comment.child(count[0]+"").child("nickname").setValue(userninkname);
                 comment.child(count[0]+"").child("date").setValue(LocalDate.now().toString());
                 comment.child(count[0]+"").child("comment").setValue(editComment.getText().toString());
                 editComment.setText("");
@@ -350,7 +357,7 @@ public class NoticeviewActivity extends AppCompatActivity{
 
     private void hearthChecked() {
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference hearth = database.getReference("notice").child(number+"").child("hearth").child(id);//댓글을 작성할 곳
+        DatabaseReference hearth = database.getReference("notice").child(number+"").child("hearth").child(userid);//댓글을 작성할 곳
         hearth.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

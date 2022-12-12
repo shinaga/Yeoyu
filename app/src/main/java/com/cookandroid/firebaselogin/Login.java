@@ -22,12 +22,14 @@ public class Login extends Activity implements View.OnClickListener{
     }
 
     @Override
-    public void onClick(View view) {
+    public void onClick(View view){
         String id=MainActivity.editId.getText().toString();
         String pw=MainActivity.editPasswd.getText().toString();
+        if(id.equals("")){
+            return;
+        }
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference user = database.getReference("user").child(id);
-
 
         user.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -35,8 +37,10 @@ public class Login extends Activity implements View.OnClickListener{
                 if(dataSnapshot.exists()) {//아이디가 있는지 없는지 부터 확인
                     user.child("password").addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            if(dataSnapshot.getValue().equals(pw)){
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if(snapshot.getValue().equals(pw)){
+                                MainActivity.ninkname = dataSnapshot.child("nickname").getValue()+"";
+
                                 Intent intent = new Intent(context, HomeActivity.class);
                                 context.startActivity(intent);
                             }

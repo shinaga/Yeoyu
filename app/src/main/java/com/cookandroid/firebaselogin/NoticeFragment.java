@@ -60,6 +60,8 @@ public class NoticeFragment extends Fragment {
                              Bundle savedInstanceState){
         view = inflater.inflate(R.layout.activity_notice, container, false);
 
+        flag = false;//프래그먼트 전환시 flag가 true가 되기 때문에 선언
+        Toast.makeText(con, flag+"", Toast.LENGTH_SHORT).show();
         btnSet();//글작성 버튼을 세팅한다.
         btnClick();//글작성 버튼 클릭시 발생하는 이벤트 함수 설정한다.
 
@@ -89,10 +91,14 @@ public class NoticeFragment extends Fragment {
         noticeCount.addListenerForSingleValueEvent(new ValueEventListener() {//노티스 넘버에 접근하기 위함
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                if(flag==false)count[0]=Integer.valueOf(snapshot.getValue().toString());//str을 int로 변환후 number[0]에 저장
+                Toast.makeText(con, count[0]+"ㅇㅇ", Toast.LENGTH_SHORT).show();
+                if(flag==false){
+                    count[0]=Integer.valueOf(snapshot.getValue().toString());//str을 int로 변환후 number[0]에 저장
+                    Toast.makeText(con, count[0]+"ㄴㄴ", Toast.LENGTH_SHORT).show();
+                }
                 int i[] = new int[1];//for문에 쓸 i도 배열로 해야함
-                if(tmp==-100) i[0]=count[0];
-                else i[0]=tmp;
+                if(tmp==-100) i[0]=count[0];//맨처음이면 그냥 i=count
+                else i[0]=tmp;//아니면 tmp로 받은 값
                 for(;i[0]>count[0]-10;i[0]--){//i는 noticeCount 수, 10개의 글을 보여주기 위함이다. 단 삭제된 글이 있으면 10개가 안될 수도 있다.
 
                     notice.child(i[0]+"").addListenerForSingleValueEvent(new ValueEventListener() {//글을 읽어 오기 위함
@@ -115,15 +121,16 @@ public class NoticeFragment extends Fragment {
                                 recyclerAdapter.setNoticeList(noticeList);//리사이클러뷰에 데이터를 넣는다.
                                 next[0]=count[0]-10;//for문에 안넣으려 했으나 오류 때문에 반복문에 넣음
                             }
+                            if(i[0]==count[0]-10+1&&noticeList.size()==0&&count[0]>0){//삭제된 글로 인해 아무 글도 불러오지 않을때를 대비
+                                flag=true;//이미 한번 불러왔다는 뜻
+                                readNotices(count[0]-10);//다시 한번 불러온다.
+                            }
                         }
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
                         }
                     });
-                    if(i[0]==count[0]-10+1&&noticeList.size()==0&&count[0]>0){//삭제된 글로 인해 아무 글도 불러오지 않을때를 대비
-                        flag=true;//이미 한번 불러왔다는 뜻
-                        readNotices(count[0]-10);//다시 한번 불러온다.
-                    }
+
                 }
 
             }
