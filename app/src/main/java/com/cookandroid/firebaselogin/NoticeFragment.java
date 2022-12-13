@@ -10,7 +10,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -61,7 +60,6 @@ public class NoticeFragment extends Fragment {
         view = inflater.inflate(R.layout.activity_notice, container, false);
 
         flag = false;//프래그먼트 전환시 flag가 true가 되기 때문에 선언
-        Toast.makeText(con, flag+"", Toast.LENGTH_SHORT).show();
         btnSet();//글작성 버튼을 세팅한다.
         btnClick();//글작성 버튼 클릭시 발생하는 이벤트 함수 설정한다.
 
@@ -91,10 +89,8 @@ public class NoticeFragment extends Fragment {
         noticeCount.addListenerForSingleValueEvent(new ValueEventListener() {//노티스 넘버에 접근하기 위함
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Toast.makeText(con, count[0]+"ㅇㅇ", Toast.LENGTH_SHORT).show();
                 if(flag==false){
                     count[0]=Integer.valueOf(snapshot.getValue().toString());//str을 int로 변환후 number[0]에 저장
-                    Toast.makeText(con, count[0]+"ㄴㄴ", Toast.LENGTH_SHORT).show();
                 }
                 int i[] = new int[1];//for문에 쓸 i도 배열로 해야함
                 if(tmp==-100) i[0]=count[0];//맨처음이면 그냥 i=count

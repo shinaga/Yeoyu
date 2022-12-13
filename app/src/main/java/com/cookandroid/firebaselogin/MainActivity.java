@@ -32,6 +32,7 @@ import java.text.BreakIterator;
 
 public class MainActivity extends AppCompatActivity {
     static EditText editId,editPasswd;//여러 class에서 참조할 수 있는 전역변수
+    static String userNinkname;//여러 class에서 참조할 수 있는 전역변수
     Button btnLogin;
     TextView textRegister,textFindPw;
     static String ninkname;
