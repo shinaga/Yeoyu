@@ -33,6 +33,7 @@ import com.cookandroid.firebaselogin.ToDoModel;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
@@ -114,7 +115,10 @@ public class CheckFragment extends Fragment implements DialogCloseListener, View
         loadBtn = view.findViewById(R.id.load_btn);
 
         timetable = view.findViewById(R.id.timetable);
-        timetable.setHeaderHighlight(2);
+
+        Calendar rightNow = Calendar.getInstance();//날짜
+        int day_of_week = rightNow.get(Calendar.DAY_OF_WEEK);//요일
+        timetable.setHeaderHighlight(day_of_week);
         initView();
     }
 
