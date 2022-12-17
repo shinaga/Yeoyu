@@ -1,6 +1,6 @@
 package com.cookandroid.firebaselogin;
 
-public class Notice {
+public class    Notice {
     int number;
     String title;
     String date;
