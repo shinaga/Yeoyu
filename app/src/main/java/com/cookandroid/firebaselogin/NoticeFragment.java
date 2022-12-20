@@ -106,10 +106,15 @@ public class NoticeFragment extends Fragment {
                                 date[0] = snapshot.child("date").getValue()+"";
                                 context[0] = snapshot.child("context").getValue()+"";
                                 String id = MainActivity.editId.getText().toString();
-                                if(snapshot.child("hearth").child(id).getValue()==null||(boolean)snapshot.child("hearth").child(id).getValue()==false){//내가 좋아요를 누른 글인지 아닌지 판단
+                                if(snapshot.child("hearth").child(id).getValue()==null){//내가 좋아요를 누른 글인지 아닌지 판단
                                     isCheck[0] = false;
                                 }
-                                else isCheck[0] = true;
+                                else if((boolean)snapshot.child("hearth").child(id).getValue()==false){//눌렀지만 취소를 눌렀으면
+                                    isCheck[0] = false;
+                                }
+                                else{
+                                    isCheck[0] = true;
+                                }
                                 htCnt[0] = Integer.valueOf(snapshot.child("hearthCount").getValue()+"");
                                 cmtCnt[0] = Integer.valueOf(snapshot.child("commentCount").getValue()+"");
 
@@ -181,8 +186,14 @@ public class NoticeFragment extends Fragment {
                                 date[0] = snapshot.child("date").getValue().toString();
                                 context[0] = snapshot.child("context").getValue().toString();
                                 String id = MainActivity.editId.getText().toString();
-                                if(snapshot.child("hearth").child(id).getValue()==null||(boolean)snapshot.child("hearth").child(id).getValue()==false){//내가 좋아요를 누른 글인지 아닌지 판단
-                                    isCheck[0]=false;
+                                if(snapshot.child("hearth").child(id).getValue()==null){//내가 좋아요를 누른 글인지 아닌지 판단
+                                    isCheck[0] = false;
+                                }
+                                else if((boolean)snapshot.child("hearth").child(id).getValue()==false){//눌렀지만 취소를 눌렀으면
+                                    isCheck[0] = false;
+                                }
+                                else{
+                                    isCheck[0] = true;
                                 }
                                 htCnt[0] = Integer.valueOf(snapshot.child("hearthCount").getValue()+"");
                                 cmtCnt[0] = Integer.valueOf(snapshot.child("commentCount").getValue()+"");

@@ -46,9 +46,6 @@ public class NoticeListAdapter extends RecyclerView.Adapter<NoticeListAdapter.Vi
         notifyItemRangeInserted(getItemCount(),list.size());
     }
 
-
-
-
     class ViewHolder extends RecyclerView.ViewHolder {
         TextView number;//프론트에선 안보임
         TextView title;

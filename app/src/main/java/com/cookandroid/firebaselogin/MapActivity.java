@@ -24,6 +24,7 @@ import android.os.Bundle;
 import android.os.Looper;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -114,6 +115,18 @@ public class MapActivity extends AppCompatActivity
     TextView tv_marker;//마커에 있는 텍스트뷰
     TextView tv_marker_check;//마커에 있는 텍스트뷰
     Marker marker;
+
+    @Override//뒤로가기 이벤트
+    public boolean onKeyDown(int keycode, KeyEvent event) {
+        if(keycode ==KeyEvent.KEYCODE_BACK) {
+            Intent intent = new Intent(this,HomeActivity.class);
+            startActivity(intent);
+            return true;
+        }
+
+        return false;
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
