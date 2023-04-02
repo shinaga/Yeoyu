@@ -28,48 +28,48 @@
             tools:layout="@layout/activity_map" />
 
         <LinearLayout
+            android:id="@+id/linear"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:visibility="invisible">
             <Button
                 android:text="카페 검색"
+                android:textColor="#84837D"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/button_cafe"/>
+                android:id="@+id/button_cafe"
+                android:background="@drawable/roundb1"
+                />
             <Button
                 android:text="식당 검색"
+                android:textColor="#84837D"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/button_rest"/>
+                android:id="@+id/button_rest"
+                android:background="@drawable/roundb1"
+                />
             <Button
                 android:text="편의점 검색"
+                android:textColor="#84837D"
                 android:layout_weight="1"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:id="@+id/button_conv"/>
+                android:id="@+id/button_conv"
+                android:background="@drawable/roundb1"
+                />
+            <Button
+                android:id="@+id/button_hearth"
+                android:text="🤍"
+                android:textColor="#84837D"
+                android:layout_weight="1"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@drawable/roundb1"
+                />
         </LinearLayout>
-    </LinearLayout>
-    <LinearLayout
-        android:id="@+id/linear"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#ffffff"
-        android:layout_marginBottom="55dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id = "@+id/place_name"
-            android:text="여기에 장소 이름이 와야함"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id = "@+id/address"
-            android:text="여기에 주소가 와야함"/>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

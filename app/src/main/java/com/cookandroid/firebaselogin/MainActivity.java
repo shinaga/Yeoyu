@@ -17,6 +17,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cookandroid.firebaselogin.CheckList.Schedule.FindpwActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -31,8 +32,10 @@ import java.text.BreakIterator;
 
 public class MainActivity extends AppCompatActivity {
     static EditText editId,editPasswd;//여러 class에서 참조할 수 있는 전역변수
+    static String userNinkname;//여러 class에서 참조할 수 있는 전역변수
     Button btnLogin;
     TextView textRegister,textFindPw;
+    static String ninkname;
     int tmp;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +69,10 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(this,SendEmailActivity.class);
                 startActivity(intent);
             return;
+        });
+        textFindPw.setOnClickListener(v ->{
+            Intent intent = new Intent(this, FindpwActivity.class);
+            startActivity(intent);
         });
     }
 }

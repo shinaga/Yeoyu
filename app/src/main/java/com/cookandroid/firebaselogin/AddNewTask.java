@@ -12,12 +12,15 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
+import com.cookandroid.firebaselogin.CheckList.Schedule.CheckFragment;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 
+import java.util.Collections;
 import java.util.Objects;
 
 public class AddNewTask extends BottomSheetDialogFragment {
@@ -89,7 +92,6 @@ public class AddNewTask extends BottomSheetDialogFragment {
 
             @Override
             public void afterTextChanged(Editable s) {
-
             }
         });
 
@@ -101,13 +103,18 @@ public class AddNewTask extends BottomSheetDialogFragment {
                 if(finalIsUpdate) {
                     db.updateTask(bundle.getInt("_id"), text);
                 }
-                else {
+                else{
                     ToDoModel task = new ToDoModel();
                     task.setTask(text);
                     task.setStatus(0);
                     db.insertTask(task);
                 }
                 dismiss();
+
+                CheckFragment.taskList = db.getAllTasks();
+                CheckFragment.tasksAdapter.setTasks(CheckFragment.taskList);
+                Collections.reverse(CheckFragment.taskList);
+                CheckFragment.tasksAdapter.notifyDataSetChanged();
             }
         });
     }

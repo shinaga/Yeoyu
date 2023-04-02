@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -14,15 +15,20 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -30,9 +36,10 @@ import java.util.ArrayList;
 public class NoticeviewActivity extends AppCompatActivity{
     int number;
     String id,nick;
-    TextView nickname,date,context;
+    TextView nickname,date,context,hearth_count,comment_count;
     EditText editComment;
     ActionBar actionBar;
+    ImageView imgUpload[] = new ImageView[3];
 
     private RecyclerView recyclerView;
     private CommentListAdapter recyclerAdapter;
@@ -43,6 +50,8 @@ public class NoticeviewActivity extends AppCompatActivity{
     String c_date;
     String c_comment;
 
+    String userid;
+    String userninkname;
     @Override//액션바 생성
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -77,7 +86,7 @@ public class NoticeviewActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_noticeview);
         actionBar = getSupportActionBar();//액션바
-
+        stringSet();//String세팅
         textSet();//TextVeiw 세팅
         editSet();//EditText 세팅
         numberSet();//받아온 게시글의 number를 가져옴
@@ -85,9 +94,106 @@ public class NoticeviewActivity extends AppCompatActivity{
 
         recyclerViewSet();//RecyclerView 세팅한다.
         loadComment();//리사이클러뷰에 담을 댓글 목록 가져오기
+        imgSet();//사진이 있으면 세팅
+        hearth_commentSet();//좋아요, 댓글 개수 세팅
     }
 
+    private void stringSet() {
+        userid = MainActivity.editId.getText().toString();
+        userninkname = MainActivity.ninkname;
+    }
 
+    public void hearthClick(View v){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference hearth = database.getReference("notice").child(number+"").child("hearth").child(userid);//하트 누를곳
+        hearth.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.getValue()==null||(boolean)snapshot.getValue()==false){
+                    hearth.setValue(true);
+
+                    ImageView img=findViewById(R.id.hearth);
+                    img.setImageResource(R.drawable.hearth_check);
+
+                    DatabaseReference htCnt = database.getReference("notice").child(number+"").child("hearthCount");
+                    htCnt.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            int cnt =  Integer.parseInt(snapshot.getValue()+"");
+                            htCnt.setValue(cnt+1);
+                            hearth_count.setText(cnt+1+"");
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                        }
+                    });
+                }
+                else{
+                    hearth.setValue(false);
+
+                    ImageView img=findViewById(R.id.hearth);
+                    img.setImageResource(R.drawable.hearth);
+
+                    DatabaseReference htCnt = database.getReference("notice").child(number+"").child("hearthCount");
+                    htCnt.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            int cnt =  Integer.parseInt(snapshot.getValue()+"");
+                            htCnt.setValue(cnt-1);
+                            hearth_count.setText(cnt-1+"");
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
+    }
+    public void send(View v){
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference comment = database.getReference("notice").child(number+"").child("comment");//댓글을 작성할 곳
+
+        final int[] count = new int[1];//현재댓글 개수를 담아오는 배열 변수, 배열로 하지 않으면 저장이 안된다.
+        DatabaseReference commentCount = database.getReference("notice").child(number+"").child("commentCount");
+        commentCount.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                count[0] = Integer.valueOf(snapshot.getValue()+"");
+                commentCount.setValue(++count[0]);
+
+                comment.child(count[0]+"").child("id").setValue(id);
+                comment.child(count[0]+"").child("nickname").setValue(userninkname);
+                comment.child(count[0]+"").child("date").setValue(LocalDate.now().toString());
+                comment.child(count[0]+"").child("comment").setValue(editComment.getText().toString());
+                editComment.setText("");
+                hearth_commentSet();//다시 한번 댓글과 좋아요 개수 불러오기
+                loadComment();//다시 한번 댓글 불러오기
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
+    private void textSet() {
+        nickname = findViewById(R.id.nickname);
+        date = findViewById(R.id.date);
+        context = findViewById(R.id.context);
+
+        hearth_count = findViewById(R.id.hearth_count);
+        comment_count = findViewById(R.id.comment_count);
+    }
+    private void editSet() {
+        editComment = findViewById(R.id.editComment);
+    }
 
     private void numberSet() {
         Intent intent = getIntent();
@@ -101,6 +207,8 @@ public class NoticeviewActivity extends AppCompatActivity{
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 id = snapshot.getValue()+"";
                 setNickname();//어떤 닉네임인지 세팅, onCreate에서 호출할시 파이어베이스의 속도 때문에 오류가 나서 여기서 호출
+
+                hearthChecked();//id가 뭔지를 알아야 하트가 체크되어 있는지 알기 때문에 여기서 호출
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -122,36 +230,7 @@ public class NoticeviewActivity extends AppCompatActivity{
             }
         });
     }
-    private void textSet() {
-        nickname = findViewById(R.id.nickname);
-        date = findViewById(R.id.date);
-        context = findViewById(R.id.context);
-    }
-    private void editSet() {
-        editComment = findViewById(R.id.editComment);
-    }
-    public void send(View v){
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference comment = database.getReference("notice").child(number+"").child("comment");//댓글을 작성할 곳
 
-        final int[] count = new int[1];//현재댓글 개수를 담아오는 배열 변수, 배열로 하지 않으면 저장이 안된다.
-        DatabaseReference commentCount = database.getReference("notice").child(number+"").child("commentCount");
-        commentCount.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                count[0] = Integer.valueOf(snapshot.getValue()+"");
-                commentCount.setValue(++count[0]);
-
-                comment.child(count[0]+"").child("id").setValue(id);
-                comment.child(count[0]+"").child("nickname").setValue(nickname.getText().toString());
-                comment.child(count[0]+"").child("date").setValue(LocalDate.now().toString());
-                comment.child(count[0]+"").child("comment").setValue(editComment.getText().toString());
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
-    }
     private void recyclerViewSet() {
         commentList = new ArrayList<Comment>();
 
@@ -176,7 +255,7 @@ public class NoticeviewActivity extends AppCompatActivity{
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 int i[] = new int[1];//for문에 쓸 i도 배열로 해야함
-
+                commentList.clear();
                 for(i[0]=1;i[0]<=Integer.valueOf(snapshot.getValue()+"");i[0]++) {
                     comment.child(i[0] + "").addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
@@ -222,5 +301,80 @@ public class NoticeviewActivity extends AppCompatActivity{
             }
         });
     }
+    private void imgSet() {
+        imgUpload[0] = findViewById(R.id.imgUpload1);
+        imgUpload[1] = findViewById(R.id.imgUpload2);
+        imgUpload[2] = findViewById(R.id.imgUpload3);
 
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+        StorageReference storageReference = storage.getReference();
+        for (int i=0;i<3;i++){
+            StorageReference pathReference = storageReference.child("notice/" + number + "/"+i+".png");
+
+        if (pathReference == null) {
+        } else {
+            int finalI = i;//i를 직접 imgUpload배열에 넣을 수 없음
+            pathReference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {//이미지가 있으면
+                @Override
+                public void onSuccess(Uri uri) {
+                    Glide.with(NoticeviewActivity.this).load(uri).into(imgUpload[finalI]);
+                    imgUpload[finalI].setVisibility(View.VISIBLE);
+
+                    findViewById(R.id.linear).setVisibility(View.VISIBLE);//사진이 하나라도 있으면 VISIBLE
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception e) {
+
+                }
+            });
+        }
+    }
+    }
+    private void hearth_commentSet() {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference notice = database.getReference("notice").child(number+"");
+
+        notice.child("hearthCount").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                hearth_count.setText(snapshot.getValue()+"");
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+        notice.child("commentCount").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                comment_count.setText(snapshot.getValue()+"");
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
+
+    private void hearthChecked() {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference hearth = database.getReference("notice").child(number+"").child("hearth").child(userid);//댓글을 작성할 곳
+        hearth.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if(snapshot.getValue()==null||(boolean)snapshot.getValue()==false){
+                    ImageView img=findViewById(R.id.hearth);
+                    img.setImageResource(R.drawable.hearth);
+                }
+                else{
+
+                    ImageView img=findViewById(R.id.hearth);
+                    img.setImageResource(R.drawable.hearth_check);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+    }
 }

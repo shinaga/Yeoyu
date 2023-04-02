@@ -66,6 +66,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
                         taskList.add(task);
                     }
                     while(cur.moveToNext());
+
                 }
             }
         }
