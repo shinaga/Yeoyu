@@ -304,6 +304,18 @@ public class MapActivity extends AppCompatActivity
             }
         });
 
+// 현재 위치 가져오기
+        LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            Location location = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+            if (location != null) {
+                LatLng myLocation = new LatLng(location.getLatitude(), location.getLongitude());
+
+                // 지도 이동
+                mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(myLocation, 13));
+            }
+        }
     }
 
     private void setCustomMarkerView() {
@@ -480,8 +492,8 @@ public class MapActivity extends AppCompatActivity
 
         currentMarker = mMap.addMarker(markerOptions);
 
-        CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(currentPosition, 15);
-        mMap.animateCamera(cameraUpdate);
+        //CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(currentPosition, 15); 여기서 호출하면 수시로 줌이 됨
+        //mMap.animateCamera(cameraUpdate);
 
         //여기 다가 클릭 이벤트를 지정하는 이유는 액티비티 실행하자마자 바로 클릭하면 오류가 뜨기 때문
         linear = findViewById(R.id.linear);
