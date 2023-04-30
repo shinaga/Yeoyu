@@ -216,34 +216,10 @@ public class MapActivity extends AppCompatActivity
 
     @Override
     public void onMapReady(final GoogleMap googleMap) {
-        Log.d(TAG, "onMapReady :");
-
         mMap = googleMap;
 
-        //런타임 퍼미션 요청 대화상자나 GPS 활성 요청 대화상자 보이기전에
-        //지도의 초기위치를 서울로 이동
-        setDefaultLocation();
-        MarkerOptions markerOptions = new MarkerOptions();
         mMap.setOnMarkerClickListener(this);
 
-        /*
-        //본관
-        LatLng Main = new LatLng(37.58475463956453, 126.9250272363605 );
-        markerOptions.position(Main);
-        mnarkerOptions.title("명지전문대 본관");
-        markerOptios.snippet("여기에 정보 입력");
-        mMap.addMarker(markerOptions);
-        //공학관
-        LatLng Engine = new LatLng(37.585099197178224, 126.92491367259198 );
-        markerOptions.position(Engine);
-        markerOptions.title("명지전문대 공학관");
-        markerOptions.snippet("여기에 정보 입력");
-        mMap.addMarker(markerOptions);
-        */
-
-
-        //런타임 퍼미션 처리
-        // 1. 위치 퍼미션을 가지고 있는지 체크합니다.
         int hasFineLocationPermission = ContextCompat.checkSelfPermission(this,
                 Manifest.permission.ACCESS_FINE_LOCATION);
         int hasCoarseLocationPermission = ContextCompat.checkSelfPermission(this,
@@ -288,21 +264,6 @@ public class MapActivity extends AppCompatActivity
             }
 
         }
-
-
-
-        mMap.getUiSettings().setMyLocationButtonEnabled(true);
-        // 현재 오동작을 해서 주석처리
-
-        //mMap.animateCamera(CameraUpdateFactory.zoomTo(15));
-        mMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
-
-            @Override
-            public void onMapClick(LatLng latLng) {
-
-                Log.d( TAG, "onMapClick :");
-            }
-        });
 
 // 현재 위치 가져오기
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
